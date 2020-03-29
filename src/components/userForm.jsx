@@ -1,4 +1,5 @@
 import React from "react";
+import Spinner from "react-bootstrap/Spinner";
 import Joi from "joi";
 import Button from "@material-ui/core/Button";
 //import Tooltip from "@material-ui/core/Tooltip";
@@ -247,6 +248,7 @@ class UserForm extends React.Component {
 
     const buttonsEnabled = this.props.getButtonsEnabled();
     const button1MarginRight = this.props.onSubmit2 ? 20 : 0;
+    const showSpinner = buttonsEnabled;
 
     return (
       <div>
@@ -338,6 +340,17 @@ class UserForm extends React.Component {
                   </div>
                 </td>
               )}
+            </tr>
+            <tr>
+              {showSpinner ? (
+                <td>
+                  <div style={{ marginLeft: "-60px" }}>
+                    <Spinner animation="border" role="status">
+                      <span className="sr-only">Loading...</span>
+                    </Spinner>
+                  </div>
+                </td>
+              ) : null}
             </tr>
           </tbody>
         </table>
