@@ -68,6 +68,7 @@ class ClientPopup extends React.Component {
     console.log("ClientPopup render");
 
     const client = ClientPopup.client;
+    const clientIsSentinel = client.clientType === "appliance";
 
     return (
       <div>
@@ -153,22 +154,30 @@ class ClientPopup extends React.Component {
                     <td>Iperf3 Count:</td>
                     <td>{client.iperf3UseCountDaily}</td>
                   </tr>
-                  <tr>
-                    <td>Sentinel Update Time:</td>
-                    <td>{client.sentinelUpdateTime}</td>
-                  </tr>
-                  <tr>
-                    <td>Sentinel Admin Update Time:</td>
-                    <td>{client.sentinelAdminUpdateTime}</td>
-                  </tr>
-                  <tr>
-                    <td>Sentinel Web Update Time:</td>
-                    <td>{client.sentinelWebUpdateTime}</td>
-                  </tr>
-                  <tr>
-                    <td>Updater Update Time:</td>
-                    <td>{client.updaterUpdateTime}</td>
-                  </tr>
+                  {clientIsSentinel && (
+                    <tr>
+                      <td>Sentinel Update Time:</td>
+                      <td>{client.sentinelUpdateTime}</td>
+                    </tr>
+                  )}
+                  {clientIsSentinel && (
+                    <tr>
+                      <td>Sentinel Admin Update Time:</td>
+                      <td>{client.sentinelAdminUpdateTime}</td>
+                    </tr>
+                  )}
+                  {clientIsSentinel && (
+                    <tr>
+                      <td>Sentinel Web Update Time:</td>
+                      <td>{client.sentinelWebUpdateTime}</td>
+                    </tr>
+                  )}
+                  {clientIsSentinel && (
+                    <tr>
+                      <td>Updater Update Time:</td>
+                      <td>{client.updaterUpdateTime}</td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
