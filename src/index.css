@@ -102,6 +102,15 @@ code {
   background: white;
 }
 
+.popup_spinner {
+  position: relative;
+  top: 45%;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  background: white;
+}
+
 .invisible-button {
   border: none;
   padding: 0;

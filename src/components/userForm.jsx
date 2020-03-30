@@ -1,5 +1,5 @@
 import React from "react";
-import Spinner from "react-bootstrap/Spinner";
+//import Spinner from "react-bootstrap/Spinner";
 import Joi from "joi";
 import Button from "@material-ui/core/Button";
 //import Tooltip from "@material-ui/core/Tooltip";
@@ -8,6 +8,7 @@ import Defs from "iipzy-shared/src/defs";
 
 import Navigator from "./navigator";
 import Input from "./input";
+import SpinnerPopup from "./spinnerPopup";
 
 let app = null;
 
@@ -256,6 +257,7 @@ class UserForm extends React.Component {
         <div style={{ marginLeft: 20, textAlign: "left" }}>
           <p style={{ fontSize: "140%" }}>{this.props.title}</p>
         </div>
+        {showSpinner && <SpinnerPopup />}
         {this.renderInput(
           "userName",
           "User Name",
@@ -341,7 +343,7 @@ class UserForm extends React.Component {
                 </td>
               )}
             </tr>
-            <tr>
+            {/*             <tr>
               {showSpinner ? (
                 <td>
                   <div style={{ marginLeft: "-60px" }}>
@@ -351,7 +353,7 @@ class UserForm extends React.Component {
                   </div>
                 </td>
               ) : null}
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>
