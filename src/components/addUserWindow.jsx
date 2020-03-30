@@ -70,7 +70,7 @@ class AddUserWindow extends UserForm {
   async addUser(userData) {
     console.log("AddUserWindow.addUser");
 
-    AddUserWindow.ShowSpinner = true;
+    AddUserWindow.showSpinner = true;
     this.doRender();
 
     const { data, status } = await user.addUser(userData);
@@ -132,7 +132,7 @@ class AddUserWindow extends UserForm {
   }
 
   async verifyUser(params) {
-    AddUserWindow.ShowSpinner = true;
+    AddUserWindow.showSpinner = true;
     this.doRender();
 
     const { data, status } = await user.verifyUser(params);
@@ -148,7 +148,7 @@ class AddUserWindow extends UserForm {
 
       AddUserWindow.showInfoPopup = true;
       AddUserWindow.buttonsEnabled = false;
-      AddUserWindow.ShowSpinner = false;
+      AddUserWindow.showSpinner = false;
       AddUserWindow.showValidationPopup = true;
 
       this.doRender();
@@ -165,7 +165,7 @@ class AddUserWindow extends UserForm {
     AddUserWindow.infoMessage = AddUserWindow.userName + " registered";
     AddUserWindow.showInfoPopup = true;
     AddUserWindow.buttonsEnabled = false;
-    AddUserWindow.ShowSpinner = false;
+    AddUserWindow.showSpinner = false;
     AddUserWindow.isVerified = true;
 
     this.doRender();
@@ -199,7 +199,7 @@ class AddUserWindow extends UserForm {
     console.log("AddUserWindow.render");
 
     const showInfoPopup = AddUserWindow.showInfoPopup;
-    const showSpinner = AddUserWindow.ShowSpinner;
+    const showSpinner = AddUserWindow.showSpinner;
     const showValidationPopup = AddUserWindow.showValidationPopup;
 
     console.log("AddUserWindow.render: showInfoPopup = " + showInfoPopup);
@@ -239,7 +239,6 @@ class AddUserWindow extends UserForm {
             </div>
           </div>
         )}
-
         <UserForm
           title={"Register User @ iipzy.com"}
           getUserData={this.getUserData}
@@ -268,7 +267,7 @@ AddUserWindow.buttonsEnabled = true;
 
 AddUserWindow.showInfoPopup = false;
 AddUserWindow.infoMessage = "";
-AddUserWindow.ShowSpinner = false;
+AddUserWindow.showSpinner = false;
 AddUserWindow.showValidationPopup = false;
 
 AddUserWindow.userId = 0;
