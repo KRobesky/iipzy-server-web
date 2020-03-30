@@ -209,7 +209,7 @@ class AddUserWindow extends UserForm {
       "AddUserWindow.render: showValidationPopup = " + showValidationPopup
     );
 
-    return (
+    const ret = (
       <div>
         {showValidationPopup && (
           <ValidationPopup
@@ -244,6 +244,8 @@ class AddUserWindow extends UserForm {
         />
       </div>
     );
+    console.log("<<<AddUserWindow.render");
+    return ret;
   }
 }
 
