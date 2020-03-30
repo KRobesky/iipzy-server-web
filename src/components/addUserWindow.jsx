@@ -69,6 +69,7 @@ class AddUserWindow extends UserForm {
   async addUser(userData) {
     console.log("AddUserWindow.addUser");
 
+    AddUserWindow.ShowSpinner = true;
     this.doRender();
 
     const { data, status } = await user.addUser(userData);
@@ -83,6 +84,7 @@ class AddUserWindow extends UserForm {
       AddUserWindow.infoMessage = data.__hadError__.errorMessage;
 
       AddUserWindow.showInfoPopup = true;
+      AddUserWindow.showSpinner = false;
       AddUserWindow.buttonsEnabled = false;
 
       this.doRender();
@@ -92,6 +94,7 @@ class AddUserWindow extends UserForm {
 
     AddUserWindow.userId = data.userId;
     console.log("AddUserWindow.addUser: userId = " + AddUserWindow.userId);
+    AddUserWindow.showSpinner = false;
     AddUserWindow.showValidationPopup = true;
     AddUserWindow.buttonsEnabled = false;
 
@@ -118,16 +121,19 @@ class AddUserWindow extends UserForm {
     this.doRender();
   }
 
-  handleVerifyClick(verificationCode) {
+  async handleVerifyClick(verificationCode) {
     console.log("AddUserWindow.handleVerifyClick, code" + verificationCode);
     if (verificationCode !== "000000")
-      this.verifyUser({
+      await this.verifyUser({
         userId: AddUserWindow.userId,
         verificationCode: verificationCode
       });
   }
 
   async verifyUser(params) {
+    AddUserWindow.ShowSpinner = true;
+    this.doRender();
+
     const { data, status } = await user.verifyUser(params);
     if (data.__hadError__) {
       console.log(
@@ -141,6 +147,7 @@ class AddUserWindow extends UserForm {
 
       AddUserWindow.showInfoPopup = true;
       AddUserWindow.buttonsEnabled = false;
+      AddUserWindow.ShowSpinner = false;
       AddUserWindow.showValidationPopup = true;
 
       this.doRender();
@@ -157,6 +164,7 @@ class AddUserWindow extends UserForm {
     AddUserWindow.infoMessage = AddUserWindow.userName + " registered";
     AddUserWindow.showInfoPopup = true;
     AddUserWindow.buttonsEnabled = false;
+    AddUserWindow.ShowSpinner = false;
     AddUserWindow.isVerified = true;
 
     this.doRender();
@@ -190,7 +198,7 @@ class AddUserWindow extends UserForm {
     console.log("AddUserWindow.render");
 
     const showInfoPopup = AddUserWindow.showInfoPopup;
-    const showSpinner = !AddUserWindow.buttonsEnabled;
+    const showSpinner = AddUserWindow.ShowSpinner;
     const showValidationPopup = AddUserWindow.showValidationPopup;
 
     console.log("AddUserWindow.render: showInfoPopup = " + showInfoPopup);
@@ -244,7 +252,7 @@ AddUserWindow.buttonsEnabled = true;
 
 AddUserWindow.showInfoPopup = false;
 AddUserWindow.infoMessage = "";
-
+AddUserWindow.ShowSpinner = false;
 AddUserWindow.showValidationPopup = false;
 
 AddUserWindow.userId = 0;
