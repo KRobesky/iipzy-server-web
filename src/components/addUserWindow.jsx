@@ -23,8 +23,9 @@ class AddUserWindow extends UserForm {
 
   componentDidMount() {
     console.log("AddUserWindow.componentDidMount");
-    const count = this.state.count + 1;
-    this.setState({ count: count });
+    // const count = this.state.count + 1;
+    // this.setState({ count: count });
+    this.doRender();
   }
 
   componentWillUnmount() {
