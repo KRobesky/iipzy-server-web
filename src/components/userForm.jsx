@@ -251,7 +251,7 @@ class UserForm extends React.Component {
     const button1MarginRight = this.props.onSubmit2 ? 20 : 0;
     //const showSpinner = !buttonsEnabled;
 
-    return (
+    const ret = (
       <div>
         <Navigator />
         <div style={{ marginLeft: 20, textAlign: "left" }}>
@@ -358,6 +358,8 @@ class UserForm extends React.Component {
         </table>
       </div>
     );
+    console.log("<<<UserForm.render");
+    return ret;
   }
 }
 
