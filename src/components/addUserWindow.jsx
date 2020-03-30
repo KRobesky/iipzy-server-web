@@ -18,6 +18,8 @@ class AddUserWindow extends UserForm {
 
     console.log("AddUserWindow.constructor");
 
+    this.state = { count: 0 };
+
     app = this;
   }
 
