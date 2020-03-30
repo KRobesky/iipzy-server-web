@@ -224,13 +224,13 @@ class AddUserWindow extends UserForm {
             closePopup={this.hideInfoPopup.bind(this)}
           />
         )}
-        {showSpinner && (
+        {/*         {showSpinner && (
           <div>
             <Spinner animation="border" role="status">
               <span className="sr-only">Loading...</span>
             </Spinner>
           </div>
-        )}
+        )} */}
         <UserForm
           title={"Register User @ iipzy.com"}
           getUserData={this.getUserData}
