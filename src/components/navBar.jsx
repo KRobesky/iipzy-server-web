@@ -34,7 +34,10 @@ class NavBar extends React.Component {
     console.log("NavBar.render: = " + navbarName);
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav
+        className="navbar navbar-expand-lg navbar-light bg-light"
+        z-index={6000}
+      >
         {navbarName === "home" && (
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
