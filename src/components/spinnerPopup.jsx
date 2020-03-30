@@ -8,16 +8,16 @@ let app = null;
 class SpinnerPopup extends React.Component {
   constructor(props) {
     super(props);
+    console.log("SpinnerPopup.constructor");
     app = this;
+
+    this.state = { count: 0 };
   }
 
-  getInfoMessage() {
-    return this.props.getInfoMessage();
-  }
-
-  handleSubmitClick(ev) {
-    console.log("...Popup handleSubmitClick");
-    this.props.closePopup();
+  componentDidMount() {
+    console.log("SpinnerPopup.componentDidMount");
+    const count = this.state.count + 1;
+    this.setState({ count: count });
   }
 
   render() {
