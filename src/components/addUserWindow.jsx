@@ -193,14 +193,16 @@ class AddUserWindow extends UserForm {
   }
 
   doRender() {
-    const count = this.state.count + 1;
+    const count = AddUserWindow.renderCount + 1;
+    // const count = this.state.count + 1;
     console.log(
       "AddUserWindow.doRender: count before = " +
-        this.state.count +
+        AddUserWindow.renderCount +
         ", after = " +
         count
     );
     this.setState({ count: count });
+    AddUserWindow.renderCount++;
   }
 
   render() {
@@ -255,6 +257,8 @@ class AddUserWindow extends UserForm {
     return ret;
   }
 }
+
+AddUserWindow.renderCount = 0;
 
 AddUserWindow.userName = "";
 AddUserWindow.emailAddress = "";
