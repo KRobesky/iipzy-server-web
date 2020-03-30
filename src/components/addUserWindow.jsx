@@ -5,6 +5,7 @@ import Defs from "iipzy-shared/src/defs";
 import eventManager from "../ipc/eventManager";
 import user from "../services/user";
 import InfoPopup from "./infoPopup";
+import SpinnerPopup from "./spinnerPopup";
 import ValidationPopup from "./validationPopup";
 import UserForm from "./userForm";
 
@@ -187,6 +188,7 @@ class AddUserWindow extends UserForm {
 
     const showInfoPopup = AddUserWindow.showInfoPopup;
     const showValidationPopup = AddUserWindow.showValidationPopup;
+    const showSpinner = !AddUserWindow.buttonsEnabled;
 
     console.log(
       "AddUserWindow.render: showValidationPopup = " + showValidationPopup
@@ -208,6 +210,7 @@ class AddUserWindow extends UserForm {
             closePopup={this.hideInfoPopup.bind(this)}
           />
         )}
+        {showSpinner && <SpinnerPopup />}
         <UserForm
           title={"Register User @ iipzy.com"}
           getUserData={this.getUserData}

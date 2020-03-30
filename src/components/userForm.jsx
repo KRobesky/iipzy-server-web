@@ -8,7 +8,7 @@ import Defs from "iipzy-shared/src/defs";
 
 import Navigator from "./navigator";
 import Input from "./input";
-import SpinnerPopup from "./spinnerPopup";
+//import SpinnerPopup from "./spinnerPopup";
 
 let app = null;
 
@@ -249,7 +249,7 @@ class UserForm extends React.Component {
 
     const buttonsEnabled = this.props.getButtonsEnabled();
     const button1MarginRight = this.props.onSubmit2 ? 20 : 0;
-    const showSpinner = !buttonsEnabled;
+    //const showSpinner = !buttonsEnabled;
 
     return (
       <div>
@@ -257,7 +257,7 @@ class UserForm extends React.Component {
         <div style={{ marginLeft: 20, textAlign: "left" }}>
           <p style={{ fontSize: "140%" }}>{this.props.title}</p>
         </div>
-        {showSpinner && <SpinnerPopup />}
+        {/*        {showSpinner && <SpinnerPopup />} */}
         {this.renderInput(
           "userName",
           "User Name",
