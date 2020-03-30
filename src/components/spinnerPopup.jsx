@@ -27,10 +27,10 @@ class SpinnerPopup extends React.Component {
       <div>
         <Navigator />
         <div className="popup_spinner">
-          <div className="popup_spinner_inner">
-            <div style={{ marginLeft: 20, textAlign: "left" }}>
+          <div className="popup_spinner_inner" alignItems="center">
+            {/*             <div style={{ marginLeft: 20, textAlign: "left" }}>
               <p style={{ fontSize: "140%" }}>{this.props.title}</p>
-            </div>
+            </div> */}
             {/* <div style={{ marginLeft: "-60px" }}> */}
             <div>
               <Spinner animation="border" role="status">
