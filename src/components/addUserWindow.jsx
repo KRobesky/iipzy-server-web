@@ -189,9 +189,11 @@ class AddUserWindow extends UserForm {
     console.log("AddUserWindow.render");
 
     const showInfoPopup = AddUserWindow.showInfoPopup;
-    const showValidationPopup = AddUserWindow.showValidationPopup;
     const showSpinner = !AddUserWindow.buttonsEnabled;
+    const showValidationPopup = AddUserWindow.showValidationPopup;
 
+    console.log("AddUserWindow.render: showInfoPopup = " + showInfoPopup);
+    console.log("AddUserWindow.render: showSpinner = " + showSpinner);
     console.log(
       "AddUserWindow.render: showValidationPopup = " + showValidationPopup
     );
