@@ -1,11 +1,12 @@
 import React from "react";
+import Spinner from "react-bootstrap/Spinner";
 
 import Defs from "iipzy-shared/src/defs";
 
 import eventManager from "../ipc/eventManager";
 import user from "../services/user";
 import InfoPopup from "./infoPopup";
-import SpinnerPopup from "./spinnerPopup";
+//import SpinnerPopup from "./spinnerPopup";
 import ValidationPopup from "./validationPopup";
 import UserForm from "./userForm";
 
@@ -223,7 +224,22 @@ class AddUserWindow extends UserForm {
             closePopup={this.hideInfoPopup.bind(this)}
           />
         )}
-        {showSpinner && <SpinnerPopup />}
+        {showSpinner && (
+          <div className="popup_spinner">
+            <div className="popup_spinner_inner" alignItems="center">
+              {/*             <div style={{ marginLeft: 20, textAlign: "left" }}>
+              <p style={{ fontSize: "140%" }}>{this.props.title}</p>
+            </div> */}
+              {/* <div style={{ marginLeft: "-60px" }}> */}
+              <div>
+                <Spinner animation="border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </Spinner>
+              </div>
+            </div>
+          </div>
+        )}
+
         <UserForm
           title={"Register User @ iipzy.com"}
           getUserData={this.getUserData}
