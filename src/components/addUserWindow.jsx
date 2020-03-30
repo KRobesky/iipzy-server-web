@@ -69,6 +69,8 @@ class AddUserWindow extends UserForm {
   async addUser(userData) {
     console.log("AddUserWindow.addUser");
 
+    this.doRender();
+
     const { data, status } = await user.addUser(userData);
     if (data.__hadError__) {
       console.log(
