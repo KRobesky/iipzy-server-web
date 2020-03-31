@@ -35,9 +35,9 @@ class AddUserWindow extends UserForm {
     app = null;
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    console.log("AddUserWindow.componentWillUpdate");
-    app = null;
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("AddUserWindow.shouldComponentUpdate");
+    return true;
   }
 
   getUserData() {
