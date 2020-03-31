@@ -10,7 +10,7 @@ import InfoPopup from "./infoPopup";
 import ValidationPopup from "./validationPopup";
 import UserForm from "./userForm";
 
-let app = null;
+//let app = null;
 
 class AddUserWindow extends UserForm {
   constructor(props) {
@@ -20,7 +20,7 @@ class AddUserWindow extends UserForm {
 
     this.state = { count: 0 };
 
-    app = this;
+    //app = this;
   }
 
   componentDidMount() {
@@ -80,9 +80,6 @@ class AddUserWindow extends UserForm {
     this.doRender();
 
     const { data, status } = await user.addUser(userData);
-
-    console.log("+++++++++++++++++++++++app = " + !!app);
-
     if (data.__hadError__) {
       console.log(
         "addUserWindow.handleUserAddResponse: errorMessage = " +
@@ -207,6 +204,7 @@ class AddUserWindow extends UserForm {
     //     ", after = " +
     //     count
     // );
+    console.log("AddUserWindow.doRender");
     this.setState({ count: this.state.count + 1 });
     //AddUserWindow.renderCount++;
   }
