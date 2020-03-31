@@ -10,7 +10,7 @@ import InfoPopup from "./infoPopup";
 import ValidationPopup from "./validationPopup";
 import UserForm from "./userForm";
 
-let app = null;
+//let app = null;
 
 class AddUserWindow extends UserForm {
   constructor(props) {
@@ -20,7 +20,7 @@ class AddUserWindow extends UserForm {
 
     this.state = { count: 0 };
 
-    app = this;
+    //app = this;
   }
 
   componentDidMount() {
@@ -32,7 +32,7 @@ class AddUserWindow extends UserForm {
 
   componentWillUnmount() {
     console.log("AddUserWindow.componentWillUnmount");
-    app = null;
+    //app = null;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
