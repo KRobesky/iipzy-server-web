@@ -30,7 +30,7 @@ class AddUserWindow extends UserForm {
 
   componentWillUnmount() {
     console.log("AddUserWindow.componentWillUnmount");
-    app = null;
+    //app = null;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -81,7 +81,7 @@ class AddUserWindow extends UserForm {
 
     const { data, status } = await user.addUser(userData);
 
-console.log("+++++++++++++++++++++++app = " !!app);
+    console.log("+++++++++++++++++++++++app = " + !!app);
 
     if (data.__hadError__) {
       console.log(
