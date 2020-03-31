@@ -10,7 +10,7 @@ import InfoPopup from "./infoPopup";
 import ValidationPopup from "./validationPopup";
 import UserForm from "./userForm";
 
-//let app = null;
+let app = null;
 
 class AddUserWindow extends UserForm {
   constructor(props) {
@@ -20,19 +20,17 @@ class AddUserWindow extends UserForm {
 
     this.state = { count: 0 };
 
-    //app = this;
+    app = this;
   }
 
   componentDidMount() {
     console.log("AddUserWindow.componentDidMount");
-    // const count = this.state.count + 1;
-    // this.setState({ count: count });
     this.doRender();
   }
 
   componentWillUnmount() {
     console.log("AddUserWindow.componentWillUnmount");
-    //app = null;
+    app = null;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -83,8 +81,7 @@ class AddUserWindow extends UserForm {
 
     const { data, status } = await user.addUser(userData);
 
-    // hack to get focus back to this window.
-    eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
+console.log("+++++++++++++++++++++++app = " !!app);
 
     if (data.__hadError__) {
       console.log(
