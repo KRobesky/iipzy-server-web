@@ -35,6 +35,11 @@ class AddUserWindow extends UserForm {
     app = null;
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    console.log("AddUserWindow.componentWillUpdate");
+    app = null;
+  }
+
   getUserData() {
     const userData = {
       userName: AddUserWindow.userName,
