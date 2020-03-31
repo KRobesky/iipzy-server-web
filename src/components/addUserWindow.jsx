@@ -205,7 +205,11 @@ class AddUserWindow extends UserForm {
     //     count
     // );
     console.log("AddUserWindow.doRender");
-    this.setState({ count: this.state.count + 1 });
+    //this.setState({ count: this.state.count + 1 });
+    this.setState((prevState, props) => {
+      console.log("AddUserWindow.doRender.2");
+      return { count: prevState.count + 1 };
+    });
     //AddUserWindow.renderCount++;
   }
 
