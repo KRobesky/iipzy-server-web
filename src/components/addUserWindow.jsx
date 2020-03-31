@@ -97,8 +97,6 @@ class AddUserWindow extends UserForm {
       AddUserWindow.buttonsEnabled = false;
 
       this.doRender();
-      //??
-      this.doRender();
 
       return;
     }
@@ -200,16 +198,16 @@ class AddUserWindow extends UserForm {
   }
 
   doRender() {
-    const count = AddUserWindow.renderCount + 1;
-    // const count = this.state.count + 1;
-    console.log(
-      "AddUserWindow.doRender: count before = " +
-        AddUserWindow.renderCount +
-        ", after = " +
-        count
-    );
-    this.setState({ count: count });
-    AddUserWindow.renderCount++;
+    // const count = AddUserWindow.renderCount + 1;
+    // // const count = this.state.count + 1;
+    // console.log(
+    //   "AddUserWindow.doRender: count before = " +
+    //     AddUserWindow.renderCount +
+    //     ", after = " +
+    //     count
+    // );
+    this.setState({ count: count + 1 });
+    //AddUserWindow.renderCount++;
   }
 
   render() {
