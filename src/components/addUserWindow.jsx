@@ -27,23 +27,17 @@ class AddUserWindow extends UserForm {
     console.log("AddUserWindow.componentDidMount");
     // const count = this.state.count + 1;
     // this.setState({ count: count });
-    window.addEventListener("focus", this.onFocus);
     this.doRender();
   }
 
   componentWillUnmount() {
     console.log("AddUserWindow.componentWillUnmount");
-    window.removeEventListener("focus", this.onFocus);
     //app = null;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log("AddUserWindow.shouldComponentUpdate");
     return true;
-  }
-
-  onFocus() {
-    console.log("=================================AddUserWindow.onFucus");
   }
 
   getUserData() {
@@ -102,6 +96,8 @@ class AddUserWindow extends UserForm {
       AddUserWindow.showSpinner = false;
       AddUserWindow.buttonsEnabled = false;
 
+      this.doRender();
+      //??
       this.doRender();
 
       return;
