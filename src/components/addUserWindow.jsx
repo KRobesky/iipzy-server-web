@@ -10,7 +10,7 @@ import InfoPopup from "./infoPopup";
 import ValidationPopup from "./validationPopup";
 import UserForm from "./userForm";
 
-//let app = null;
+let app = null;
 
 class AddUserWindow extends UserForm {
   constructor(props) {
@@ -20,7 +20,7 @@ class AddUserWindow extends UserForm {
 
     this.state = { count: 0 };
 
-    //app = this;
+    app = this;
   }
 
   componentDidMount() {
@@ -30,7 +30,7 @@ class AddUserWindow extends UserForm {
 
   componentWillUnmount() {
     console.log("AddUserWindow.componentWillUnmount");
-    //app = null;
+    app = null;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -96,8 +96,8 @@ class AddUserWindow extends UserForm {
       AddUserWindow.buttonsEnabled = false;
       AddUserWindow.fieldsEnabled = true;
 
-      //this.doRender();
-      eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
+      if (app) this.doRender();
+      else eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
 
       return;
     }
@@ -109,8 +109,8 @@ class AddUserWindow extends UserForm {
     AddUserWindow.buttonsEnabled = false;
     AddUserWindow.fieldsEnabled = true;
 
-    //this.doRender();
-    eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
+    if (app) this.doRender();
+    else eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
   }
 
   getInfoMessage() {
@@ -162,7 +162,8 @@ class AddUserWindow extends UserForm {
       AddUserWindow.showSpinner = false;
       AddUserWindow.showValidationPopup = true;
 
-      this.doRender();
+      if (app) this.doRender();
+      else eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
 
       return;
     }
@@ -180,7 +181,8 @@ class AddUserWindow extends UserForm {
     AddUserWindow.showSpinner = false;
     AddUserWindow.isVerified = true;
 
-    this.doRender();
+    if (app) this.doRender();
+    else eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
   }
 
   hideValidationCodePopup() {
