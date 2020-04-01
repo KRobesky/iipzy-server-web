@@ -24,7 +24,9 @@ class NavBar extends React.Component {
     this.setState({ count: count });
   }
 
-  handleClick = e => {};
+  handleClick = e => {
+    console.log("handleClick: ev = " + JSON.stringify(ev));
+  };
 
   render() {
     const isAdmin = NavBar.isAdmin;
@@ -86,7 +88,7 @@ class NavBar extends React.Component {
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
-                onClick={this.handleClick}
+                onClick={this.handleClick("addUser")}
                 to={Defs.urlAddUser}
               >
                 Register
