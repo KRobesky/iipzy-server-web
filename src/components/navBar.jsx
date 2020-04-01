@@ -42,7 +42,7 @@ class NavBar extends React.Component {
             <div className="navbar-nav">
               <NavLink
                 className="nav-item nav-link"
-                onClick={this.handleClick()(Defs.urlIipzy)}
+                onClick={this.handleClick(Defs.urlIipzy)}
                 to={Defs.urlIipzy}
               >
                 iipzy
