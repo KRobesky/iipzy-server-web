@@ -28,6 +28,7 @@ class EditUserWindow extends UserForm {
   componentDidMount() {
     console.log("EditUserWindow.componentDidMount");
     EditUserWindow.buttonsEnabled = false;
+    EditUserWindow.fieldsEnabled = true;
     EditUserWindow.showPasswordPopup = true;
     EditUserWindow.passwordValidated = false;
     const count = this.state.count + 1;
@@ -79,6 +80,20 @@ class EditUserWindow extends UserForm {
     );
   }
 
+  getFieldsEnabled() {
+    console.log(
+      "EditUserWindow.getFieldsEnabled: " + EditUserWindow.fieldsEnabled
+    );
+    return EditUserWindow.fieldsEnabled;
+  }
+
+  setFieldsEnabled(fieldsEnabled) {
+    EditUserWindow.fieldsEnabled = fieldsEnabled;
+    console.log(
+      "EditUserWindow.setFieldsEnabled: " + EditUserWindow.fieldsEnabled
+    );
+  }
+
   doRender() {
     const count = this.state.count + 1;
     this.setState({ count: count });
@@ -112,6 +127,7 @@ class EditUserWindow extends UserForm {
 
       EditUserWindow.showInfoPopup = true;
       EditUserWindow.buttonsEnabled = false;
+      EditUserWindow.fieldsEnabled = true;
 
       this.doRender();
 
@@ -121,6 +137,7 @@ class EditUserWindow extends UserForm {
     EditUserWindow.infoMessage = EditUserWindow.userName + " updated";
     EditUserWindow.showInfoPopup = true;
     EditUserWindow.buttonsEnabled = false;
+    EditUserWindow.fieldsEnabled = true;
 
     this.doRender();
   }
@@ -144,6 +161,7 @@ class EditUserWindow extends UserForm {
 
       EditUserWindow.showInfoPopup = true;
       EditUserWindow.buttonsEnabled = false;
+      EditUserWindow.fieldsEnabled = true;
 
       this.doRender();
 
@@ -158,6 +176,7 @@ class EditUserWindow extends UserForm {
     EditUserWindow.infoMessage = EditUserWindow.userName + " deleted";
     EditUserWindow.showInfoPopup = true;
     EditUserWindow.buttonsEnabled = false;
+    EditUserWindow.fieldsEnabled = true;
 
     EditUserWindow.userId = 0;
     EditUserWindow.userName = "";
@@ -187,6 +206,7 @@ class EditUserWindow extends UserForm {
   hideInfoPopup() {
     EditUserWindow.showInfoPopup = false;
     EditUserWindow.buttonsEnabled = true;
+    EditUserWindow.fieldsEnabled = true;
     this.doRender();
   }
 
@@ -211,6 +231,7 @@ class EditUserWindow extends UserForm {
       EditUserWindow.showPasswordPopup = false;
       EditUserWindow.buttonsEnabled = false;
     }
+    EditUserWindow.fieldsEnabled = true;
     this.doRender();
   }
 
@@ -270,6 +291,8 @@ class EditUserWindow extends UserForm {
             setUserData={this.setUserData}
             getButtonsEnabled={this.getButtonsEnabled}
             setButtonsEnabled={this.setButtonsEnabled}
+            getFieldsEnabled={this.getFieldsEnabled}
+            setFieldsEnabled={this.setFieldsEnabled}
             userNameDisabled={true}
             button1Label={"Update"}
             onSubmit={ev => this.handleUpdateClick(ev)}
@@ -298,6 +321,7 @@ EditUserWindow.showPasswordPopup = true;
 EditUserWindow.passwordSupplied = false;
 EditUserWindow.passwordValidated = false;
 EditUserWindow.buttonsEnabled = false;
+EditUserWindow.fieldsEnabled = true;
 
 const handleLoginStatus = async (event, data) => {
   const { userName, authToken, password, loginStatus } = data;
