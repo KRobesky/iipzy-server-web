@@ -25,14 +25,14 @@ class NavBar extends React.Component {
   }
 
   handleClick = ev => {
-    console.log(
-      "==================NavBar.handleClick: ev = " + JSON.stringify(ev)
-    );
+    // console.log(
+    //   "==================NavBar.handleClick: ev = " + JSON.stringify(ev)
+    // );
   };
 
-  handleTo = ev => {
-    console.log("==================NavBar.handleTo ev = " + JSON.stringify(ev));
-  };
+  // handleTo = ev => {
+  //   console.log("==================NavBar.handleTo ev = " + JSON.stringify(ev));
+  // };
 
   render() {
     const isAdmin = NavBar.isAdmin;
