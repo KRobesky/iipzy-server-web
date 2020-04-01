@@ -25,7 +25,7 @@ class NavBar extends React.Component {
   }
 
   handleClick = ev => {
-    console.log("NavBar.handleClick: ev = " + JSON.stringify(ev));
+    console.log("=====NavBar.handleClick: ev = " + JSON.stringify(ev));
   };
 
   render() {
