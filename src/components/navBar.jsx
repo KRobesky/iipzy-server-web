@@ -24,7 +24,7 @@ class NavBar extends React.Component {
     this.setState({ count: count });
   }
 
-  handleClick = e => {
+  handleClick = ev => {
     console.log("handleClick: ev = " + JSON.stringify(ev));
   };
 
