@@ -112,7 +112,7 @@ class NavBar extends React.Component {
               <NavLink
                 className="nav-item nav-link"
                 onClick={() => this.handleClick(Defs.urlDownload)}
-                // to={Defs.urlDownload}
+                to={Defs.urlDownload}
               >
                 Download
               </NavLink>
