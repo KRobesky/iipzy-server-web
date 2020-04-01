@@ -30,6 +30,10 @@ class NavBar extends React.Component {
     );
   };
 
+  handleTo = ev => {
+    console.log("==================NavBar.handleTo ev = " + JSON.stringify(ev));
+  };
+
   render() {
     const isAdmin = NavBar.isAdmin;
     const loggedIn = NavBar.loggedIn;
@@ -91,8 +95,8 @@ class NavBar extends React.Component {
               <NavLink
                 className="nav-item nav-link"
                 innerRef={this.handleClick(Defs.urlAddUser)}
-                to={Defs.urlAddUser}
-                replace
+                /*                to={Defs.urlAddUser} */
+                to={this.handleTo(Defs.urlAddUser)}
               >
                 Register
               </NavLink>
