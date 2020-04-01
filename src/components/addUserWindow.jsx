@@ -80,6 +80,9 @@ class AddUserWindow extends UserForm {
     this.doRender();
 
     const { data, status } = await user.addUser(userData);
+
+    eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
+
     if (data.__hadError__) {
       console.log(
         "addUserWindow.handleUserAddResponse: errorMessage = " +

@@ -26,7 +26,7 @@ class NavBar extends React.Component {
 
   handleClick = url => {
     console.log("==================NavBar.handleClick: url = " + url);
-    eventManager.send(Defs.ipcLinkTo, url);
+    //eventManager.send(Defs.ipcLinkTo, url);
   };
 
   // handleClickAddUser = url => {
