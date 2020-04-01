@@ -96,8 +96,7 @@ class AddUserWindow extends UserForm {
       AddUserWindow.buttonsEnabled = false;
       AddUserWindow.fieldsEnabled = true;
 
-      if (app) this.doRender();
-      else eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
+      eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
 
       return;
     }
@@ -109,8 +108,7 @@ class AddUserWindow extends UserForm {
     AddUserWindow.buttonsEnabled = false;
     AddUserWindow.fieldsEnabled = true;
 
-    if (app) this.doRender();
-    else eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
+    eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
   }
 
   getInfoMessage() {
@@ -162,8 +160,7 @@ class AddUserWindow extends UserForm {
       AddUserWindow.showSpinner = false;
       AddUserWindow.showValidationPopup = true;
 
-      if (app) this.doRender();
-      else eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
+      eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
 
       return;
     }
@@ -181,8 +178,7 @@ class AddUserWindow extends UserForm {
     AddUserWindow.showSpinner = false;
     AddUserWindow.isVerified = true;
 
-    if (app) this.doRender();
-    else eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
+    eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
   }
 
   hideValidationCodePopup() {
