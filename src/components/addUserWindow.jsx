@@ -97,6 +97,8 @@ class AddUserWindow extends UserForm {
 
       this.doRender();
 
+      this.forceUpdate();
+
       return;
     }
 
@@ -108,6 +110,8 @@ class AddUserWindow extends UserForm {
     AddUserWindow.fieldsEnabled = true;
 
     this.doRender();
+
+    this.forceUpdate();
   }
 
   getInfoMessage() {
