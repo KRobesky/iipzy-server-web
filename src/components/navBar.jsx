@@ -95,8 +95,7 @@ class NavBar extends React.Component {
               <NavLink
                 className="nav-item nav-link"
                 onClick={this.handleClick(Defs.urlAddUser)}
-                /*                to={Defs.urlAddUser} */
-                to={this.handleTo(Defs.urlAddUser)}
+                to={Defs.urlAddUser}
               >
                 Register
               </NavLink>
