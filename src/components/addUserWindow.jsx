@@ -207,7 +207,7 @@ class AddUserWindow extends UserForm {
     return AddUserWindow.fieldsEnabled;
   }
 
-  setButtonsEnabled(fieldsEnabled) {
+  setFieldsEnabled(fieldsEnabled) {
     AddUserWindow.fieldsEnabled = fieldsEnabled;
     console.log(
       "AddUserWindow.setFieldsEnabled: " + AddUserWindow.fieldsEnabled
