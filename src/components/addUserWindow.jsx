@@ -93,6 +93,7 @@ class AddUserWindow extends UserForm {
       AddUserWindow.showInfoPopup = true;
       AddUserWindow.showSpinner = false;
       AddUserWindow.buttonsEnabled = false;
+      AddUserWindow.fieldsEnabled = true;
 
       this.doRender();
 
@@ -104,6 +105,7 @@ class AddUserWindow extends UserForm {
     AddUserWindow.showSpinner = false;
     AddUserWindow.showValidationPopup = true;
     AddUserWindow.buttonsEnabled = false;
+    AddUserWindow.fieldsEnabled = true;
 
     this.doRender();
   }
@@ -171,6 +173,7 @@ class AddUserWindow extends UserForm {
     AddUserWindow.infoMessage = AddUserWindow.userName + " registered";
     AddUserWindow.showInfoPopup = true;
     AddUserWindow.buttonsEnabled = false;
+    AddUserWindow.fieldsEnabled = true;
     AddUserWindow.showSpinner = false;
     AddUserWindow.isVerified = true;
 
@@ -192,7 +195,23 @@ class AddUserWindow extends UserForm {
 
   setButtonsEnabled(buttonsEnabled) {
     AddUserWindow.buttonsEnabled = buttonsEnabled;
-    console.log("AddUserWindow.setButtonsEnabled");
+    console.log(
+      "AddUserWindow.setButtonsEnabled: " + AddUserWindow.fieldsEnabled
+    );
+  }
+
+  getFieldsEnabled() {
+    console.log(
+      "addUserWindow.getFieldsEnabled: " + AddUserWindow.fieldsEnabled
+    );
+    return AddUserWindow.fieldsEnabled;
+  }
+
+  setButtonsEnabled(fieldsEnabled) {
+    AddUserWindow.fieldsEnabled = fieldsEnabled;
+    console.log(
+      "AddUserWindow.setFieldsEnabled: " + AddUserWindow.fieldsEnabled
+    );
   }
 
   doRender() {
@@ -255,6 +274,8 @@ class AddUserWindow extends UserForm {
           setUserData={this.setUserData}
           getButtonsEnabled={this.getButtonsEnabled}
           setButtonsEnabled={this.setButtonsEnabled}
+          getFieldsEnabled={this.getFieldsEnabled}
+          setFieldsEnabled={this.setFieldsEnabled}
           userNameDisabled={false}
           button1Label={"Register"}
           onSubmit={ev => this.handleAddClick(ev)}
@@ -278,6 +299,7 @@ AddUserWindow.password2 = "";
 AddUserWindow.needRegistration = false;
 
 AddUserWindow.buttonsEnabled = true;
+AddUserWindow.fieldsEnabled = true;
 
 AddUserWindow.showInfoPopup = false;
 AddUserWindow.infoMessage = "";

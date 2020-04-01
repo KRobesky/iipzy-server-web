@@ -207,12 +207,14 @@ class UserForm extends React.Component {
     if (errors) return;
 
     this.props.setButtonsEnabled(false);
+    this.props.setFieldsEnabled(false);
 
     this.props.onSubmit(this.data);
   }
 
   handleButton2Click(ev) {
     this.props.setButtonsEnabled(false);
+    this.props.setFieldsEnabled(false);
 
     this.props.onSubmit2(this.data);
   }
@@ -248,6 +250,7 @@ class UserForm extends React.Component {
     console.log("UserForm.render");
 
     const buttonsEnabled = this.props.getButtonsEnabled();
+    const fieldsEnabled = this.props.getFieldsEnabled();
     const button1MarginRight = this.props.onSubmit2 ? 20 : 0;
     //const showSpinner = !buttonsEnabled;
 
@@ -263,7 +266,7 @@ class UserForm extends React.Component {
           "User Name",
           "text",
           true,
-          this.props.userNameDisabled,
+          this.props.userNameDisabled || !fieldsEnabled,
           ev => this.handleChange(ev)
         )}
         {this.renderInput(
@@ -271,7 +274,7 @@ class UserForm extends React.Component {
           "Email Address",
           "text",
           false,
-          !this.isValidUserName(),
+          !this.isValidUserName() || !fieldsEnabled,
           ev => this.handleChange(ev)
         )}
         {this.renderInput(
@@ -279,7 +282,7 @@ class UserForm extends React.Component {
           "Mobile Phone Number",
           "text",
           false,
-          !this.isValidEmailAddress(),
+          !this.isValidEmailAddress() || !fieldsEnabled,
           ev => this.handleChange(ev)
         )}
         {this.renderInput(
@@ -287,7 +290,7 @@ class UserForm extends React.Component {
           "Password",
           "password",
           false,
-          !this.isValidMobilePhoneNo(),
+          !this.isValidMobilePhoneNo() || !fieldsEnabled,
           ev => this.handleChange(ev)
         )}
         {this.renderInput(
@@ -295,7 +298,7 @@ class UserForm extends React.Component {
           "Password Again",
           "password",
           false,
-          !this.isValidPassword(),
+          !this.isValidPassword() || !fieldsEnabled,
           ev => this.handlePassword2Change(ev)
         )}
         <table align="center">
