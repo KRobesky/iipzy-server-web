@@ -90,8 +90,8 @@ class NavBar extends React.Component {
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
-                /*                 onClick={() => this.handleClick(Defs.urlForgotPassword)}
-                to={Defs.urlForgotPassword} */
+                onClick={() => this.handleClick(Defs.urlForgotPassword)}
+                /* to={Defs.urlForgotPassword} */
               >
                 Forgot Password
               </NavLink>
