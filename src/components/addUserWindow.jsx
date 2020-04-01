@@ -81,8 +81,6 @@ class AddUserWindow extends UserForm {
 
     const { data, status } = await user.addUser(userData);
 
-    eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
-
     if (data.__hadError__) {
       console.log(
         "addUserWindow.handleUserAddResponse: errorMessage = " +
@@ -98,7 +96,8 @@ class AddUserWindow extends UserForm {
       AddUserWindow.buttonsEnabled = false;
       AddUserWindow.fieldsEnabled = true;
 
-      this.doRender();
+      //this.doRender();
+      eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
 
       return;
     }
@@ -110,7 +109,8 @@ class AddUserWindow extends UserForm {
     AddUserWindow.buttonsEnabled = false;
     AddUserWindow.fieldsEnabled = true;
 
-    this.doRender();
+    //this.doRender();
+    eventManager.send(Defs.ipcLinkTo, Defs.urlAddUser);
   }
 
   getInfoMessage() {
