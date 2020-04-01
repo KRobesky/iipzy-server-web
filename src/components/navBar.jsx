@@ -52,14 +52,14 @@ class NavBar extends React.Component {
               <NavLink
                 className="nav-item nav-link"
                 onClick={() => this.handleClick(Defs.urlIipzy)}
-                /*                 to={Defs.urlIipzy} */
+                to={Defs.urlIipzy}
               >
                 iipzy
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
                 onClick={() => this.handleClick(Defs.urlSentinels)}
-                /*                 to={Defs.urlSentinels} */
+                to={Defs.urlSentinels}
               >
                 Sentinel
               </NavLink>
@@ -67,7 +67,7 @@ class NavBar extends React.Component {
                 <NavLink
                   className="nav-item nav-link"
                   onClick={() => this.handleClick(Defs.urlLogin)}
-                  /*                   to={Defs.urlLogin} */
+                  to={Defs.urlLogin}
                 >
                   Log In
                 </NavLink>
@@ -76,7 +76,7 @@ class NavBar extends React.Component {
                 <NavLink
                   className="nav-item nav-link"
                   onClick={() => this.handleClick(Defs.urlLogin)}
-                  /*                   to={Defs.urlLogin} */
+                  to={Defs.urlLogin}
                 >
                   Log Out
                 </NavLink>
@@ -84,28 +84,28 @@ class NavBar extends React.Component {
               <NavLink
                 className="nav-item nav-link"
                 onClick={() => this.handleClick(Defs.urlEditUser)}
-                /*                 to={Defs.urlEditUser} */
+                to={Defs.urlEditUser}
               >
                 Edit User
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
                 onClick={() => this.handleClick(Defs.urlForgotPassword)}
-                /* to={Defs.urlForgotPassword} */
+                to={Defs.urlForgotPassword}
               >
                 Forgot Password
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
                 onClick={() => this.handleClick(Defs.urlAddUser)}
-                /*                 to={Defs.urlAddUser} */
+                to={Defs.urlAddUser}
               >
                 Register
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
                 onClick={() => this.handleClick(Defs.urlAbout)}
-                /*                 to={Defs.urlAbout} */
+                to={Defs.urlAbout}
               >
                 About
               </NavLink>
@@ -120,7 +120,7 @@ class NavBar extends React.Component {
                 <NavLink
                   className="nav-item nav-link"
                   onClick={() => this.handleClick(Defs.urlAdministration)}
-                  /*                   to={Defs.urlAdministration} */
+                  to={Defs.urlAdministration}
                 >
                   Administration
                 </NavLink>
@@ -134,28 +134,28 @@ class NavBar extends React.Component {
               <NavLink
                 className="nav-item nav-link"
                 onClick={() => this.handleClick(Defs.urlClients)}
-                /*                 to={Defs.urlClients} */
+                to={Defs.urlClients}
               >
                 Clients
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
                 onClick={() => this.handleClick(Defs.urlSentinelAdmin)}
-                /*                 to={Defs.urlSentinelAdmin} */
+                to={Defs.urlSentinelAdmin}
               >
                 Admin
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
                 onClick={() => this.handleClick(Defs.urlUpdater)}
-                /*                 to={Defs.urlUpdater} */
+                to={Defs.urlUpdater}
               >
                 Update
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
                 onClick={() => this.handleClick(Defs.urlHome)}
-                /*                 to={Defs.urlHome} */
+                to={Defs.urlHome}
               >
                 Home
               </NavLink>
