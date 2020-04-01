@@ -30,8 +30,8 @@ class NavBar extends React.Component {
     );
   };
 
-  handleClickAddUser = () => {
-    console.log("==================NavBar.handleClickAddUser");
+  handleClickAddUser = url => {
+    console.log("==================NavBar.handleClickAddUser: " + url);
   };
 
   // handleTo = ev => {
@@ -98,7 +98,7 @@ class NavBar extends React.Component {
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
-                onClick={this.handleClickAddUser}
+                onClick={() => this.handleClickAddUser(Defs.urlAddUser)}
                 to={Defs.urlAddUser}
               >
                 Register
