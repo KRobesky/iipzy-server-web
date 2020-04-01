@@ -48,14 +48,14 @@ class NavBar extends React.Component {
             <div className="navbar-nav">
               <NavLink
                 className="nav-item nav-link"
-                innerRef={this.handleClick(Defs.urlIipzy)}
+                onClick={this.handleClick(Defs.urlIipzy)}
                 to={Defs.urlIipzy}
               >
                 iipzy
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
-                innerRef={this.handleClick(Defs.urlSentinels)}
+                onClick={this.handleClick(Defs.urlSentinels)}
                 to={Defs.urlSentinels}
               >
                 Sentinel
@@ -63,7 +63,7 @@ class NavBar extends React.Component {
               {!loggedIn && (
                 <NavLink
                   className="nav-item nav-link"
-                  innerRef={this.handleClick(Defs.urlLogin)}
+                  onClick={this.handleClick(Defs.urlLogin)}
                   to={Defs.urlLogin}
                 >
                   Log In
@@ -72,7 +72,7 @@ class NavBar extends React.Component {
               {loggedIn && (
                 <NavLink
                   className="nav-item nav-link"
-                  innerRef={this.handleClick(Defs.urlLogin)}
+                  onClick={this.handleClick(Defs.urlLogin)}
                   to={Defs.urlLogin}
                 >
                   Log Out
@@ -80,21 +80,21 @@ class NavBar extends React.Component {
               )}
               <NavLink
                 className="nav-item nav-link"
-                innerRef={this.handleClick(Defs.urlEditUser)}
+                onClick={this.handleClick(Defs.urlEditUser)}
                 to={Defs.urlEditUser}
               >
                 Edit User
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
-                innerRef={this.handleClick(Defs.urlForgotPassword)}
+                onClick={this.handleClick(Defs.urlForgotPassword)}
                 to={Defs.urlForgotPassword}
               >
                 Forgot Password
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
-                innerRef={this.handleClick(Defs.urlAddUser)}
+                onClick={this.handleClick(Defs.urlAddUser)}
                 /*                to={Defs.urlAddUser} */
                 to={this.handleTo(Defs.urlAddUser)}
               >
@@ -102,14 +102,14 @@ class NavBar extends React.Component {
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
-                innerRef={this.handleClick(Defs.urlAbout)}
+                onClick={this.handleClick(Defs.urlAbout)}
                 to={Defs.urlAbout}
               >
                 About
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
-                innerRef={this.handleClick(Defs.urlDownload)}
+                onClick={this.handleClick(Defs.urlDownload)}
                 to={Defs.urlDownload}
               >
                 Download
@@ -117,7 +117,7 @@ class NavBar extends React.Component {
               {isAdmin && (
                 <NavLink
                   className="nav-item nav-link"
-                  innerRef={this.handleClick(Defs.urlAdministration)}
+                  onClick={this.handleClick(Defs.urlAdministration)}
                   to={Defs.urlAdministration}
                 >
                   Administration
@@ -131,28 +131,28 @@ class NavBar extends React.Component {
             <div className="navbar-nav">
               <NavLink
                 className="nav-item nav-link"
-                innerRef={this.handleClick(Defs.urlClients)}
+                onClick={this.handleClick(Defs.urlClients)}
                 to={Defs.urlClients}
               >
                 Clients
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
-                innerRef={this.handleClick(Defs.urlSentinelAdmin)}
+                onClick={this.handleClick(Defs.urlSentinelAdmin)}
                 to={Defs.urlSentinelAdmin}
               >
                 Admin
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
-                innerRef={this.handleClick(Defs.urlUpdater)}
+                onClick={this.handleClick(Defs.urlUpdater)}
                 to={Defs.urlUpdater}
               >
                 Update
               </NavLink>
               <NavLink
                 className="nav-item nav-link"
-                innerRef={this.handleClick(Defs.urlHome)}
+                onClick={this.handleClick(Defs.urlHome)}
                 to={Defs.urlHome}
               >
                 Home
