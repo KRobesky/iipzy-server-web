@@ -17,14 +17,6 @@ class ClientPicker extends React.Component {
 
     app = this;
 
-    // this.device = null;
-    // this.title = "Network Device";
-    // ClientPicker.clientsFiltered = [];
-    // ClientPicker.clientTokenByEntryString = new Map();
-    // ClientPicker.entryStringByClientToken = new Map();
-    // ClientPicker.selectedClient = "";
-    // ClientPicker.selectedClientToken = "";
-
     this.state = { count: 0 };
   }
 
