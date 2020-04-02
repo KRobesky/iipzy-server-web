@@ -50,7 +50,7 @@ class ClientPicker extends React.Component {
     ClientPicker.selectedClient = ev.value;
     console.log("clientPicker.handleSelect: " + ClientPicker.selectedClient);
     this.props.onPick(
-      this.clientTokenByEntryString.get(ClientPicker.selectedClient)
+      ClientPicker.clientTokenByEntryString.get(ClientPicker.selectedClient)
     );
   }
 
@@ -124,7 +124,7 @@ async function getClientsFromDB(queryString) {
           localIPAddress +
           (isOnLine ? "" : "  - offline");
         ClientPicker.clientsFiltered.push(entryString);
-        this.clientTokenByEntryString.set(entryString, clientToken);
+        ClientPicker.clientTokenByEntryString.set(entryString, clientToken);
         ClientPicker.entryStringByClientToken.set(clientToken, entryString);
       }
     }

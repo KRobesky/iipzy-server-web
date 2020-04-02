@@ -104,6 +104,8 @@ class UserForm extends React.Component {
     console.log("UserForm.componentWillUnmount");
 
     this.props.setUserData(this.data);
+
+    app = null;
   }
 
   isValidUserName() {
