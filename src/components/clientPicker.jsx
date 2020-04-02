@@ -19,29 +19,30 @@ class ClientPicker extends React.Component {
 
     // this.device = null;
     // this.title = "Network Device";
-    this.clientsFiltered = [];
-    this.clientTokenByEntryString = new Map();
-    this.entryStringByClientToken = new Map();
-    this.selectedClient = "";
-    this.selectedClientToken = "";
+    // ClientPicker.clientsFiltered = [];
+    // ClientPicker.clientTokenByEntryString = new Map();
+    // ClientPicker.entryStringByClientToken = new Map();
+    // ClientPicker.selectedClient = "";
+    // ClientPicker.selectedClientToken = "";
 
     this.state = { count: 0 };
   }
 
   async componentDidMount() {
     console.log("ClientPicker.componentDidMount");
-    await this.getClientsFromDB("sentinelsOnly=1");
-    this.selectedClientToken = this.props.getSelectedClientToken();
+    //await this.getClientsFromDB("sentinelsOnly=1");
+    getClientsFromDB("sentinelsOnly=1");
+    //ClientPicker.selectedClientToken = this.props.getSelectedClientToken();
   }
 
   componentWillUnmount() {
     console.log("ClientPicker.componentWillUnmount");
-    //??app = null;
+    app = null;
   }
 
   getClients() {
     console.log("ClientPicker.getClients");
-    return this.clientsFiltered;
+    return ClientPicker.clientsFiltered;
   }
 
   getDisabled() {
@@ -49,71 +50,75 @@ class ClientPicker extends React.Component {
   }
 
   getSelectedClient() {
-    console.log("clientPicker.getSelectedClient: " + this.selectedClient);
-    return this.selectedClient;
+    console.log(
+      "clientPicker.getSelectedClient: " + ClientPicker.selectedClient
+    );
+    return ClientPicker.selectedClient;
   }
 
-  async getClientsFromDB(queryString) {
-    const { data, status } = await clients.getClients(queryString);
-    console.log("ClientPicker.getClientsFromDB (response): status = " + status);
+  // async getClientsFromDB(queryString) {
+  //   const { data, status } = await clients.getClients(queryString);
+  //   console.log("ClientPicker.getClientsFromDB (response): status = " + status);
 
-    if (data.__hadError__) {
-      console.log(
-        "ClientPicker.handleClientsGetResponse: errorMessage = " +
-          data.__hadError__.errorMessage +
-          ", statusCode = " +
-          data.__hadError__.statusCode
-      );
+  //   if (data.__hadError__) {
+  //     console.log(
+  //       "ClientPicker.handleClientsGetResponse: errorMessage = " +
+  //         data.__hadError__.errorMessage +
+  //         ", statusCode = " +
+  //         data.__hadError__.statusCode
+  //     );
 
-      //   ClientPicker.infoMessage = data.__hadError__.errorMessage;
+  //     //   ClientPicker.infoMessage = data.__hadError__.errorMessage;
 
-      //   if (app != null) app.doRender();
+  //     //   if (app != null) app.doRender();
 
-      return;
-    }
+  //     return;
+  //   }
 
-    if (data) {
-      this.clientsFiltered = [];
-      this.clientTokenByEntryString = new Map();
-      this.entryStringByClientToken = new Map();
+  //   if (data) {
+  //     ClientPicker.clientsFiltered = [];
+  //     ClientPicker.clientTokenByEntryString = new Map();
+  //     ClientPicker.entryStringByClientToken = new Map();
 
-      for (let i = 0; i < data.length; i++) {
-        const {
-          clientName,
-          clientType,
-          clientToken,
-          publicIPAddress,
-          localIPAddress,
-          isOnLine
-        } = data[i];
-        if (clientType === "appliance") {
-          const entryString =
-            clientName +
-            "  " +
-            publicIPAddress +
-            "  " +
-            localIPAddress +
-            (isOnLine ? "" : "  - offline");
-          this.clientsFiltered.push(entryString);
-          this.clientTokenByEntryString.set(entryString, clientToken);
-          this.entryStringByClientToken.set(clientToken, entryString);
-        }
-      }
+  //     for (let i = 0; i < data.length; i++) {
+  //       const {
+  //         clientName,
+  //         clientType,
+  //         clientToken,
+  //         publicIPAddress,
+  //         localIPAddress,
+  //         isOnLine
+  //       } = data[i];
+  //       if (clientType === "appliance") {
+  //         const entryString =
+  //           clientName +
+  //           "  " +
+  //           publicIPAddress +
+  //           "  " +
+  //           localIPAddress +
+  //           (isOnLine ? "" : "  - offline");
+  //         ClientPicker.clientsFiltered.push(entryString);
+  //         this.clientTokenByEntryString.set(entryString, clientToken);
+  //         ClientPicker.entryStringByClientToken.set(clientToken, entryString);
+  //       }
+  //     }
 
-      if (this.selectedClientToken) {
-        this.selectedClient = this.entryStringByClientToken.get(
-          this.selectedClientToken
-        );
-      }
-    }
+  //     if (ClientPicker.selectedClientToken) {
+  //       ClientPicker.selectedClient = ClientPicker.entryStringByClientToken.get(
+  //         ClientPicker.selectedClientToken
+  //       );
+  //     }
+  //   }
 
-    this.doRender();
-  }
+  //   this.doRender();
+  // }
 
   handleSelect(ev) {
-    this.selectedClient = ev.value;
-    console.log("clientPicker.handleSelect: " + this.selectedClient);
-    this.props.onPick(this.clientTokenByEntryString.get(this.selectedClient));
+    ClientPicker.selectedClient = ev.value;
+    console.log("clientPicker.handleSelect: " + ClientPicker.selectedClient);
+    this.props.onPick(
+      this.clientTokenByEntryString.get(ClientPicker.selectedClient)
+    );
   }
 
   doRender() {
@@ -136,6 +141,72 @@ class ClientPicker extends React.Component {
       </div>
     );
   }
+}
+
+ClientPicker.clientsFiltered = [];
+ClientPicker.clientTokenByEntryString = new Map();
+ClientPicker.entryStringByClientToken = new Map();
+ClientPicker.selectedClient = "";
+ClientPicker.selectedClientToken = "";
+
+async function getClientsFromDB(queryString) {
+  const { data, status } = await clients.getClients(queryString);
+  console.log("ClientPicker.getClientsFromDB (response): status = " + status);
+
+  if (data.__hadError__) {
+    console.log(
+      "ClientPicker.handleClientsGetResponse: errorMessage = " +
+        data.__hadError__.errorMessage +
+        ", statusCode = " +
+        data.__hadError__.statusCode
+    );
+
+    //   ClientPicker.infoMessage = data.__hadError__.errorMessage;
+
+    //   if (app != null) app.doRender();
+
+    return;
+  }
+
+  if (data) {
+    ClientPicker.clientsFiltered = [];
+    ClientPicker.clientTokenByEntryString = new Map();
+    ClientPicker.entryStringByClientToken = new Map();
+
+    for (let i = 0; i < data.length; i++) {
+      const {
+        clientName,
+        clientType,
+        clientToken,
+        publicIPAddress,
+        localIPAddress,
+        isOnLine
+      } = data[i];
+      if (clientType === "appliance") {
+        const entryString =
+          clientName +
+          "  " +
+          publicIPAddress +
+          "  " +
+          localIPAddress +
+          (isOnLine ? "" : "  - offline");
+        ClientPicker.clientsFiltered.push(entryString);
+        this.clientTokenByEntryString.set(entryString, clientToken);
+        ClientPicker.entryStringByClientToken.set(clientToken, entryString);
+      }
+    }
+
+    if (ClientPicker.selectedClientToken) {
+      ClientPicker.selectedClient = ClientPicker.entryStringByClientToken.get(
+        ClientPicker.selectedClientToken
+      );
+    }
+  }
+
+  if (app)
+    ClientPicker.selectedClientToken = app.props.getSelectedClientToken();
+
+  if (app) app.doRender();
 }
 
 export default ClientPicker;
