@@ -12,8 +12,6 @@ import UserForm from "./userForm";
 
 let app = null;
 
-let loaded = false;
-
 class AddUserWindow extends UserForm {
   constructor(props) {
     super(props);
@@ -27,13 +25,13 @@ class AddUserWindow extends UserForm {
 
   componentDidMount() {
     console.log("AddUserWindow.componentDidMount");
-    loaded = true;
+    AddUserWindow.loadCount++;
     this.doRender();
   }
 
   componentWillUnmount() {
     console.log("AddUserWindow.componentWillUnmount");
-    loaded = false;
+    AddUserWindow.loadCount--;
     app = null;
   }
 
@@ -228,7 +226,9 @@ class AddUserWindow extends UserForm {
     //     ", after = " +
     //     count
     // );
-    console.log("AddUserWindow.doRender: loaded = " + loaded);
+    console.log(
+      "AddUserWindow.doRender: loadCount = " + AddUserWindow.loadCount
+    );
     //this.setState({ count: this.state.count + 1 });
     this.setState((prevState, props) => {
       console.log("AddUserWindow.doRender.2");
@@ -291,6 +291,8 @@ class AddUserWindow extends UserForm {
     return ret;
   }
 }
+
+AddUserWindow.loadCount = 0;
 
 AddUserWindow.renderCount = 0;
 
