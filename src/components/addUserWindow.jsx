@@ -231,7 +231,10 @@ class AddUserWindow extends UserForm {
     //     count
     // );
     console.log(
-      "AddUserWindow.doRender: loadCount = " + AddUserWindow.loadCount
+      ">>>AddUserWindow.doRender: count = " +
+        this.state.count +
+        ", loadCount = " +
+        AddUserWindow.loadCount
     );
     //this.setState({ count: this.state.count + 1 });
     // this.setState((prevState, props) => {
@@ -239,7 +242,7 @@ class AddUserWindow extends UserForm {
     //   return { count: prevState.count + 1 };
     // });
     this.setState({ count: this.setState.count + 1 }, () => {
-      console.log("AddUserWindow.doRender.2");
+      console.log("<<<AddUserWindow.doRender.2: " + this.setState.count);
     });
     //AddUserWindow.renderCount++;
   }
