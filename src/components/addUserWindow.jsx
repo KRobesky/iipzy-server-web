@@ -27,14 +27,18 @@ class AddUserWindow extends UserForm {
   }
 
   componentDidMount() {
-    console.log("AddUserWindow.componentDidMount");
+    console.log(
+      "AddUserWindow.componentDidMount: instanceId = " + this.instanceId
+    );
     this.mounted = true;
     AddUserWindow.loadCount++;
     this.doRender();
   }
 
   componentWillUnmount() {
-    console.log("AddUserWindow.componentWillUnmount");
+    console.log(
+      "AddUserWindow.componentWillUnmount: instanceId = " + this.instanceId
+    );
     this.mounted = false;
     AddUserWindow.loadCount--;
     app = null;
