@@ -16,31 +16,20 @@ class AddUserWindow extends UserForm {
   constructor(props) {
     super(props);
 
-    this.instanceId = Date.now();
-    console.log("AddUserWindow.constructor: instanceId = " + this.instanceId);
+    console.log("AddUserWindow.constructor");
 
     this.state = { count: 0 };
-
-    this.mounted = false;
 
     app = this;
   }
 
   componentDidMount() {
-    console.log(
-      "AddUserWindow.componentDidMount: instanceId = " + this.instanceId
-    );
-    this.mounted = true;
-    AddUserWindow.loadCount++;
+    console.log("AddUserWindow.componentDidMount");
     this.doRender();
   }
 
   componentWillUnmount() {
-    console.log(
-      "AddUserWindow.componentWillUnmount: instanceId = " + this.instanceId
-    );
-    this.mounted = false;
-    AddUserWindow.loadCount--;
+    console.log("AddUserWindow.componentWillUnmount");
     app = null;
   }
 
@@ -88,44 +77,6 @@ class AddUserWindow extends UserForm {
     await addUser(userData);
   }
 
-  // async addUser(userData) {
-  //   console.log("AddUserWindow.addUser");
-
-  //   AddUserWindow.showSpinner = true;
-  //   this.doRender();
-
-  //   const { data, status } = await user.addUser(userData);
-
-  //   if (data.__hadError__) {
-  //     console.log(
-  //       "addUserWindow.handleUserAddResponse: errorMessage = " +
-  //         data.__hadError__.errorMessage +
-  //         ", statusCode = " +
-  //         data.__hadError__.statusCode
-  //     );
-
-  //     AddUserWindow.infoMessage = data.__hadError__.errorMessage;
-
-  //     AddUserWindow.showInfoPopup = true;
-  //     AddUserWindow.showSpinner = false;
-  //     AddUserWindow.buttonsEnabled = false;
-  //     AddUserWindow.fieldsEnabled = true;
-
-  //     this.doRender();
-
-  //     return;
-  //   }
-
-  //   AddUserWindow.userId = data.userId;
-  //   console.log("AddUserWindow.addUser: userId = " + AddUserWindow.userId);
-  //   AddUserWindow.showSpinner = false;
-  //   AddUserWindow.showValidationPopup = true;
-  //   AddUserWindow.buttonsEnabled = false;
-  //   AddUserWindow.fieldsEnabled = true;
-
-  //   this.doRender();
-  // }
-
   getInfoMessage() {
     return AddUserWindow.infoMessage;
   }
@@ -149,51 +100,10 @@ class AddUserWindow extends UserForm {
   async handleVerifyClick(verificationCode) {
     console.log("AddUserWindow.handleVerifyClick, code" + verificationCode);
     if (verificationCode !== "000000")
-      await this.verifyUser({
+      await verifyUser({
         userId: AddUserWindow.userId,
         verificationCode: verificationCode
       });
-  }
-
-  async verifyUser(params) {
-    AddUserWindow.showSpinner = true;
-    this.doRender();
-
-    const { data, status } = await user.verifyUser(params);
-    if (data.__hadError__) {
-      console.log(
-        "AddUserWindow.handleUserVerifyResponse: errorMessage = " +
-          data.__hadError__.errorMessage +
-          ", statusCode = " +
-          data.__hadError__.statusCode
-      );
-
-      AddUserWindow.infoMessage = data.__hadError__.errorMessage;
-
-      AddUserWindow.showInfoPopup = true;
-      AddUserWindow.buttonsEnabled = false;
-      AddUserWindow.showSpinner = false;
-      AddUserWindow.showValidationPopup = true;
-
-      this.doRender();
-
-      return;
-    }
-
-    console.log(
-      "AddUserWindow.handleUserVerifyResponse: isVerified = " + data.isVerified
-    );
-
-    AddUserWindow.showValidationPopup = false;
-
-    AddUserWindow.infoMessage = AddUserWindow.userName + " registered";
-    AddUserWindow.showInfoPopup = true;
-    AddUserWindow.buttonsEnabled = false;
-    AddUserWindow.fieldsEnabled = true;
-    AddUserWindow.showSpinner = false;
-    AddUserWindow.isVerified = true;
-
-    this.doRender();
   }
 
   hideValidationCodePopup() {
@@ -231,33 +141,8 @@ class AddUserWindow extends UserForm {
   }
 
   doRender() {
-    // const count = AddUserWindow.renderCount + 1;
-    // // const count = this.state.count + 1;
-    // console.log(
-    //   "AddUserWindow.doRender: count before = " +
-    //     AddUserWindow.renderCount +
-    //     ", after = " +
-    //     count
-    // );
-    const newCount = Date.now();
-    console.log(
-      ">>>AddUserWindow.doRender: count = " +
-        newCount +
-        ", mounted = " +
-        this.mounted +
-        ", instanceId = " +
-        this.instanceId
-    );
-    //this.setState({ count: this.state.count + 1 });
-    // this.setState((prevState, props) => {
-    //   console.log("AddUserWindow.doRender.2");
-    //   return { count: prevState.count + 1 };
-    // });
-    //this.setState({ count: this.state.count + 1 }, () => {
-    this.setState({ count: newCount }, () => {
-      console.log("<<<AddUserWindow.doRender.2: " + this.state.count);
-    });
-    //AddUserWindow.renderCount++;
+    console.log("AddUserWindow.doRender");
+    this.setState({ count: this.state.count + 1 });
   }
 
   render() {
@@ -315,10 +200,6 @@ class AddUserWindow extends UserForm {
   }
 }
 
-AddUserWindow.loadCount = 0;
-
-AddUserWindow.renderCount = 0;
-
 AddUserWindow.userName = "";
 AddUserWindow.emailAddress = "";
 AddUserWindow.mobilePhoneNo = "";
@@ -373,6 +254,47 @@ async function addUser(userData) {
   AddUserWindow.showValidationPopup = true;
   AddUserWindow.buttonsEnabled = false;
   AddUserWindow.fieldsEnabled = true;
+
+  if (app) app.doRender();
+}
+
+async function verifyUser(params) {
+  AddUserWindow.showSpinner = true;
+  if (app) app.doRender();
+
+  const { data, status } = await user.verifyUser(params);
+  if (data.__hadError__) {
+    console.log(
+      "AddUserWindow.handleUserVerifyResponse: errorMessage = " +
+        data.__hadError__.errorMessage +
+        ", statusCode = " +
+        data.__hadError__.statusCode
+    );
+
+    AddUserWindow.infoMessage = data.__hadError__.errorMessage;
+
+    AddUserWindow.showInfoPopup = true;
+    AddUserWindow.buttonsEnabled = false;
+    AddUserWindow.showSpinner = false;
+    AddUserWindow.showValidationPopup = true;
+
+    if (app) app.doRender();
+
+    return;
+  }
+
+  console.log(
+    "AddUserWindow.handleUserVerifyResponse: isVerified = " + data.isVerified
+  );
+
+  AddUserWindow.showValidationPopup = false;
+
+  AddUserWindow.infoMessage = AddUserWindow.userName + " registered";
+  AddUserWindow.showInfoPopup = true;
+  AddUserWindow.buttonsEnabled = false;
+  AddUserWindow.fieldsEnabled = true;
+  AddUserWindow.showSpinner = false;
+  AddUserWindow.isVerified = true;
 
   if (app) app.doRender();
 }
