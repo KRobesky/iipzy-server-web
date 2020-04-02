@@ -28,7 +28,7 @@ class Navigator extends React.Component {
 
   componentWillUnmount() {
     console.log("Navigator.componentWillUnmount");
-    app = null;
+    //app = null;
   }
 
   handleLinkChange() {
