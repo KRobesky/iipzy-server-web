@@ -85,46 +85,46 @@ class AddUserWindow extends UserForm {
     AddUserWindow.password = userData.password;
     AddUserWindow.password2 = userData.password;
 
-    await this.addUser(userData);
+    await addUser(userData);
   }
 
-  async addUser(userData) {
-    console.log("AddUserWindow.addUser");
+  // async addUser(userData) {
+  //   console.log("AddUserWindow.addUser");
 
-    AddUserWindow.showSpinner = true;
-    this.doRender();
+  //   AddUserWindow.showSpinner = true;
+  //   this.doRender();
 
-    const { data, status } = await user.addUser(userData);
+  //   const { data, status } = await user.addUser(userData);
 
-    if (data.__hadError__) {
-      console.log(
-        "addUserWindow.handleUserAddResponse: errorMessage = " +
-          data.__hadError__.errorMessage +
-          ", statusCode = " +
-          data.__hadError__.statusCode
-      );
+  //   if (data.__hadError__) {
+  //     console.log(
+  //       "addUserWindow.handleUserAddResponse: errorMessage = " +
+  //         data.__hadError__.errorMessage +
+  //         ", statusCode = " +
+  //         data.__hadError__.statusCode
+  //     );
 
-      AddUserWindow.infoMessage = data.__hadError__.errorMessage;
+  //     AddUserWindow.infoMessage = data.__hadError__.errorMessage;
 
-      AddUserWindow.showInfoPopup = true;
-      AddUserWindow.showSpinner = false;
-      AddUserWindow.buttonsEnabled = false;
-      AddUserWindow.fieldsEnabled = true;
+  //     AddUserWindow.showInfoPopup = true;
+  //     AddUserWindow.showSpinner = false;
+  //     AddUserWindow.buttonsEnabled = false;
+  //     AddUserWindow.fieldsEnabled = true;
 
-      this.doRender();
+  //     this.doRender();
 
-      return;
-    }
+  //     return;
+  //   }
 
-    AddUserWindow.userId = data.userId;
-    console.log("AddUserWindow.addUser: userId = " + AddUserWindow.userId);
-    AddUserWindow.showSpinner = false;
-    AddUserWindow.showValidationPopup = true;
-    AddUserWindow.buttonsEnabled = false;
-    AddUserWindow.fieldsEnabled = true;
+  //   AddUserWindow.userId = data.userId;
+  //   console.log("AddUserWindow.addUser: userId = " + AddUserWindow.userId);
+  //   AddUserWindow.showSpinner = false;
+  //   AddUserWindow.showValidationPopup = true;
+  //   AddUserWindow.buttonsEnabled = false;
+  //   AddUserWindow.fieldsEnabled = true;
 
-    this.doRender();
-  }
+  //   this.doRender();
+  // }
 
   getInfoMessage() {
     return AddUserWindow.infoMessage;
@@ -338,5 +338,43 @@ AddUserWindow.showValidationPopup = false;
 
 AddUserWindow.userId = 0;
 AddUserWindow.isVerified = false;
+
+async function addUser(userData) {
+  console.log("AddUserWindow.addUser");
+
+  AddUserWindow.showSpinner = true;
+  this.doRender();
+
+  const { data, status } = await user.addUser(userData);
+
+  if (data.__hadError__) {
+    console.log(
+      "addUserWindow.handleUserAddResponse: errorMessage = " +
+        data.__hadError__.errorMessage +
+        ", statusCode = " +
+        data.__hadError__.statusCode
+    );
+
+    AddUserWindow.infoMessage = data.__hadError__.errorMessage;
+
+    AddUserWindow.showInfoPopup = true;
+    AddUserWindow.showSpinner = false;
+    AddUserWindow.buttonsEnabled = false;
+    AddUserWindow.fieldsEnabled = true;
+
+    if (app) app.doRender();
+
+    return;
+  }
+
+  AddUserWindow.userId = data.userId;
+  console.log("AddUserWindow.addUser: userId = " + AddUserWindow.userId);
+  AddUserWindow.showSpinner = false;
+  AddUserWindow.showValidationPopup = true;
+  AddUserWindow.buttonsEnabled = false;
+  AddUserWindow.fieldsEnabled = true;
+
+  if (app) app.doRender();
+}
 
 export default AddUserWindow;
