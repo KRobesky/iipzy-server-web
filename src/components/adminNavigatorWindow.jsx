@@ -20,10 +20,8 @@ class AdminNavigatorWindow extends React.Component {
 
   componentDidMount() {
     console.log("AdminNavigatorWindow.componentDidMount");
-    const count = this.state.count + 1;
-    this.setState({ count: count });
-
     eventManager.send(Defs.ipcShowNavBar, "admin");
+    this.doRender();
   }
 
   componentWillUnmount() {
@@ -32,8 +30,7 @@ class AdminNavigatorWindow extends React.Component {
   }
 
   doRender() {
-    const count = this.state.count + 1;
-    this.setState({ count: count });
+    this.setState({ count: this.state.count + 1 });
   }
 
   render() {
