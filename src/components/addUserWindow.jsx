@@ -230,9 +230,10 @@ class AddUserWindow extends UserForm {
     //     ", after = " +
     //     count
     // );
+    const newCount = Data.now();
     console.log(
       ">>>AddUserWindow.doRender: count = " +
-        this.state.count +
+        newCount +
         ", loadCount = " +
         AddUserWindow.loadCount
     );
@@ -242,7 +243,7 @@ class AddUserWindow extends UserForm {
     //   return { count: prevState.count + 1 };
     // });
     //this.setState({ count: this.state.count + 1 }, () => {
-    this.setState({ count: Date.now() }, () => {
+    this.setState({ count: newCount }, () => {
       console.log("<<<AddUserWindow.doRender.2: " + this.state.count);
     });
     //AddUserWindow.renderCount++;
