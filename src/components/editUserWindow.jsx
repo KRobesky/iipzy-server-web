@@ -105,89 +105,12 @@ class EditUserWindow extends UserForm {
     console.log("mobilePhoneNo=" + userData.mobilePhoneNo);
     console.log("emailAddress=" + userData.emailAddress);
 
-    await this.updateUser(userData);
-
-    // save in globals.
-    EditUserWindow.mobilePhoneNo = userData.mobilePhoneNo;
-    EditUserWindow.emailAddress = userData.emailAddress;
-    EditUserWindow.password = userData.password;
-  }
-
-  async updateUser(userData) {
-    const { data, status } = await user.updateUser(userData);
-    if (data.__hadError__) {
-      console.log(
-        "EditUserWindow.updateUser: errorMessage = " +
-          data.__hadError__.errorMessage +
-          ", statusCode = " +
-          data.__hadError__.statusCode
-      );
-
-      EditUserWindow.infoMessage = data.__hadError__.errorMessage;
-
-      EditUserWindow.showInfoPopup = true;
-      EditUserWindow.buttonsEnabled = false;
-      EditUserWindow.fieldsEnabled = true;
-
-      this.doRender();
-
-      return;
-    }
-
-    EditUserWindow.infoMessage = EditUserWindow.userName + " updated";
-    EditUserWindow.showInfoPopup = true;
-    EditUserWindow.buttonsEnabled = false;
-    EditUserWindow.fieldsEnabled = true;
-
-    this.doRender();
+    updateUser(userData);
   }
 
   async handleDeleteClick(userData) {
     console.log("EditUserWindow handleDeleteClick");
-    await this.deleteUser(userData);
-  }
-
-  async deleteUser(userData) {
-    const { data, status } = await user.deleteUser(userData);
-    if (data.__hadError__) {
-      console.log(
-        "EditUserWindow.deleteUser: errorMessage = " +
-          data.__hadError__.errorMessage +
-          ", statusCode = " +
-          data.__hadError__.statusCode
-      );
-
-      EditUserWindow.infoMessage = data.__hadError__.errorMessage;
-
-      EditUserWindow.showInfoPopup = true;
-      EditUserWindow.buttonsEnabled = false;
-      EditUserWindow.fieldsEnabled = true;
-
-      this.doRender();
-
-      return;
-    }
-
-    eventManager.send(Defs.ipcSubmitLogout, {
-      userName: EditUserWindow.userName,
-      authToken: EditUserWindow.authToken
-    });
-
-    EditUserWindow.infoMessage = EditUserWindow.userName + " deleted";
-    EditUserWindow.showInfoPopup = true;
-    EditUserWindow.buttonsEnabled = false;
-    EditUserWindow.fieldsEnabled = true;
-
-    EditUserWindow.userId = 0;
-    EditUserWindow.userName = "";
-    EditUserWindow.emailAddress = "";
-    EditUserWindow.mobilePhoneNo = "";
-    EditUserWindow.password = "";
-    EditUserWindow.password2 = "";
-    EditUserWindow.isAdmin = false;
-    EditUserWindow.isLoggedIn = false;
-    EditUserWindow.authToken = "";
-    this.doRender();
+    deleteUser(userData);
   }
 
   handleLoginClick(ev) {
@@ -323,6 +246,83 @@ EditUserWindow.passwordValidated = false;
 EditUserWindow.buttonsEnabled = false;
 EditUserWindow.fieldsEnabled = true;
 
+async function deleteUser(userData) {
+  const { data, status } = await user.deleteUser(userData);
+  if (data.__hadError__) {
+    console.log(
+      "EditUserWindow.deleteUser: errorMessage = " +
+        data.__hadError__.errorMessage +
+        ", statusCode = " +
+        data.__hadError__.statusCode
+    );
+
+    EditUserWindow.infoMessage = data.__hadError__.errorMessage;
+
+    EditUserWindow.showInfoPopup = true;
+    EditUserWindow.buttonsEnabled = false;
+    EditUserWindow.fieldsEnabled = true;
+
+    if (app) app.doRender();
+
+    return;
+  }
+
+  eventManager.send(Defs.ipcSubmitLogout, {
+    userName: EditUserWindow.userName,
+    authToken: EditUserWindow.authToken
+  });
+
+  EditUserWindow.infoMessage = EditUserWindow.userName + " deleted";
+  EditUserWindow.showInfoPopup = true;
+  EditUserWindow.buttonsEnabled = false;
+  EditUserWindow.fieldsEnabled = true;
+
+  EditUserWindow.userId = 0;
+  EditUserWindow.userName = "";
+  EditUserWindow.emailAddress = "";
+  EditUserWindow.mobilePhoneNo = "";
+  EditUserWindow.password = "";
+  EditUserWindow.password2 = "";
+  EditUserWindow.isAdmin = false;
+  EditUserWindow.isLoggedIn = false;
+  EditUserWindow.authToken = "";
+
+  if (app) app.doRender();
+}
+
+async function updateUser(userData) {
+  const { data, status } = await user.updateUser(userData);
+  if (data.__hadError__) {
+    console.log(
+      "EditUserWindow.updateUser: errorMessage = " +
+        data.__hadError__.errorMessage +
+        ", statusCode = " +
+        data.__hadError__.statusCode
+    );
+
+    EditUserWindow.infoMessage = data.__hadError__.errorMessage;
+
+    EditUserWindow.showInfoPopup = true;
+    EditUserWindow.buttonsEnabled = false;
+    EditUserWindow.fieldsEnabled = true;
+
+    if (app) app.doRender();
+
+    return;
+  }
+
+  EditUserWindow.mobilePhoneNo = userData.mobilePhoneNo;
+  EditUserWindow.emailAddress = userData.emailAddress;
+  EditUserWindow.password = userData.password;
+
+  EditUserWindow.infoMessage = EditUserWindow.userName + " updated";
+  EditUserWindow.showInfoPopup = true;
+  EditUserWindow.buttonsEnabled = false;
+  EditUserWindow.fieldsEnabled = true;
+
+  if (app) app.doRender();
+}
+
 const handleLoginStatus = async (event, data) => {
   const { userName, authToken, password, loginStatus } = data;
   console.log(
@@ -355,7 +355,7 @@ async function getUser() {
   EditUserWindow.emailAddress = data.emailAddress;
   EditUserWindow.mobilePhoneNo = data.mobilePhoneNo;
   EditUserWindow.isAdmin = data.isAdmin;
-  if (app != null) app.doRender();
+  if (app) app.doRender();
 }
 
 eventManager.on(Defs.ipcLoginStatus, handleLoginStatus);

@@ -72,61 +72,19 @@ class SentinelsWindow extends React.Component {
     app = this;
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     console.log("SentinelsWindow.componentDidMount");
-    this.getClientsFromDB("localSentinelsOnly=1");
+    getClientsFromDB("localSentinelsOnly=1");
   }
 
   componentWillUnmount() {
     console.log("SentinelsWindow.componentWillUnmount");
-    //??app = null;
+    app = null;
   }
 
   doRender() {
     const count = this.state.count + 1;
     this.setState({ count: count });
-  }
-
-  async getClientsFromDB(queryString) {
-    const { data, status } = await clients.getClients(queryString);
-    console.log(
-      "SentinelsWindow.getClientsFromDB (response): status = " + status
-    );
-
-    if (data.__hadError__) {
-      console.log(
-        "SentinelsWindow.getClientsFromDB: errorMessage = " +
-          data.__hadError__.errorMessage +
-          ", statusCode = " +
-          data.__hadError__.statusCode
-      );
-
-      SentinelsWindow.infoMessage = data.__hadError__.errorMessage;
-
-      this.doRender();
-
-      return;
-    }
-
-    SentinelsWindow.clients = data;
-    if (SentinelsWindow.clients.length === 1) {
-      // go directly to sentinel.
-      if (app != null) {
-        const item = {
-          localIPAddress: SentinelsWindow.clients[0].localIPAddress,
-          isOnLine: SentinelsWindow.clients[0].isOnLine
-        };
-        app.handleLocalIPAddressClick(item);
-      }
-    } else {
-      // display sentinels.
-      SentinelsWindow.clientByClientToken = new Map();
-      for (let i = 0; i < SentinelsWindow.clients.length; i++) {
-        const client = SentinelsWindow.clients[i];
-        SentinelsWindow.clientByClientToken.set(client.clientToken, client);
-      }
-      this.doRender();
-    }
   }
 
   handleLocalIPAddressClick(item) {
@@ -235,6 +193,48 @@ SentinelsWindow.clientByClientToken = new Map();
 SentinelsWindow.clientToken = "";
 SentinelsWindow.infoMessage = "";
 SentinelsWindow.isLoggedIn = false;
+
+async function getClientsFromDB(queryString) {
+  const { data, status } = await clients.getClients(queryString);
+  console.log(
+    "SentinelsWindow.getClientsFromDB (response): status = " + status
+  );
+
+  if (data.__hadError__) {
+    console.log(
+      "SentinelsWindow.getClientsFromDB: errorMessage = " +
+        data.__hadError__.errorMessage +
+        ", statusCode = " +
+        data.__hadError__.statusCode
+    );
+
+    SentinelsWindow.infoMessage = data.__hadError__.errorMessage;
+
+    if (app) app.doRender();
+
+    return;
+  }
+
+  SentinelsWindow.clients = data;
+  if (SentinelsWindow.clients.length === 1) {
+    // go directly to sentinel.
+    if (app != null) {
+      const item = {
+        localIPAddress: SentinelsWindow.clients[0].localIPAddress,
+        isOnLine: SentinelsWindow.clients[0].isOnLine
+      };
+      app.handleLocalIPAddressClick(item);
+    }
+  } else {
+    // display sentinels.
+    SentinelsWindow.clientByClientToken = new Map();
+    for (let i = 0; i < SentinelsWindow.clients.length; i++) {
+      const client = SentinelsWindow.clients[i];
+      SentinelsWindow.clientByClientToken.set(client.clientToken, client);
+    }
+    if (app) app.doRender();
+  }
+}
 
 const handleLoginStatus = (event, data) => {
   const { userName, authToken, password, loginStatus } = data;

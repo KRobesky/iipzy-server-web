@@ -99,7 +99,7 @@ class ClientsWindow extends React.Component {
 
   async componentDidMount() {
     console.log("ClientsWindow.componentDidMount");
-    await this.getClientsFromDB("");
+    getClientsFromDB("");
   }
 
   componentWillUnmount() {
@@ -110,37 +110,6 @@ class ClientsWindow extends React.Component {
   doRender() {
     const count = this.state.count + 1;
     this.setState({ count: count });
-  }
-
-  async getClientsFromDB(queryString) {
-    const { data, status } = await clients.getClients(queryString);
-    console.log(
-      "ClientsWindow.getClientsFromDB (response): status = " + status
-    );
-
-    if (data.__hadError__) {
-      console.log(
-        "ClientsWindow.getClientsFromDB: errorMessage = " +
-          data.__hadError__.errorMessage +
-          ", statusCode = " +
-          data.__hadError__.statusCode
-      );
-
-      ClientsWindow.infoMessage = data.__hadError__.errorMessage;
-
-      this.doRender();
-
-      return;
-    }
-
-    ClientsWindow.clients = data;
-    ClientsWindow.clientByClientToken = new Map();
-    for (let i = 0; i < ClientsWindow.clients.length; i++) {
-      const client = ClientsWindow.clients[i];
-      ClientsWindow.clientByClientToken.set(client.clientToken, client);
-    }
-
-    this.doRender();
   }
 
   handleClientTokenClick(clientToken) {
@@ -210,5 +179,34 @@ ClientsWindow.clientByClientToken = new Map();
 ClientsWindow.clientToken = "";
 ClientsWindow.infoMessage = "";
 ClientsWindow.showClientPopup = false;
+
+async function getClientsFromDB(queryString) {
+  const { data, status } = await clients.getClients(queryString);
+  console.log("ClientsWindow.getClientsFromDB (response): status = " + status);
+
+  if (data.__hadError__) {
+    console.log(
+      "ClientsWindow.getClientsFromDB: errorMessage = " +
+        data.__hadError__.errorMessage +
+        ", statusCode = " +
+        data.__hadError__.statusCode
+    );
+
+    ClientsWindow.infoMessage = data.__hadError__.errorMessage;
+
+    if (app) app.doRender();
+
+    return;
+  }
+
+  ClientsWindow.clients = data;
+  ClientsWindow.clientByClientToken = new Map();
+  for (let i = 0; i < ClientsWindow.clients.length; i++) {
+    const client = ClientsWindow.clients[i];
+    ClientsWindow.clientByClientToken.set(client.clientToken, client);
+  }
+
+  if (app) app.doRender();
+}
 
 export default ClientsWindow;

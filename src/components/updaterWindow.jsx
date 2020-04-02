@@ -77,7 +77,7 @@ class UpdaterWindow extends React.Component {
       updateType: UpdaterWindow.updateType
     });
 
-    this.postUpdaterUpdate({
+    postUpdaterUpdate({
       tgtClientToken: UpdaterWindow.tgtClientToken,
       updateType: UpdaterWindow.updateType,
       updateUuid: uuidv4()
@@ -92,66 +92,6 @@ class UpdaterWindow extends React.Component {
       if (updateType) UpdaterWindow.updateType = updateType;
       if (app != null) app.doRender();
     }
-  }
-
-  async getUpdaterStatus() {
-    const { data, status } = await updater.getUpdaterStatus(
-      UpdaterWindow.tgtClientToken
-    );
-
-    if (status && status === Defs.httpStatusOk) {
-      const updateStatus = data.updateStatus;
-
-      console.log(
-        "UpdaterWindow.getUpdaterStatus: status = " +
-          JSON.stringify(updateStatus, null, 2)
-      );
-
-      UpdaterWindow.inProgress = updateStatus.inProgress;
-      if (!UpdaterWindow.waitForInProgress)
-        UpdaterWindow.status = updateStatus.step;
-
-      if (updateStatus.failed) {
-        UpdaterWindow.status = "failed";
-        UpdaterWindow.waitForInProgress = false;
-        if (UpdaterWindow.submitTimeout) {
-          clearTimeout(UpdaterWindow.submitTimeout);
-          UpdaterWindow.submitTimeout = null;
-        }
-      }
-    }
-    this.doRender();
-  }
-
-  async postUpdaterUpdate(params) {
-    const { data, status } = await updater.postUpdaterUpdate(params);
-    console.log(
-      "UpdaterWindow.postUpdaterUpdate: response = " +
-        JSON.stringify(data, null, 2)
-    );
-
-    if (data.__hadError__) {
-      console.log(
-        "UpdaterWindow.postUpdaterUpdate: errorMessage = " +
-          data.__hadError__.errorMessage +
-          ", statusCode = " +
-          data.__hadError__.statusCode
-      );
-
-      UpdaterWindow.infoMessage = data.__hadError__.errorMessage;
-      UpdaterWindow.showInfoPopup = true;
-      UpdaterWindow.buttonsEnabled = false;
-      UpdaterWindow.status = "failed";
-
-      UpdaterWindow.waitForInProgress = false;
-      UpdaterWindow.inProgress = false;
-      if (UpdaterWindow.submitTimeout) {
-        clearTimeout(UpdaterWindow.submitTimeout);
-        UpdaterWindow.submitTimeout = null;
-      }
-    }
-
-    this.doRender();
   }
 
   handleUpdateTypeChange(ev) {
@@ -396,5 +336,65 @@ UpdaterWindow.statusInterval = null;
 UpdaterWindow.tgtClientToken = "";
 UpdaterWindow.updateType = "iipzy-pi";
 UpdaterWindow.waitForInProgress = false;
+
+async function getUpdaterStatus() {
+  const { data, status } = await updater.getUpdaterStatus(
+    UpdaterWindow.tgtClientToken
+  );
+
+  if (status && status === Defs.httpStatusOk) {
+    const updateStatus = data.updateStatus;
+
+    console.log(
+      "UpdaterWindow.getUpdaterStatus: status = " +
+        JSON.stringify(updateStatus, null, 2)
+    );
+
+    UpdaterWindow.inProgress = updateStatus.inProgress;
+    if (!UpdaterWindow.waitForInProgress)
+      UpdaterWindow.status = updateStatus.step;
+
+    if (updateStatus.failed) {
+      UpdaterWindow.status = "failed";
+      UpdaterWindow.waitForInProgress = false;
+      if (UpdaterWindow.submitTimeout) {
+        clearTimeout(UpdaterWindow.submitTimeout);
+        UpdaterWindow.submitTimeout = null;
+      }
+    }
+  }
+  if (app) app.doRender();
+}
+
+async function postUpdaterUpdate(params) {
+  const { data, status } = await updater.postUpdaterUpdate(params);
+  console.log(
+    "UpdaterWindow.postUpdaterUpdate: response = " +
+      JSON.stringify(data, null, 2)
+  );
+
+  if (data.__hadError__) {
+    console.log(
+      "UpdaterWindow.postUpdaterUpdate: errorMessage = " +
+        data.__hadError__.errorMessage +
+        ", statusCode = " +
+        data.__hadError__.statusCode
+    );
+
+    UpdaterWindow.infoMessage = data.__hadError__.errorMessage;
+    UpdaterWindow.showInfoPopup = true;
+    UpdaterWindow.buttonsEnabled = false;
+    UpdaterWindow.status = "failed";
+
+    UpdaterWindow.waitForInProgress = false;
+    UpdaterWindow.inProgress = false;
+    if (UpdaterWindow.submitTimeout) {
+      clearTimeout(UpdaterWindow.submitTimeout);
+      UpdaterWindow.submitTimeout = null;
+    }
+  }
+
+  if (app) app.doRender();
+}
 
 export default UpdaterWindow;

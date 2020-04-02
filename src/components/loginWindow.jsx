@@ -87,55 +87,23 @@ class LoginWindow extends React.Component {
     this.doRender();
   }
 
-  async handleSubmitClick(ev, title) {
+  handleSubmitClick(ev, title) {
     console.log("LoginWindow.handleSubmitClick");
 
     LoginWindow.buttonsEnabled = false;
     LoginWindow.title = title;
     this.doRender();
     if (!LoginWindow.isLoggedIn) {
-      await this.loginRequest({
+      loginRequest({
         userName: LoginWindow.userName,
         password: LoginWindow.password
       });
     } else {
-      await this.logoutRequest({
+      logoutRequest({
         userName: LoginWindow.userName,
         authToken: LoginWindow.authToken
       });
-      LoginWindow.password = "";
     }
-    LoginWindow.buttonsEnabled = true;
-    this.doRender();
-  }
-
-  async loginRequest(params) {
-    const { data } = await auth.loginRequest(params);
-    console.log(
-      "LoginWindow.loginRequest (response): data = " +
-        JSON.stringify(data, null, 2)
-    );
-    if (data.__hadError__) {
-      LoginWindow.infoMessage = data.__hadError__.errorMessage;
-      LoginWindow.showInfoPopup = true;
-    } else {
-      LoginWindow.infoMessage = "Successfully logged in";
-      LoginWindow.showInfoPopup = false;
-    }
-  }
-
-  async logoutRequest(params) {
-    const { data } = await auth.logoutRequest(params);
-    console.log(
-      "LoginWindow.logoutRequest (response): data = " +
-        JSON.stringify(data, null, 2)
-    );
-    if (data.__hadError__) {
-      LoginWindow.infoMessage = data.__hadError__.errorMessage;
-    } else {
-      LoginWindow.infoMessage = "Successfully logged out";
-    }
-    LoginWindow.showInfoPopup = true;
   }
 
   render() {
@@ -238,6 +206,39 @@ LoginWindow.password = "";
 LoginWindow.showInfoPopup = false;
 LoginWindow.title = "";
 LoginWindow.userName = "";
+
+async function loginRequest(params) {
+  const { data } = await auth.loginRequest(params);
+  console.log(
+    "LoginWindow.loginRequest (response): data = " +
+      JSON.stringify(data, null, 2)
+  );
+  if (data.__hadError__) {
+    LoginWindow.infoMessage = data.__hadError__.errorMessage;
+    LoginWindow.showInfoPopup = true;
+  } else {
+    LoginWindow.infoMessage = "Successfully logged in";
+    LoginWindow.showInfoPopup = false;
+  }
+  LoginWindow.buttonsEnabled = true;
+  if (app) app.doRender();
+}
+
+async function logoutRequest(params) {
+  const { data } = await auth.logoutRequest(params);
+  console.log(
+    "LoginWindow.logoutRequest (response): data = " +
+      JSON.stringify(data, null, 2)
+  );
+  if (data.__hadError__) {
+    LoginWindow.infoMessage = data.__hadError__.errorMessage;
+  } else {
+    LoginWindow.infoMessage = "Successfully logged out";
+  }
+  LoginWindow.password = "";
+  LoginWindow.showInfoPopup = true;
+  if (app) app.doRender();
+}
 
 const handleLoginStatus = (event, data) => {
   const { userName, authToken, loginStatus } = data;

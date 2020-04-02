@@ -61,7 +61,7 @@ class AddUserWindow extends UserForm {
     AddUserWindow.password2 = userData.password2;
   }
 
-  async handleAddClick(userData) {
+  handleAddClick(userData) {
     console.log("AddUserWindow.handleAddClick");
     console.log("  userName=" + userData.userName);
     console.log("  mobilePhoneNo=" + userData.mobilePhoneNo);
@@ -74,7 +74,7 @@ class AddUserWindow extends UserForm {
     AddUserWindow.password = userData.password;
     AddUserWindow.password2 = userData.password;
 
-    await addUser(userData);
+    addUser(userData);
   }
 
   getInfoMessage() {
@@ -100,7 +100,7 @@ class AddUserWindow extends UserForm {
   async handleVerifyClick(verificationCode) {
     console.log("AddUserWindow.handleVerifyClick, code" + verificationCode);
     if (verificationCode !== "000000")
-      await verifyUser({
+      verifyUser({
         userId: AddUserWindow.userId,
         verificationCode: verificationCode
       });

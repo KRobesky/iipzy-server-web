@@ -29,7 +29,7 @@ class SentinelAdminWindow extends React.Component {
       SentinelAdminWindow.statusInterval = setInterval(async () => {
         if (!this.inSendSentinelAdminStatusGetRequest) {
           this.inSendSentinelAdminStatusGetRequest = true;
-          await this.getSentinelAdminStatus();
+          await getSentinelAdminStatus();
           this.inSendSentinelAdminStatusGetRequest = false;
         }
       }, 1 * 1000);
@@ -52,67 +52,6 @@ class SentinelAdminWindow extends React.Component {
       if (tgtClientToken) SentinelAdminWindow.tgtClientToken = tgtClientToken;
       if (action) SentinelAdminWindow.action = action;
     }
-  }
-
-  async getSentinelAdminStatus() {
-    const { data, status } = await sentinelAdmin.getSentinelAdminStatus(
-      SentinelAdminWindow.tgtClientToken
-    );
-
-    if (status && status === Defs.httpStatusOk) {
-      const adminStatus = data.adminStatus;
-
-      console.log(
-        "SentinelAdminWindow.getSentinelAdminStatus: status = " +
-          JSON.stringify(adminStatus, null, 2)
-      );
-
-      SentinelAdminWindow.inProgress = adminStatus.inProgress;
-      if (!SentinelAdminWindow.waitForInProgress)
-        SentinelAdminWindow.status = adminStatus.step;
-
-      if (adminStatus.failed) {
-        SentinelAdminWindow.status = "failed";
-        SentinelAdminWindow.waitForInProgress = false;
-        if (SentinelAdminWindow.submitTimeout) {
-          clearTimeout(SentinelAdminWindow.submitTimeout);
-          SentinelAdminWindow.submitTimeout = null;
-        }
-      }
-    }
-
-    this.doRender();
-  }
-
-  async postSentinelAdmin(params) {
-    const { data, status } = await sentinelAdmin.postSentinelAdmin(params);
-    console.log(
-      "SentinelAdminWindow.postSentinelAdmin: response = " +
-        JSON.stringify(data, null, 2)
-    );
-
-    if (data.__hadError__) {
-      console.log(
-        "SentinelAdminWindow.postSentinelAdmin: errorMessage = " +
-          data.__hadError__.errorMessage +
-          ", statusCode = " +
-          data.__hadError__.statusCode
-      );
-
-      SentinelAdminWindow.infoMessage = data.__hadError__.errorMessage;
-      SentinelAdminWindow.showInfoPopup = true;
-      SentinelAdminWindow.buttonsEnabled = false;
-      SentinelAdminWindow.status = "failed";
-
-      SentinelAdminWindow.waitForInProgress = false;
-      SentinelAdminWindow.inProgress = false;
-      if (SentinelAdminWindow.submitTimeout) {
-        clearTimeout(SentinelAdminWindow.submitTimeout);
-        SentinelAdminWindow.submitTimeout = null;
-      }
-    }
-
-    this.doRender();
   }
 
   handleSaveClick(ev) {
@@ -138,7 +77,7 @@ class SentinelAdminWindow extends React.Component {
     SentinelAdminWindow.status = "starting...";
     this.doRender();
 
-    this.postSentinelAdmin({
+    postSentinelAdmin({
       tgtClientToken: SentinelAdminWindow.tgtClientToken,
       action: SentinelAdminWindow.action,
       actionUuid: uuidv4()
@@ -453,5 +392,66 @@ SentinelAdminWindow.statusInterval = null;
 SentinelAdminWindow.submitTimeout = null;
 SentinelAdminWindow.tgtClientToken = "";
 SentinelAdminWindow.waitForInProgress = false;
+
+async function getSentinelAdminStatus() {
+  const { data, status } = await sentinelAdmin.getSentinelAdminStatus(
+    SentinelAdminWindow.tgtClientToken
+  );
+
+  if (status && status === Defs.httpStatusOk) {
+    const adminStatus = data.adminStatus;
+
+    console.log(
+      "SentinelAdminWindow.getSentinelAdminStatus: status = " +
+        JSON.stringify(adminStatus, null, 2)
+    );
+
+    SentinelAdminWindow.inProgress = adminStatus.inProgress;
+    if (!SentinelAdminWindow.waitForInProgress)
+      SentinelAdminWindow.status = adminStatus.step;
+
+    if (adminStatus.failed) {
+      SentinelAdminWindow.status = "failed";
+      SentinelAdminWindow.waitForInProgress = false;
+      if (SentinelAdminWindow.submitTimeout) {
+        clearTimeout(SentinelAdminWindow.submitTimeout);
+        SentinelAdminWindow.submitTimeout = null;
+      }
+    }
+  }
+
+  if (app) app.doRender();
+}
+
+async function postSentinelAdmin(params) {
+  const { data, status } = await sentinelAdmin.postSentinelAdmin(params);
+  console.log(
+    "SentinelAdminWindow.postSentinelAdmin: response = " +
+      JSON.stringify(data, null, 2)
+  );
+
+  if (data.__hadError__) {
+    console.log(
+      "SentinelAdminWindow.postSentinelAdmin: errorMessage = " +
+        data.__hadError__.errorMessage +
+        ", statusCode = " +
+        data.__hadError__.statusCode
+    );
+
+    SentinelAdminWindow.infoMessage = data.__hadError__.errorMessage;
+    SentinelAdminWindow.showInfoPopup = true;
+    SentinelAdminWindow.buttonsEnabled = false;
+    SentinelAdminWindow.status = "failed";
+
+    SentinelAdminWindow.waitForInProgress = false;
+    SentinelAdminWindow.inProgress = false;
+    if (SentinelAdminWindow.submitTimeout) {
+      clearTimeout(SentinelAdminWindow.submitTimeout);
+      SentinelAdminWindow.submitTimeout = null;
+    }
+  }
+
+  if (app) app.doRender();
+}
 
 export default SentinelAdminWindow;

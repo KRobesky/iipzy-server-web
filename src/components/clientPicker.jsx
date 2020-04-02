@@ -22,9 +22,7 @@ class ClientPicker extends React.Component {
 
   async componentDidMount() {
     console.log("ClientPicker.componentDidMount");
-    //await this.getClientsFromDB("sentinelsOnly=1");
     getClientsFromDB("sentinelsOnly=1");
-    //ClientPicker.selectedClientToken = this.props.getSelectedClientToken();
   }
 
   componentWillUnmount() {
@@ -47,63 +45,6 @@ class ClientPicker extends React.Component {
     );
     return ClientPicker.selectedClient;
   }
-
-  // async getClientsFromDB(queryString) {
-  //   const { data, status } = await clients.getClients(queryString);
-  //   console.log("ClientPicker.getClientsFromDB (response): status = " + status);
-
-  //   if (data.__hadError__) {
-  //     console.log(
-  //       "ClientPicker.handleClientsGetResponse: errorMessage = " +
-  //         data.__hadError__.errorMessage +
-  //         ", statusCode = " +
-  //         data.__hadError__.statusCode
-  //     );
-
-  //     //   ClientPicker.infoMessage = data.__hadError__.errorMessage;
-
-  //     //   if (app != null) app.doRender();
-
-  //     return;
-  //   }
-
-  //   if (data) {
-  //     ClientPicker.clientsFiltered = [];
-  //     ClientPicker.clientTokenByEntryString = new Map();
-  //     ClientPicker.entryStringByClientToken = new Map();
-
-  //     for (let i = 0; i < data.length; i++) {
-  //       const {
-  //         clientName,
-  //         clientType,
-  //         clientToken,
-  //         publicIPAddress,
-  //         localIPAddress,
-  //         isOnLine
-  //       } = data[i];
-  //       if (clientType === "appliance") {
-  //         const entryString =
-  //           clientName +
-  //           "  " +
-  //           publicIPAddress +
-  //           "  " +
-  //           localIPAddress +
-  //           (isOnLine ? "" : "  - offline");
-  //         ClientPicker.clientsFiltered.push(entryString);
-  //         this.clientTokenByEntryString.set(entryString, clientToken);
-  //         ClientPicker.entryStringByClientToken.set(clientToken, entryString);
-  //       }
-  //     }
-
-  //     if (ClientPicker.selectedClientToken) {
-  //       ClientPicker.selectedClient = ClientPicker.entryStringByClientToken.get(
-  //         ClientPicker.selectedClientToken
-  //       );
-  //     }
-  //   }
-
-  //   this.doRender();
-  // }
 
   handleSelect(ev) {
     ClientPicker.selectedClient = ev.value;

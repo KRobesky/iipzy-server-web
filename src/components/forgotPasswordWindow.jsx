@@ -146,33 +146,7 @@ class ForgotPasswordWindow extends React.Component {
     // if (errors) return;
     // this.props.setButtonsEnabled(false);
     ForgotPasswordWindow.buttonsEnabled = false;
-    await this.sendPasswordResetCode({
-      userName: this.data.userName
-    });
-  }
-
-  async sendPasswordResetCode(params) {
-    const { data, status } = await user.sendPasswordResetCode(params);
-    if (data.__hadError__) {
-      console.log(
-        "ForgotPasswordWindow.getResetCode: errorMessage = " +
-          data.__hadError__.errorMessage +
-          ", statusCode = " +
-          data.__hadError__.statusCode
-      );
-
-      ForgotPasswordWindow.responseMessage = data.__hadError__.errorMessage;
-    } else {
-      ForgotPasswordWindow.responseMessage =
-        "Password Reset Code has been sent to user " +
-        ForgotPasswordWindow.userName;
-      ForgotPasswordWindow.codeSent = true;
-    }
-
-    ForgotPasswordWindow.showResponsePopup = true;
-    ForgotPasswordWindow.buttonsEnabled = false;
-
-    this.doRender();
+    sendPasswordResetCode({ userName: this.data.userName });
   }
 
   async handleSubmitClick(ev) {
@@ -188,35 +162,11 @@ class ForgotPasswordWindow extends React.Component {
     if (errors) return;
     ForgotPasswordWindow.buttonsEnabled = false;
     this.doRender();
-    await this.updatePassword({
+    updatePassword({
       userName: this.data.userName,
       passwordResetCode: this.data.passwordResetCode,
       password: this.data.password
     });
-  }
-
-  async updatePassword(params) {
-    const { data, status } = await user.newPassword(params);
-    if (data.__hadError__) {
-      console.log(
-        "ForgotPasswordWindow.updatePassword: errorMessage = " +
-          data.__hadError__.errorMessage +
-          ", statusCode = " +
-          data.__hadError__.statusCode
-      );
-
-      ForgotPasswordWindow.responseMessage = data.__hadError__.errorMessage;
-    } else {
-      ForgotPasswordWindow.responseMessage =
-        "Password has been changed for user " + ForgotPasswordWindow.userName;
-      ForgotPasswordWindow.inputsEnabled = false;
-      ForgotPasswordWindow.submitButtonEnabled = false;
-    }
-
-    ForgotPasswordWindow.showResponsePopup = true;
-    ForgotPasswordWindow.buttonsEnabled = false;
-
-    this.doRender();
   }
 
   handleResetClick(ev) {
@@ -497,6 +447,54 @@ ForgotPasswordWindow.buttonsEnabled = true;
 ForgotPasswordWindow.submitButtonEnabled = true;
 
 ForgotPasswordWindow.codeSent = false;
+
+async function sendPasswordResetCode(params) {
+  const { data, status } = await user.sendPasswordResetCode(params);
+  if (data.__hadError__) {
+    console.log(
+      "ForgotPasswordWindow.getResetCode: errorMessage = " +
+        data.__hadError__.errorMessage +
+        ", statusCode = " +
+        data.__hadError__.statusCode
+    );
+
+    ForgotPasswordWindow.responseMessage = data.__hadError__.errorMessage;
+  } else {
+    ForgotPasswordWindow.responseMessage =
+      "Password Reset Code has been sent to user " +
+      ForgotPasswordWindow.userName;
+    ForgotPasswordWindow.codeSent = true;
+  }
+
+  ForgotPasswordWindow.showResponsePopup = true;
+  ForgotPasswordWindow.buttonsEnabled = false;
+
+  if (app) app.doRender();
+}
+
+async function updatePassword(params) {
+  const { data, status } = await user.newPassword(params);
+  if (data.__hadError__) {
+    console.log(
+      "ForgotPasswordWindow.updatePassword: errorMessage = " +
+        data.__hadError__.errorMessage +
+        ", statusCode = " +
+        data.__hadError__.statusCode
+    );
+
+    ForgotPasswordWindow.responseMessage = data.__hadError__.errorMessage;
+  } else {
+    ForgotPasswordWindow.responseMessage =
+      "Password has been changed for user " + ForgotPasswordWindow.userName;
+    ForgotPasswordWindow.inputsEnabled = false;
+    ForgotPasswordWindow.submitButtonEnabled = false;
+  }
+
+  ForgotPasswordWindow.showResponsePopup = true;
+  ForgotPasswordWindow.buttonsEnabled = false;
+
+  if (app) app.doRender();
+}
 
 const handleLoginStatus = (event, data) => {
   const { userName } = data;
