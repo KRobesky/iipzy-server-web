@@ -33,7 +33,7 @@ class UpdaterWindow extends React.Component {
       UpdaterWindow.statusInterval = setInterval(async () => {
         if (!this.inSendUpdaterStatusGetRequest) {
           this.inSendUpdaterStatusGetRequest = true;
-          await this.getUpdaterStatus();
+          await getUpdaterStatus();
           this.inSendUpdaterStatusGetRequest = false;
         }
       }, 1 * 1000);
