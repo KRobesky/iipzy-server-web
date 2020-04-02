@@ -24,11 +24,12 @@ class Navigator extends React.Component {
 
   componentDidMount() {
     console.log("Navigator.componentDidMount");
+    app = this;
   }
 
   componentWillUnmount() {
     console.log("Navigator.componentWillUnmount");
-    //app = null;
+    app = null;
   }
 
   handleLinkChange() {
