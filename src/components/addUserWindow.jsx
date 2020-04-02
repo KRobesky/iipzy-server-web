@@ -20,17 +20,21 @@ class AddUserWindow extends UserForm {
 
     this.state = { count: 0 };
 
+    this.mounted = false;
+
     app = this;
   }
 
   componentDidMount() {
     console.log("AddUserWindow.componentDidMount");
+    this.mounted = true;
     AddUserWindow.loadCount++;
     this.doRender();
   }
 
   componentWillUnmount() {
     console.log("AddUserWindow.componentWillUnmount");
+    this.mounted = false;
     AddUserWindow.loadCount--;
     app = null;
   }
@@ -234,8 +238,8 @@ class AddUserWindow extends UserForm {
     console.log(
       ">>>AddUserWindow.doRender: count = " +
         newCount +
-        ", loadCount = " +
-        AddUserWindow.loadCount
+        ", mounted = " +
+        this.mounted
     );
     //this.setState({ count: this.state.count + 1 });
     // this.setState((prevState, props) => {
