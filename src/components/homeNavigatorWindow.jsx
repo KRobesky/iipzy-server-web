@@ -20,11 +20,10 @@ class HomeNavigatorWindow extends React.Component {
 
   componentDidMount() {
     console.log("HomeNavigatorWindow.componentDidMount");
-    const count = this.state.count + 1;
-    this.setState({ count: count });
 
     eventManager.send(Defs.ipcShowNavBar, "home");
     eventManager.send(Defs.ipcLinkTo, Defs.urlIipzy);
+    this.doRender();
   }
 
   componentWillUnmount() {
@@ -34,7 +33,7 @@ class HomeNavigatorWindow extends React.Component {
 
   doRender() {
     const count = this.state.count + 1;
-    this.setState({ count: count });
+    this.setState({ count: this.state.count + 1 });
   }
 
   render() {
