@@ -16,7 +16,8 @@ class AddUserWindow extends UserForm {
   constructor(props) {
     super(props);
 
-    console.log("AddUserWindow.constructor");
+    this.instanceId = Date.now();
+    console.log("AddUserWindow.constructor: instanceId = " + this.instanceId);
 
     this.state = { count: 0 };
 
@@ -239,7 +240,9 @@ class AddUserWindow extends UserForm {
       ">>>AddUserWindow.doRender: count = " +
         newCount +
         ", mounted = " +
-        this.mounted
+        this.mounted +
+        ", instanceId = " +
+        this.instanceId
     );
     //this.setState({ count: this.state.count + 1 });
     // this.setState((prevState, props) => {
