@@ -230,7 +230,7 @@ class AddUserWindow extends UserForm {
     //     ", after = " +
     //     count
     // );
-    const newCount = Data.now();
+    const newCount = Date.now();
     console.log(
       ">>>AddUserWindow.doRender: count = " +
         newCount +
