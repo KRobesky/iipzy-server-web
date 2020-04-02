@@ -343,7 +343,7 @@ async function addUser(userData) {
   console.log("AddUserWindow.addUser");
 
   AddUserWindow.showSpinner = true;
-  this.doRender();
+  if (app) app.doRender();
 
   const { data, status } = await user.addUser(userData);
 
