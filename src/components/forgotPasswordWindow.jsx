@@ -47,6 +47,26 @@ class ForgotPasswordWindow extends React.Component {
     };
   }
 
+  componentDidMount() {
+    console.log("forgotPasswordWindow componentDidMount");
+    this.data.userName = ForgotPasswordWindow.userName;
+    this.data.passwordResetCode = ForgotPasswordWindow.passwordResetCode;
+    this.data.password = ForgotPasswordWindow.password;
+    this.data.password2 = ForgotPasswordWindow.password2;
+
+    this.doRender();
+  }
+
+  componentWillUnmount() {
+    console.log("forgotPasswordWindow componentWillUnmount");
+    ForgotPasswordWindow.userName = this.data.userName;
+    ForgotPasswordWindow.passwordResetCode = this.data.passwordResetCode;
+    ForgotPasswordWindow.password = this.data.password;
+    ForgotPasswordWindow.password2 = this.data.password2;
+
+    app = null;
+  }
+
   validateProperty(name, value) {
     console.log("...validateProperty: name=" + name + ", value = " + value);
     const obj = { [name]: value };
@@ -70,26 +90,6 @@ class ForgotPasswordWindow extends React.Component {
     return errors;
   }
 
-  componentDidMount() {
-    console.log("forgotPasswordWindow componentDidMount");
-    this.data.userName = ForgotPasswordWindow.userName;
-    this.data.passwordResetCode = ForgotPasswordWindow.passwordResetCode;
-    this.data.password = ForgotPasswordWindow.password;
-    this.data.password2 = ForgotPasswordWindow.password2;
-
-    this.doRender();
-  }
-
-  componentWillUnmount() {
-    console.log("forgotPasswordWindow componentWillUnmount");
-    ForgotPasswordWindow.userName = this.data.userName;
-    ForgotPasswordWindow.passwordResetCode = this.data.passwordResetCode;
-    ForgotPasswordWindow.password = this.data.password;
-    ForgotPasswordWindow.password2 = this.data.password2;
-
-    app = null;
-  }
-
   handleChange(ev) {
     const name = ev.target.name;
     const value = ev.target.value;
@@ -101,6 +101,41 @@ class ForgotPasswordWindow extends React.Component {
     const data = this.data;
     data[name] = value;
     this.setState({ data, errors });
+  }
+
+  handleClearClck(ev) {
+    ForgotPasswordWindow.userName = "";
+    ForgotPasswordWindow.passwordResetCode = "";
+    ForgotPasswordWindow.password = "";
+    ForgotPasswordWindow.password2 = "";
+
+    ForgotPasswordWindow.showGetCodeResponsePopup = false;
+    ForgotPasswordWindow.getCodeResponseMessage = "";
+
+    ForgotPasswordWindow.showSubmitResponsePopup = false;
+    ForgotPasswordWindow.getSubmitResponseMessage = "";
+
+    ForgotPasswordWindow.inputsEnabled = true;
+    ForgotPasswordWindow.buttonsEnabled = true;
+    ForgotPasswordWindow.submitButtonEnabled = false;
+
+    ForgotPasswordWindow.codeSent = false;
+
+    this.componentDidMount();
+  }
+
+  handleGetCodeClick(ev) {
+    console.log("...ForgotPasswordWindow handleGetCodeClick");
+    console.log("userName=" + this.data.userName);
+    // ev.preventDefault();
+    // const errors = this.validate();
+    // if (errors)
+    //   console.log("...handleGetCodeClick: errors = " + Object.values(errors));
+    // this.setState({ errors: errors || {} });
+    // if (errors) return;
+    // this.props.setButtonsEnabled(false);
+    ForgotPasswordWindow.buttonsEnabled = false;
+    sendPasswordResetCode({ userName: this.data.userName });
   }
 
   handlePassword2Change(ev) {
@@ -124,21 +159,7 @@ class ForgotPasswordWindow extends React.Component {
     return this.handleChange(ev);
   }
 
-  async handleGetCodeClick(ev) {
-    console.log("...ForgotPasswordWindow handleGetCodeClick");
-    console.log("userName=" + this.data.userName);
-    // ev.preventDefault();
-    // const errors = this.validate();
-    // if (errors)
-    //   console.log("...handleGetCodeClick: errors = " + Object.values(errors));
-    // this.setState({ errors: errors || {} });
-    // if (errors) return;
-    // this.props.setButtonsEnabled(false);
-    ForgotPasswordWindow.buttonsEnabled = false;
-    sendPasswordResetCode({ userName: this.data.userName });
-  }
-
-  async handleSubmitClick(ev) {
+  handleSubmitClick(ev) {
     console.log("...ForgotPasswordWindow handleSubmitClick");
     console.log("userName=" + this.data.userName);
     console.log("masswordResetCode=" + this.data.passwordResetCode);
@@ -156,27 +177,6 @@ class ForgotPasswordWindow extends React.Component {
       passwordResetCode: this.data.passwordResetCode,
       password: this.data.password,
     });
-  }
-
-  handleResetClick(ev) {
-    ForgotPasswordWindow.userName = "";
-    ForgotPasswordWindow.passwordResetCode = "";
-    ForgotPasswordWindow.password = "";
-    ForgotPasswordWindow.password2 = "";
-
-    ForgotPasswordWindow.showGetCodeResponsePopup = false;
-    ForgotPasswordWindow.getCodeResponseMessage = "";
-
-    ForgotPasswordWindow.showSubmitResponsePopup = false;
-    ForgotPasswordWindow.getSubmitResponseMessage = "";
-
-    ForgotPasswordWindow.inputsEnabled = true;
-    ForgotPasswordWindow.buttonsEnabled = true;
-    ForgotPasswordWindow.submitButtonEnabled = true;
-
-    ForgotPasswordWindow.codeSent = false;
-
-    this.componentDidMount();
   }
 
   isValidInput() {
@@ -387,7 +387,7 @@ class ForgotPasswordWindow extends React.Component {
                       color: "#0000b0",
                     }}
                     /* autoFocus */
-                    onClick={(ev) => this.handleResetClick(ev)}
+                    onClick={(ev) => this.handleClearClck(ev)}
                   >
                     Clear
                   </Button>
@@ -411,7 +411,7 @@ ForgotPasswordWindow.responseMessage = "";
 
 ForgotPasswordWindow.buttonsEnabled = true;
 ForgotPasswordWindow.inputsEnabled = true;
-ForgotPasswordWindow.submitButtonEnabled = true;
+ForgotPasswordWindow.submitButtonEnabled = false;
 ForgotPasswordWindow.showSpinner = false;
 
 ForgotPasswordWindow.codeSent = false;
@@ -435,6 +435,7 @@ async function sendPasswordResetCode(params) {
       "Password Reset Code has been sent to user " +
       ForgotPasswordWindow.userName;
     ForgotPasswordWindow.codeSent = true;
+    ForgotPasswordWindow.submitButtonEnabled = true;
   }
 
   ForgotPasswordWindow.buttonsEnabled = false;
