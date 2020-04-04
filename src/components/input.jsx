@@ -12,7 +12,7 @@ const Input = ({
   onChange,
 }) => {
   return (
-    <div className="form-group" style={{ width: "120px", marginLeft: 45 }}>
+    <div className="form-group" style={{ width: "480px", marginLeft: 45 }}>
       <label htmlFor={name}>{label}</label>
       <input
         autoFocus={autofocus}
