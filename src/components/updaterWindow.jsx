@@ -5,11 +5,11 @@ import uuidv4 from "uuid/v4";
 
 import Defs from "iipzy-shared/src/defs";
 
-import updater from "../services/updater";
 import cookie from "../utils/cookie";
 import ClientPicker from "./clientPicker";
 import InfoPopup from "./infoPopup";
 import Navigator from "./navigator";
+import updater from "../services/updater";
 
 let app = null;
 
@@ -53,7 +53,7 @@ class UpdaterWindow extends React.Component {
     console.log("...UpdaterWindow handleSaveClick");
     cookie.set("updaterSettings", {
       tgtClientToken: UpdaterWindow.tgtClientToken,
-      updateType: UpdaterWindow.updateType
+      updateType: UpdaterWindow.updateType,
     });
   }
 
@@ -74,13 +74,13 @@ class UpdaterWindow extends React.Component {
 
     cookie.set("updaterSettings", {
       tgtClientToken: UpdaterWindow.tgtClientToken,
-      updateType: UpdaterWindow.updateType
+      updateType: UpdaterWindow.updateType,
     });
 
     postUpdaterUpdate({
       tgtClientToken: UpdaterWindow.tgtClientToken,
       updateType: UpdaterWindow.updateType,
-      updateUuid: uuidv4()
+      updateUuid: uuidv4(),
     });
   }
 
@@ -162,15 +162,16 @@ class UpdaterWindow extends React.Component {
     return (
       <div>
         <Navigator />
-        {showInfoPopup ? (
+        {showSpinner && <SpinnerPopup />}
+        {showInfoPopup && (
           <InfoPopup
             title={"Sentinel Update"}
             getInfoMessage={() => this.getInfoMessage()}
-            onSubmit={ev => this.handleInfoPopupClick(ev)}
+            onSubmit={(ev) => this.handleInfoPopupClick(ev)}
             closePopup={this.hideInfoPopup.bind(this)}
           />
-        ) : null}
-        {!showInfoPopup ? (
+        )}
+        {!showInfoPopup && (
           <div>
             <div style={{ marginLeft: 20, textAlign: "left" }}>
               <p style={{ fontSize: "140%" }}>Update Sentinel</p>
@@ -186,7 +187,7 @@ class UpdaterWindow extends React.Component {
                     <td>Client:</td>
                     <td>
                       <ClientPicker
-                        onPick={ev => this.handleClientPick(ev)}
+                        onPick={(ev) => this.handleClientPick(ev)}
                         getDisabled={this.getDisabled}
                         getSelectedClientToken={this.getClientToken}
                       />
@@ -206,7 +207,7 @@ class UpdaterWindow extends React.Component {
                             value="iipzy-pi"
                             checked={updateType === "iipzy-pi"}
                             disabled={disabledWhileUpdating}
-                            onChange={ev => this.handleUpdateTypeChange(ev)}
+                            onChange={(ev) => this.handleUpdateTypeChange(ev)}
                           />
                           &nbsp;Sentinel&nbsp;
                         </tr>
@@ -217,7 +218,7 @@ class UpdaterWindow extends React.Component {
                             value="iipzy-sentinel-admin"
                             checked={updateType === "iipzy-sentinel-admin"}
                             disabled={disabledWhileUpdating}
-                            onChange={ev => this.handleUpdateTypeChange(ev)}
+                            onChange={(ev) => this.handleUpdateTypeChange(ev)}
                           />
                           &nbsp;Sentinel Admin&nbsp;
                         </tr>
@@ -228,7 +229,7 @@ class UpdaterWindow extends React.Component {
                             value="iipzy-sentinel-web"
                             checked={updateType === "iipzy-sentinel-web"}
                             disabled={disabledWhileUpdating}
-                            onChange={ev => this.handleUpdateTypeChange(ev)}
+                            onChange={(ev) => this.handleUpdateTypeChange(ev)}
                           />
                           &nbsp;Sentinel Web&nbsp;
                         </tr>
@@ -239,7 +240,7 @@ class UpdaterWindow extends React.Component {
                             value="iipzy-updater"
                             checked={updateType === "iipzy-updater"}
                             disabled={disabledWhileUpdating}
-                            onChange={ev => this.handleUpdateTypeChange(ev)}
+                            onChange={(ev) => this.handleUpdateTypeChange(ev)}
                           />
                           &nbsp;Updater
                         </tr>
@@ -259,10 +260,10 @@ class UpdaterWindow extends React.Component {
                         style={{
                           marginLeft: "100px",
                           width: "130px",
-                          color: "#0000b0"
+                          color: "#0000b0",
                         }}
                         autoFocus
-                        onClick={ev => this.handleSaveClick(ev)}
+                        onClick={(ev) => this.handleSaveClick(ev)}
                       >
                         Save
                       </Button>
@@ -273,10 +274,10 @@ class UpdaterWindow extends React.Component {
                         style={{
                           marginLeft: "50px",
                           width: "130px",
-                          color: "#0000b0"
+                          color: "#0000b0",
                         }}
                         autoFocus
-                        onClick={ev => this.handleSubmitClick(ev)}
+                        onClick={(ev) => this.handleSubmitClick(ev)}
                       >
                         Submit
                       </Button>
@@ -304,24 +305,12 @@ class UpdaterWindow extends React.Component {
                         readOnly={true}
                       />
                     </td>
-                    {showSpinner ? (
-                      <td>
-                        <div style={{ marginLeft: "-60px" }}>
-                          <Spinner animation="border" role="status">
-                            <span className="sr-only">Loading...</span>
-                          </Spinner>
-                        </div>
-                      </td>
-                    ) : null}
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-        ) : null}
+        )}
       </div>
     );
   }
