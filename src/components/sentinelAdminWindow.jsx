@@ -75,7 +75,7 @@ class SentinelAdminWindow extends React.Component {
     }, 30 * 1000);
 
     SentinelAdminWindow.waitForInProgress = true;
-    SentinelAdminWindow.status = "starting...";
+    SentinelAdminWindow.status = "contacting server...";
     this.doRender();
 
     postSentinelAdmin({
@@ -153,7 +153,7 @@ class SentinelAdminWindow extends React.Component {
     const disabledWhileInProgress =
       SentinelAdminWindow.waitForInProgress || SentinelAdminWindow.inProgress;
     const activityStatus = SentinelAdminWindow.status;
-    const showSpinner = SentinelAdminWindow.inProgress;
+    const showSpinner = disabledWhileInProgress;
 
     const showInfoPopup = SentinelAdminWindow.showInfoPopup;
 

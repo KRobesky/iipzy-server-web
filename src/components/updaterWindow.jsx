@@ -70,7 +70,7 @@ class UpdaterWindow extends React.Component {
     }, 30 * 1000);
 
     UpdaterWindow.waitForInProgress = true;
-    UpdaterWindow.status = "sending...";
+    UpdaterWindow.status = "contacting server...";
     this.doRender();
 
     cookie.set("updaterSettings", {
