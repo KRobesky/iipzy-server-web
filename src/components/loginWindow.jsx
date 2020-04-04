@@ -118,14 +118,14 @@ class LoginWindow extends React.Component {
     return (
       <div>
         <Navigator />
-        {showInfoPopup ? (
+        {showInfoPopup && (
           <InfoPopup
             title={title_}
             getInfoMessage={() => this.getInfoMessage()}
             onSubmit={(ev) => this.handleInfoPopupClick(ev)}
             closePopup={this.hideInfoPopup.bind(this)}
           />
-        ) : null}
+        )}
         {!isLoggedIn && (
           <div style={{ marginLeft: 20, textAlign: "left" }}>
             <p style={{ fontSize: "140%" }}>Log in @ iipzy.com</p>
@@ -136,6 +136,7 @@ class LoginWindow extends React.Component {
             <p style={{ fontSize: "140%" }}>Log out @ iipzy.com</p>
           </div>
         )}
+        {showSpinner && <SpinnerPopup />}
         {!showInfoPopup && (
           <Input
             type="text"
