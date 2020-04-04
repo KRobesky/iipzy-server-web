@@ -324,77 +324,79 @@ class ForgotPasswordWindow extends React.Component {
           !inputsEnabled || !this.isValidPassword(),
           (ev) => this.handlePassword2Change(ev)
         )}
-        <table align="center">
-          <tbody>
-            <tr>
-              <td>
-                <div style={{ textAlign: "center" }}>
-                  <Button
-                    type="button"
-                    variant="contained"
-                    disabled={
-                      !buttonsEnabled ||
-                      !this.isValidUserName() ||
-                      this.isValidPasswordResetCode()
-                    }
+        <div style={{ marginLeft: "45px" }}>
+          <table align="left">
+            <tbody>
+              <tr>
+                <td>
+                  <div style={{ textAlign: "center" }}>
+                    <Button
+                      type="button"
+                      variant="contained"
+                      disabled={
+                        !buttonsEnabled ||
+                        !this.isValidUserName() ||
+                        this.isValidPasswordResetCode()
+                      }
+                      style={{
+                        width: "130px",
+                        color: "#0000b0",
+                      }}
+                      /* autoFocus */
+                      onClick={(ev) => this.handleGetCodeClick(ev)}
+                    >
+                      Get Code
+                    </Button>
+                  </div>
+                </td>
+                <td>
+                  <div
                     style={{
-                      width: "130px",
-                      color: "#0000b0",
+                      textAlign: "center",
+                      marginLeft: 40,
+                      marginRight: 40,
                     }}
-                    /* autoFocus */
-                    onClick={(ev) => this.handleGetCodeClick(ev)}
                   >
-                    Get Code
-                  </Button>
-                </div>
-              </td>
-              <td>
-                <div
-                  style={{
-                    textAlign: "center",
-                    marginLeft: 40,
-                    marginRight: 40,
-                  }}
-                >
-                  <Button
-                    type="button"
-                    variant="contained"
-                    disabled={
-                      !buttonsEnabled ||
-                      !this.isValidInput() ||
-                      !submitButtonEnabled
-                    }
-                    style={{
-                      width: "130px",
-                      color: "#0000b0",
-                    }}
-                    /* autoFocus */
-                    onClick={(ev) => this.handleSubmitClick(ev)}
-                  >
-                    Submit
-                  </Button>
-                </div>
-              </td>
-              <td>
-                <div style={{ textAlign: "center" }}>
-                  <Button
-                    type="button"
-                    variant="contained"
-                    disabled={!buttonsEnabled}
-                    style={{
-                      width: "130px",
-                      color: "#0000b0",
-                    }}
-                    /* autoFocus */
-                    onClick={(ev) => this.handleClearClck(ev)}
-                  >
-                    Clear
-                  </Button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                    <Button
+                      type="button"
+                      variant="contained"
+                      disabled={
+                        !buttonsEnabled ||
+                        !this.isValidInput() ||
+                        !submitButtonEnabled
+                      }
+                      style={{
+                        width: "130px",
+                        color: "#0000b0",
+                      }}
+                      /* autoFocus */
+                      onClick={(ev) => this.handleSubmitClick(ev)}
+                    >
+                      Submit
+                    </Button>
+                  </div>
+                </td>
+                <td>
+                  <div style={{ textAlign: "center" }}>
+                    <Button
+                      type="button"
+                      variant="contained"
+                      disabled={!buttonsEnabled}
+                      style={{
+                        width: "130px",
+                        color: "#0000b0",
+                      }}
+                      /* autoFocus */
+                      onClick={(ev) => this.handleClearClck(ev)}
+                    >
+                      Clear
+                    </Button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }

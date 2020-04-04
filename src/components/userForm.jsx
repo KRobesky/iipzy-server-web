@@ -289,7 +289,6 @@ class UserForm extends React.Component {
           (ev) => this.handlePassword2Change(ev)
         )}
         <div>&nbsp;</div>
-        {/*         <table align="center"> */}
         <div style={{ marginLeft: "45px" }}>
           <table align="left">
             <tbody>
