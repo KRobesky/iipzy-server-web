@@ -163,7 +163,7 @@ class LoginWindow extends React.Component {
           />
         )}
         {!showInfoPopup && !isLoggedIn && (
-          <div style={{ textAlign: "center" }}>
+          <div style={{ marginLeft: "45px" }}>
             <Button
               type="button"
               variant="contained"
