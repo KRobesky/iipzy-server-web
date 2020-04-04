@@ -5,11 +5,12 @@ import uuidv4 from "uuid/v4";
 
 import Defs from "iipzy-shared/src/defs";
 
-import sentinelAdmin from "../services/sentinelAdmin";
 import cookie from "../utils/cookie";
 import ClientPicker from "./clientPicker";
 import InfoPopup from "./infoPopup";
 import Navigator from "./navigator";
+import sentinelAdmin from "../services/sentinelAdmin";
+import SpinnerPopup from "./spinnerPopup";
 
 let app = null;
 
@@ -58,7 +59,7 @@ class SentinelAdminWindow extends React.Component {
     console.log("...SentinelAdminWindow handleSaveClick");
     cookie.set("sentinelAdminSettings", {
       tgtClientToken: SentinelAdminWindow.tgtClientToken,
-      action: SentinelAdminWindow.action
+      action: SentinelAdminWindow.action,
     });
   }
 
@@ -80,7 +81,7 @@ class SentinelAdminWindow extends React.Component {
     postSentinelAdmin({
       tgtClientToken: SentinelAdminWindow.tgtClientToken,
       action: SentinelAdminWindow.action,
-      actionUuid: uuidv4()
+      actionUuid: uuidv4(),
     });
   }
 
@@ -159,15 +160,16 @@ class SentinelAdminWindow extends React.Component {
     return (
       <div>
         <Navigator />
-        {showInfoPopup ? (
+        {showSpinner && <SpinnerPopup />}
+        {showInfoPopup && (
           <InfoPopup
             title={"Sentinel Admin"}
             getInfoMessage={() => this.getInfoMessage()}
-            onSubmit={ev => this.handleInfoPopupClick(ev)}
+            onSubmit={(ev) => this.handleInfoPopupClick(ev)}
             closePopup={this.hideInfoPopup.bind(this)}
           />
-        ) : null}
-        {!showInfoPopup ? (
+        )}
+        {!showInfoPopup && (
           <div>
             <div style={{ marginLeft: 20, textAlign: "left" }}>
               <p style={{ fontSize: "140%" }}>Sentinel Administration</p>
@@ -182,7 +184,7 @@ class SentinelAdminWindow extends React.Component {
                     <td>Client:</td>
                     <td>
                       <ClientPicker
-                        onPick={ev => this.handleClientPick(ev)}
+                        onPick={(ev) => this.handleClientPick(ev)}
                         getDisabled={this.getDisabled}
                         getSelectedClientToken={this.getClientToken}
                       />
@@ -204,7 +206,7 @@ class SentinelAdminWindow extends React.Component {
                               action === Defs.adminCmd_sentinel_restartSentinel
                             }
                             disabled={disabledWhileInProgress}
-                            onChange={ev => this.handleActionChange(ev)}
+                            onChange={(ev) => this.handleActionChange(ev)}
                           />
                           &nbsp;Restart Sentinel&nbsp;
                         </tr>
@@ -218,7 +220,7 @@ class SentinelAdminWindow extends React.Component {
                               Defs.adminCmd_sentinel_restartSentinelAdmin
                             }
                             disabled={disabledWhileInProgress}
-                            onChange={ev => this.handleActionChange(ev)}
+                            onChange={(ev) => this.handleActionChange(ev)}
                           />
                           &nbsp;Restart Sentinel Admin&nbsp;
                         </tr>
@@ -232,7 +234,7 @@ class SentinelAdminWindow extends React.Component {
                               Defs.adminCmd_sentinel_restartSentinelWeb
                             }
                             disabled={disabledWhileInProgress}
-                            onChange={ev => this.handleActionChange(ev)}
+                            onChange={(ev) => this.handleActionChange(ev)}
                           />
                           &nbsp;Restart Sentinel Web&nbsp;
                         </tr>
@@ -245,7 +247,7 @@ class SentinelAdminWindow extends React.Component {
                               action === Defs.adminCmd_sentinel_restartUpdater
                             }
                             disabled={disabledWhileInProgress}
-                            onChange={ev => this.handleActionChange(ev)}
+                            onChange={(ev) => this.handleActionChange(ev)}
                           />
                           &nbsp;Restart Updater&nbsp;
                         </tr>
@@ -256,7 +258,7 @@ class SentinelAdminWindow extends React.Component {
                             value={Defs.adminCmd_sentinel_reboot}
                             checked={action === Defs.adminCmd_sentinel_reboot}
                             disabled={disabledWhileInProgress}
-                            onChange={ev => this.handleActionChange(ev)}
+                            onChange={(ev) => this.handleActionChange(ev)}
                           />
                           &nbsp;Reboot&nbsp;
                         </tr>
@@ -267,7 +269,7 @@ class SentinelAdminWindow extends React.Component {
                             value={Defs.adminCmd_sentinel_sendLogs}
                             checked={action === Defs.adminCmd_sentinel_sendLogs}
                             disabled={disabledWhileInProgress}
-                            onChange={ev => this.handleActionChange(ev)}
+                            onChange={(ev) => this.handleActionChange(ev)}
                           />
                           &nbsp;Send Logs
                         </tr>
@@ -281,7 +283,7 @@ class SentinelAdminWindow extends React.Component {
                               Defs.adminCmd_sentinel_setLogLevelDetailed
                             }
                             disabled={disabledWhileInProgress}
-                            onChange={ev => this.handleActionChange(ev)}
+                            onChange={(ev) => this.handleActionChange(ev)}
                           />
                           &nbsp;Set Log Level = Detailed
                         </tr>
@@ -295,7 +297,7 @@ class SentinelAdminWindow extends React.Component {
                               Defs.adminCmd_sentinel_setLogLevelNormal
                             }
                             disabled={disabledWhileInProgress}
-                            onChange={ev => this.handleActionChange(ev)}
+                            onChange={(ev) => this.handleActionChange(ev)}
                           />
                           &nbsp;Set Log Level = Normal
                         </tr>
@@ -315,10 +317,10 @@ class SentinelAdminWindow extends React.Component {
                         style={{
                           marginLeft: "100px",
                           width: "130px",
-                          color: "#0000b0"
+                          color: "#0000b0",
                         }}
                         /* autoFocus */
-                        onClick={ev => this.handleSaveClick(ev)}
+                        onClick={(ev) => this.handleSaveClick(ev)}
                       >
                         Save
                       </Button>
@@ -329,10 +331,10 @@ class SentinelAdminWindow extends React.Component {
                         style={{
                           marginLeft: "50px",
                           width: "130px",
-                          color: "#0000b0"
+                          color: "#0000b0",
                         }}
                         /* autoFocus */
-                        onClick={ev => this.handleSubmitClick(ev)}
+                        onClick={(ev) => this.handleSubmitClick(ev)}
                       >
                         Submit
                       </Button>
@@ -360,24 +362,12 @@ class SentinelAdminWindow extends React.Component {
                         readOnly={true}
                       />
                     </td>
-                    {showSpinner ? (
-                      <td>
-                        <div style={{ marginLeft: "-60px" }}>
-                          <Spinner animation="border" role="status">
-                            <span className="sr-only">Loading...</span>
-                          </Spinner>
-                        </div>
-                      </td>
-                    ) : null}
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-        ) : null}
+        )}
       </div>
     );
   }
