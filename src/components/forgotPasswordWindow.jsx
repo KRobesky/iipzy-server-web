@@ -6,10 +6,11 @@ import Button from "@material-ui/core/Button";
 import Defs from "iipzy-shared/src/defs";
 
 import eventManager from "../ipc/eventManager";
-import user from "../services/user";
 import InfoPopup from "./infoPopup";
 import Input from "./input";
 import Navigator from "./navigator";
+import SpinnerPopup from "./spinnerPopup";
+import user from "../services/user";
 
 let app = null;
 
@@ -22,39 +23,27 @@ class ForgotPasswordWindow extends React.Component {
     this.state = {
       update: false,
       errors: {},
-      count: 0
+      count: 0,
     };
 
     this.data = {
       userName: null,
       passwordResetCode: null,
       password: null,
-      password2: null
+      password2: null,
     };
 
     app = this;
 
     this.schema = {
-      userName: Joi.string()
-        .required()
-        .label("User Name")
-        .min(5)
-        .max(50),
+      userName: Joi.string().required().label("User Name").min(5).max(50),
       passwordResetCode: Joi.string()
         .required()
         .label("Password Reset Code")
         .min(6)
         .max(6),
-      password: Joi.string()
-        .required()
-        .label("Password")
-        .min(5)
-        .max(50),
-      password2: Joi.string()
-        .required()
-        .label("Password Again")
-        .min(5)
-        .max(50)
+      password: Joi.string().required().label("Password").min(5).max(50),
+      password2: Joi.string().required().label("Password Again").min(5).max(50),
     };
   }
 
@@ -165,7 +154,7 @@ class ForgotPasswordWindow extends React.Component {
     updatePassword({
       userName: this.data.userName,
       passwordResetCode: this.data.passwordResetCode,
-      password: this.data.password
+      password: this.data.password,
     });
   }
 
@@ -263,29 +252,10 @@ class ForgotPasswordWindow extends React.Component {
     this.doRender();
   }
 
-  // getSubmitResponseMessage() {
-  //   return ForgotPasswordWindow.submitResponseMessage;
-  // }
-
-  // handleSubmitResponsePopupClick() {
-  //   console.log("...ForgotPasswordWindowhandleInfoPopupClick");
-  // }
-
-  // hideSubmitResponsePopup() {
-  //   ForgotPasswordWindow.showSubmitResponsePopup = false;
-  //   ForgotPasswordWindow.buttonsEnabled = true;
-  //   this.doRender();
-  // }
-
   doRender(name, value) {
-    // this.data.userName = ForgotPasswordWindow.userName;
-    // this.data.passwordResetCode = ForgotPasswordWindow.passwordResetCode;
-    // this.data.password = ForgotPasswordWindow.password;
-    // this.data.password2 = ForgotPasswordWindow.password2;
     if (name && value) this.data[name] = value;
 
-    const count = this.state.count + 1;
-    this.setState({ count: count });
+    this.setState({ count: this.state.count + 1 });
   }
 
   render() {
@@ -294,21 +264,21 @@ class ForgotPasswordWindow extends React.Component {
     const inputsEnabled = ForgotPasswordWindow.inputsEnabled;
     const buttonsEnabled = ForgotPasswordWindow.buttonsEnabled;
     const showResponsePopup = ForgotPasswordWindow.showResponsePopup;
+    const showSpinner = ForgotPasswordWindow.showSpinner;
     const submitButtonEnabled = ForgotPasswordWindow.submitButtonEnabled;
-    // const showSubmitResponsePopup =
-    //   ForgotPasswordWindow.showSubmitResponsePopup;
 
     return (
       <div>
         <Navigator />
-        {showResponsePopup ? (
+        {showSpinner && <SpinnerPopup />}
+        {showResponsePopup && (
           <InfoPopup
             title={"Forgot Password"}
             getInfoMessage={() => this.getResponseMessage()}
-            onSubmit={ev => this.handleResponsePopupClick(ev)}
+            onSubmit={(ev) => this.handleResponsePopupClick(ev)}
             closePopup={this.hideResponsePopup.bind(this)}
           />
-        ) : null}
+        )}
         <div style={{ marginLeft: 20, textAlign: "left" }}>
           <p style={{ fontSize: "140%" }}>Forgot Password</p>
         </div>
@@ -329,7 +299,7 @@ class ForgotPasswordWindow extends React.Component {
           "text",
           true,
           !inputsEnabled || this.codeSent(),
-          ev => this.handleChange(ev)
+          (ev) => this.handleChange(ev)
         )}
         {this.renderInput(
           "passwordResetCode",
@@ -337,7 +307,7 @@ class ForgotPasswordWindow extends React.Component {
           "text",
           false,
           !inputsEnabled || !this.isValidUserName() || !this.codeSent(),
-          ev => this.handleChange(ev)
+          (ev) => this.handleChange(ev)
         )}
         {this.renderInput(
           "password",
@@ -345,7 +315,7 @@ class ForgotPasswordWindow extends React.Component {
           "password",
           false,
           !inputsEnabled || !this.isValidPasswordResetCode(),
-          ev => this.handleChange(ev)
+          (ev) => this.handleChange(ev)
         )}
         {this.renderInput(
           "password2",
@@ -353,7 +323,7 @@ class ForgotPasswordWindow extends React.Component {
           "password",
           false,
           !inputsEnabled || !this.isValidPassword(),
-          ev => this.handlePassword2Change(ev)
+          (ev) => this.handlePassword2Change(ev)
         )}
         <table align="center">
           <tbody>
@@ -370,10 +340,10 @@ class ForgotPasswordWindow extends React.Component {
                     }
                     style={{
                       width: "130px",
-                      color: "#0000b0"
+                      color: "#0000b0",
                     }}
                     /* autoFocus */
-                    onClick={ev => this.handleGetCodeClick(ev)}
+                    onClick={(ev) => this.handleGetCodeClick(ev)}
                   >
                     Get Code
                   </Button>
@@ -384,7 +354,7 @@ class ForgotPasswordWindow extends React.Component {
                   style={{
                     textAlign: "center",
                     marginLeft: 40,
-                    marginRight: 40
+                    marginRight: 40,
                   }}
                 >
                   <Button
@@ -397,10 +367,10 @@ class ForgotPasswordWindow extends React.Component {
                     }
                     style={{
                       width: "130px",
-                      color: "#0000b0"
+                      color: "#0000b0",
                     }}
                     /* autoFocus */
-                    onClick={ev => this.handleSubmitClick(ev)}
+                    onClick={(ev) => this.handleSubmitClick(ev)}
                   >
                     Submit
                   </Button>
@@ -414,10 +384,10 @@ class ForgotPasswordWindow extends React.Component {
                     disabled={!buttonsEnabled}
                     style={{
                       width: "130px",
-                      color: "#0000b0"
+                      color: "#0000b0",
                     }}
                     /* autoFocus */
-                    onClick={ev => this.handleResetClick(ev)}
+                    onClick={(ev) => this.handleResetClick(ev)}
                   >
                     Clear
                   </Button>
@@ -439,16 +409,17 @@ ForgotPasswordWindow.password2 = "";
 ForgotPasswordWindow.showResponsePopup = false;
 ForgotPasswordWindow.responseMessage = "";
 
-// ForgotPasswordWindow.showSubmitResponsePopup = false;
-// ForgotPasswordWindow.getSubmitResponseMessage = "";
-
-ForgotPasswordWindow.inputsEnabled = true;
 ForgotPasswordWindow.buttonsEnabled = true;
+ForgotPasswordWindow.inputsEnabled = true;
 ForgotPasswordWindow.submitButtonEnabled = true;
+ForgotPasswordWindow.showSpinner = false;
 
 ForgotPasswordWindow.codeSent = false;
 
 async function sendPasswordResetCode(params) {
+  ForgotPasswordWindow.showSpinner = true;
+  if (app) app.doRender();
+
   const { data, status } = await user.sendPasswordResetCode(params);
   if (data.__hadError__) {
     console.log(
@@ -466,13 +437,17 @@ async function sendPasswordResetCode(params) {
     ForgotPasswordWindow.codeSent = true;
   }
 
-  ForgotPasswordWindow.showResponsePopup = true;
   ForgotPasswordWindow.buttonsEnabled = false;
+  ForgotPasswordWindow.showResponsePopup = true;
+  ForgotPasswordWindow.showSpinner = false;
 
   if (app) app.doRender();
 }
 
 async function updatePassword(params) {
+  ForgotPasswordWindow.showSpinner = true;
+  if (app) app.doRender();
+
   const { data, status } = await user.newPassword(params);
   if (data.__hadError__) {
     console.log(
@@ -490,8 +465,9 @@ async function updatePassword(params) {
     ForgotPasswordWindow.submitButtonEnabled = false;
   }
 
-  ForgotPasswordWindow.showResponsePopup = true;
   ForgotPasswordWindow.buttonsEnabled = false;
+  ForgotPasswordWindow.showResponsePopup = true;
+  ForgotPasswordWindow.showSpinner = false;
 
   if (app) app.doRender();
 }
