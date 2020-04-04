@@ -20,7 +20,7 @@ class UserForm extends React.Component {
 
     this.state = {
       errors: {},
-      count: 0
+      count: 0,
       // showPopup: false
     };
 
@@ -29,40 +29,25 @@ class UserForm extends React.Component {
       emailAddress: null,
       mobilePhoneNo: null,
       password: null,
-      password2: null
+      password2: null,
     };
 
     app = this;
 
     this.schema = {
-      userName: Joi.string()
-        .required()
-        .label("User Name")
-        .min(5)
-        .max(50),
-      emailAddress: Joi.string()
-        .required()
-        .label("Email Address")
-        .email(),
+      userName: Joi.string().required().label("User Name").min(5).max(50),
+      emailAddress: Joi.string().required().label("Email Address").email(),
       mobilePhoneNo: Joi.string()
         .required()
         .label("Mobile Phone Number")
         .regex(/^\d{3}-\d{3}-\d{4}$/)
-        .error(errors => {
+        .error((errors) => {
           return {
-            message: "Phone number must be of the form 123-456-7890"
+            message: "Phone number must be of the form 123-456-7890",
           };
         }),
-      password: Joi.string()
-        .required()
-        .label("Password")
-        .min(5)
-        .max(50),
-      password2: Joi.string()
-        .required()
-        .label("Password Again")
-        .min(5)
-        .max(50)
+      password: Joi.string().required().label("Password").min(5).max(50),
+      password2: Joi.string().required().label("Password Again").min(5).max(50),
     };
   }
 
@@ -269,7 +254,7 @@ class UserForm extends React.Component {
           "text",
           true,
           this.props.userNameDisabled || !fieldsEnabled,
-          ev => this.handleChange(ev)
+          (ev) => this.handleChange(ev)
         )}
         {this.renderInput(
           "emailAddress",
@@ -277,7 +262,7 @@ class UserForm extends React.Component {
           "text",
           false,
           !this.isValidUserName() || !fieldsEnabled,
-          ev => this.handleChange(ev)
+          (ev) => this.handleChange(ev)
         )}
         {this.renderInput(
           "mobilePhoneNo",
@@ -285,7 +270,7 @@ class UserForm extends React.Component {
           "text",
           false,
           !this.isValidEmailAddress() || !fieldsEnabled,
-          ev => this.handleChange(ev)
+          (ev) => this.handleChange(ev)
         )}
         {this.renderInput(
           "password",
@@ -293,7 +278,7 @@ class UserForm extends React.Component {
           "password",
           false,
           !this.isValidMobilePhoneNo() || !fieldsEnabled,
-          ev => this.handleChange(ev)
+          (ev) => this.handleChange(ev)
         )}
         {this.renderInput(
           "password2",
@@ -301,16 +286,18 @@ class UserForm extends React.Component {
           "password",
           false,
           !this.isValidPassword() || !fieldsEnabled,
-          ev => this.handlePassword2Change(ev)
+          (ev) => this.handlePassword2Change(ev)
         )}
-        <table align="center">
+        <div>&nbsp;</div>
+        {/*         <table align="center"> */}
+        <table align="left">
           <tbody>
             <tr>
               <td>
                 <div
                   style={{
                     textAlign: "center",
-                    marginRight: button1MarginRight
+                    marginRight: button1MarginRight,
                   }}
                 >
                   <Button
@@ -319,10 +306,10 @@ class UserForm extends React.Component {
                     disabled={!this.isValidInput()}
                     style={{
                       width: "130px",
-                      color: "#0000b0"
+                      color: "#0000b0",
                     }}
                     autoFocus
-                    onClick={ev => this.handleButtonClick(ev)}
+                    onClick={(ev) => this.handleButtonClick(ev)}
                   >
                     {this.getButton1Label()}
                   </Button>
@@ -337,10 +324,10 @@ class UserForm extends React.Component {
                       disabled={!buttonsEnabled}
                       style={{
                         width: "130px",
-                        color: "#0000b0"
+                        color: "#0000b0",
                       }}
                       autoFocus
-                      onClick={ev => this.handleButton2Click(ev)}
+                      onClick={(ev) => this.handleButton2Click(ev)}
                     >
                       {this.getButton2Label()}
                     </Button>
