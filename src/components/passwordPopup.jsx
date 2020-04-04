@@ -85,7 +85,7 @@ class PasswordPopup extends React.Component {
               label="Password"
               onChange={(ev) => this.handleChange(ev)}
               error=""
-              percentageWidth={true}
+              porportiionalWidth={true}
             />
             <h1>{this.props.text}</h1>
             <div style={{ textAlign: "center" }}>
