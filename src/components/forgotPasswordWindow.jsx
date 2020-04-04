@@ -464,6 +464,7 @@ async function updatePassword(params) {
     ForgotPasswordWindow.responseMessage =
       "Password has been changed for user " + ForgotPasswordWindow.userName;
     ForgotPasswordWindow.inputsEnabled = false;
+    ForgotPasswordWindow.submitButtonEnabled = false;
   }
 
   ForgotPasswordWindow.buttonsEnabled = true;
