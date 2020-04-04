@@ -290,52 +290,53 @@ class UserForm extends React.Component {
         )}
         <div>&nbsp;</div>
         {/*         <table align="center"> */}
-        <table align="left">
-          <tbody>
-            <tr>
-              <td>
-                <div
-                  style={{
-                    textAlign: "center",
-                    marginRight: button1MarginRight,
-                  }}
-                >
-                  <Button
-                    type="button"
-                    variant="contained"
-                    disabled={!this.isValidInput()}
-                    style={{
-                      width: "130px",
-                      color: "#0000b0",
-                    }}
-                    autoFocus
-                    onClick={(ev) => this.handleButtonClick(ev)}
-                  >
-                    {this.getButton1Label()}
-                  </Button>
-                </div>
-              </td>
-              {this.props.onSubmit2 && (
+        <div style={{ marginLeft: "45px" }}>
+          <table align="left">
+            <tbody>
+              <tr>
                 <td>
-                  <div style={{ textAlign: "center", marginLeft: 20 }}>
+                  <div
+                    style={{
+                      textAlign: "center",
+                      marginRight: button1MarginRight,
+                    }}
+                  >
                     <Button
                       type="button"
                       variant="contained"
-                      disabled={!buttonsEnabled}
+                      disabled={!this.isValidInput()}
                       style={{
                         width: "130px",
                         color: "#0000b0",
                       }}
                       autoFocus
-                      onClick={(ev) => this.handleButton2Click(ev)}
+                      onClick={(ev) => this.handleButtonClick(ev)}
                     >
-                      {this.getButton2Label()}
+                      {this.getButton1Label()}
                     </Button>
                   </div>
                 </td>
-              )}
-            </tr>
-            {/*             <tr>
+                {this.props.onSubmit2 && (
+                  <td>
+                    <div style={{ textAlign: "center", marginLeft: 20 }}>
+                      <Button
+                        type="button"
+                        variant="contained"
+                        disabled={!buttonsEnabled}
+                        style={{
+                          width: "130px",
+                          color: "#0000b0",
+                        }}
+                        autoFocus
+                        onClick={(ev) => this.handleButton2Click(ev)}
+                      >
+                        {this.getButton2Label()}
+                      </Button>
+                    </div>
+                  </td>
+                )}
+              </tr>
+              {/*             <tr>
               {showSpinner ? (
                 <td>
                   <div style={{ marginLeft: "-60px" }}>
@@ -346,8 +347,9 @@ class UserForm extends React.Component {
                 </td>
               ) : null}
             </tr> */}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
     );
     console.log("<<<UserForm.render");
