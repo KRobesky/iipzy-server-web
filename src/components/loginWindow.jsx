@@ -7,8 +7,9 @@ import Defs from "iipzy-shared/src/defs";
 import eventManager from "../ipc/eventManager";
 import auth from "../services/auth";
 import InfoPopup from "./infoPopup";
-import Navigator from "./navigator";
 import Input from "./input";
+import Navigator from "./navigator";
+import SpinnerPopup from "./spinnerPopup";
 
 let app = null;
 
@@ -96,12 +97,12 @@ class LoginWindow extends React.Component {
     if (!LoginWindow.isLoggedIn) {
       loginRequest({
         userName: LoginWindow.userName,
-        password: LoginWindow.password
+        password: LoginWindow.password,
       });
     } else {
       logoutRequest({
         userName: LoginWindow.userName,
-        authToken: LoginWindow.authToken
+        authToken: LoginWindow.authToken,
       });
     }
   }
@@ -111,6 +112,7 @@ class LoginWindow extends React.Component {
 
     const isLoggedIn = LoginWindow.isLoggedIn;
     const showInfoPopup = LoginWindow.showInfoPopup;
+    const showSpinner = LoginWindow.showSpinner;
     const title_ = LoginWindow.title;
 
     return (
@@ -120,7 +122,7 @@ class LoginWindow extends React.Component {
           <InfoPopup
             title={title_}
             getInfoMessage={() => this.getInfoMessage()}
-            onSubmit={ev => this.handleInfoPopupClick(ev)}
+            onSubmit={(ev) => this.handleInfoPopupClick(ev)}
             closePopup={this.hideInfoPopup.bind(this)}
           />
         ) : null}
@@ -142,7 +144,7 @@ class LoginWindow extends React.Component {
             name="userName"
             value={this.getUserName()}
             label="User Name"
-            onChange={ev => this.handleChange(ev)}
+            onChange={(ev) => this.handleChange(ev)}
             error=""
           />
         )}
@@ -155,7 +157,7 @@ class LoginWindow extends React.Component {
             name="password"
             value={this.getPassword()}
             label="Password"
-            onChange={ev => this.handleChange(ev)}
+            onChange={(ev) => this.handleChange(ev)}
             error=""
           />
         )}
@@ -167,10 +169,10 @@ class LoginWindow extends React.Component {
               disabled={!this.getSubmitButtonEnabled()}
               style={{
                 width: "130px",
-                color: "#0000b0"
+                color: "#0000b0",
               }}
               /* autoFocus */
-              onClick={ev => this.handleSubmitClick(ev, "Log in")}
+              onClick={(ev) => this.handleSubmitClick(ev, "Log in")}
             >
               Login
             </Button>
@@ -184,10 +186,10 @@ class LoginWindow extends React.Component {
               disabled={!this.getSubmitButtonEnabled()}
               style={{
                 width: "130px",
-                color: "#0000b0"
+                color: "#0000b0",
               }}
               /* autoFocus */
-              onClick={ev => this.handleSubmitClick(ev, "Log out")}
+              onClick={(ev) => this.handleSubmitClick(ev, "Log out")}
             >
               Logout
             </Button>
@@ -204,10 +206,14 @@ LoginWindow.infoMessage = "";
 LoginWindow.isLoggedIn = false;
 LoginWindow.password = "";
 LoginWindow.showInfoPopup = false;
+LoginWindow.showSpinner = false;
 LoginWindow.title = "";
 LoginWindow.userName = "";
 
 async function loginRequest(params) {
+  LoginWindow.showSpinner = true;
+  if (app) app.doRender();
+
   const { data } = await auth.loginRequest(params);
   console.log(
     "LoginWindow.loginRequest (response): data = " +
@@ -221,10 +227,14 @@ async function loginRequest(params) {
     LoginWindow.showInfoPopup = false;
   }
   LoginWindow.buttonsEnabled = true;
+  LoginWindow.showSpinner = false;
   if (app) app.doRender();
 }
 
 async function logoutRequest(params) {
+  LoginWindow.showSpinner = true;
+  if (app) app.doRender();
+
   const { data } = await auth.logoutRequest(params);
   console.log(
     "LoginWindow.logoutRequest (response): data = " +
@@ -237,6 +247,7 @@ async function logoutRequest(params) {
   }
   LoginWindow.password = "";
   LoginWindow.showInfoPopup = true;
+  LoginWindow.showSpinner = false;
   if (app) app.doRender();
 }
 
