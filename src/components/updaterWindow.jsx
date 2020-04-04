@@ -70,7 +70,7 @@ class UpdaterWindow extends React.Component {
     }, 30 * 1000);
 
     UpdaterWindow.waitForInProgress = true;
-    UpdaterWindow.status = "starting...";
+    UpdaterWindow.status = "sending...";
     this.doRender();
 
     cookie.set("updaterSettings", {
@@ -156,7 +156,7 @@ class UpdaterWindow extends React.Component {
     const disabledWhileUpdating =
       UpdaterWindow.waitForInProgress || UpdaterWindow.inProgress;
     const updateStatus = UpdaterWindow.status;
-    const showSpinner = UpdaterWindow.inProgress;
+    const showSpinner = disabledWhileUpdating;
 
     const showInfoPopup = UpdaterWindow.showInfoPopup;
 
