@@ -324,6 +324,7 @@ class ForgotPasswordWindow extends React.Component {
           !inputsEnabled || !this.isValidPassword(),
           (ev) => this.handlePassword2Change(ev)
         )}
+        <div>&nbsp;</div>
         <div style={{ marginLeft: "45px" }}>
           <table align="left">
             <tbody>
