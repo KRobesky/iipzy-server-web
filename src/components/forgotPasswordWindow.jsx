@@ -134,7 +134,7 @@ class ForgotPasswordWindow extends React.Component {
     // this.setState({ errors: errors || {} });
     // if (errors) return;
     // this.props.setButtonsEnabled(false);
-    ForgotPasswordWindow.buttonsEnabled = false;
+
     sendPasswordResetCode({ userName: this.data.userName });
   }
 
@@ -170,8 +170,7 @@ class ForgotPasswordWindow extends React.Component {
       console.log("...handleSubmitClick: errors = " + Object.values(errors));
     this.setState({ errors: errors || {} });
     if (errors) return;
-    ForgotPasswordWindow.buttonsEnabled = false;
-    this.doRender();
+
     updatePassword({
       userName: this.data.userName,
       passwordResetCode: this.data.passwordResetCode,
@@ -417,6 +416,7 @@ ForgotPasswordWindow.showSpinner = false;
 ForgotPasswordWindow.codeSent = false;
 
 async function sendPasswordResetCode(params) {
+  ForgotPasswordWindow.buttonsEnabled = false;
   ForgotPasswordWindow.showSpinner = true;
   if (app) app.doRender();
 
@@ -438,7 +438,7 @@ async function sendPasswordResetCode(params) {
     ForgotPasswordWindow.submitButtonEnabled = true;
   }
 
-  ForgotPasswordWindow.buttonsEnabled = false;
+  ForgotPasswordWindow.buttonsEnabled = true;
   ForgotPasswordWindow.showResponsePopup = true;
   ForgotPasswordWindow.showSpinner = false;
 
@@ -446,6 +446,7 @@ async function sendPasswordResetCode(params) {
 }
 
 async function updatePassword(params) {
+  ForgotPasswordWindow.buttonsEnabled = false;
   ForgotPasswordWindow.showSpinner = true;
   if (app) app.doRender();
 
@@ -463,10 +464,9 @@ async function updatePassword(params) {
     ForgotPasswordWindow.responseMessage =
       "Password has been changed for user " + ForgotPasswordWindow.userName;
     ForgotPasswordWindow.inputsEnabled = false;
-    ForgotPasswordWindow.submitButtonEnabled = false;
   }
 
-  ForgotPasswordWindow.buttonsEnabled = false;
+  ForgotPasswordWindow.buttonsEnabled = true;
   ForgotPasswordWindow.showResponsePopup = true;
   ForgotPasswordWindow.showSpinner = false;
 
