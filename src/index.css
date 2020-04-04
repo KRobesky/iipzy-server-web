@@ -112,7 +112,6 @@ code {
   bottom: 0;
   margin: auto;
   background-color: rgba(0, 0, 0, 0.1);
-  /*   opacity: 1; */
   z-index: 5000;
 }
 
@@ -123,7 +122,6 @@ code {
   height: 40px;
   margin: auto;
   opacity: 1;
-  /* background: white; */
 }
 
 .invisible-button {

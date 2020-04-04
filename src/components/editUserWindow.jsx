@@ -8,6 +8,7 @@ import user from "../services/user";
 import InfoPopup from "./infoPopup";
 import Navigator from "./navigator";
 import PasswordPopup from "./passwordPopup";
+import SpinnerPopup from "./spinnerPopup";
 import UserForm from "./userForm";
 
 let app = null;
@@ -46,7 +47,7 @@ class EditUserWindow extends UserForm {
       emailAddress: EditUserWindow.emailAddress,
       mobilePhoneNo: EditUserWindow.mobilePhoneNo,
       password: EditUserWindow.password,
-      password2: EditUserWindow.password2
+      password2: EditUserWindow.password2,
     };
     console.log("EditUserWindow.getUserData: " + JSON.stringify(userData));
     console.log(
@@ -162,26 +163,28 @@ class EditUserWindow extends UserForm {
     const isLoggedIn = EditUserWindow.isLoggedIn;
     console.log("EditUserWindow.render: isLoggedIn = " + isLoggedIn);
 
-    const showPasswordPopup = EditUserWindow.showPasswordPopup;
-    const showInfoPopup = EditUserWindow.showInfoPopup;
     const passwordSupplied = EditUserWindow.passwordSupplied;
+    const showInfoPopup = EditUserWindow.showInfoPopup;
+    const showPasswordPopup = EditUserWindow.showPasswordPopup;
+    const showSpinner = EditUserWindow.showSpinner;
 
     return (
       <div>
-        {isLoggedIn && showPasswordPopup ? (
+        {isLoggedIn && showPasswordPopup && (
           <PasswordPopup
-            onSubmit={ev => this.handlePasswordPopupClick(ev)}
+            onSubmit={(ev) => this.handlePasswordPopupClick(ev)}
             closePopup={this.hidePasswordPopup.bind(this)}
           />
-        ) : null}
-        {showInfoPopup ? (
+        )}
+        {showInfoPopup && (
           <InfoPopup
             title={"Edit User"}
             getInfoMessage={() => this.getInfoMessage()}
-            onSubmit={ev => this.handleInfoPopupClick(ev)}
+            onSubmit={(ev) => this.handleInfoPopupClick(ev)}
             closePopup={this.hideInfoPopup.bind(this)}
           />
-        ) : null}
+        )}
+        {showSpinner && <SpinnerPopup />}
         {!isLoggedIn && !showInfoPopup && (
           <div>
             <Navigator />
@@ -197,10 +200,10 @@ class EditUserWindow extends UserForm {
                 variant="contained"
                 style={{
                   width: "130px",
-                  color: "#0000b0"
+                  color: "#0000b0",
                 }}
                 autoFocus
-                onClick={ev => this.handleLoginClick(ev)}
+                onClick={(ev) => this.handleLoginClick(ev)}
               >
                 Login
               </Button>
@@ -218,9 +221,9 @@ class EditUserWindow extends UserForm {
             setFieldsEnabled={this.setFieldsEnabled}
             userNameDisabled={true}
             button1Label={"Update"}
-            onSubmit={ev => this.handleUpdateClick(ev)}
+            onSubmit={(ev) => this.handleUpdateClick(ev)}
             button2Label={"Delete"}
-            onSubmit2={ev => this.handleDeleteClick(ev)}
+            onSubmit2={(ev) => this.handleDeleteClick(ev)}
           />
         )}
       </div>
@@ -239,14 +242,20 @@ EditUserWindow.isAdmin = false;
 EditUserWindow.isLoggedIn = false;
 EditUserWindow.authToken = "";
 
+EditUserWindow.infoMessage = "";
 EditUserWindow.showInfoPopup = false;
 EditUserWindow.showPasswordPopup = true;
+EditUserWindow.showSpinner = false;
+
 EditUserWindow.passwordSupplied = false;
 EditUserWindow.passwordValidated = false;
 EditUserWindow.buttonsEnabled = false;
 EditUserWindow.fieldsEnabled = true;
 
 async function deleteUser(userData) {
+  EditUserWindow.showSpinner = true;
+  if (app) app.doRender();
+
   const { data, status } = await user.deleteUser(userData);
   if (data.__hadError__) {
     console.log(
@@ -256,11 +265,11 @@ async function deleteUser(userData) {
         data.__hadError__.statusCode
     );
 
-    EditUserWindow.infoMessage = data.__hadError__.errorMessage;
-
-    EditUserWindow.showInfoPopup = true;
     EditUserWindow.buttonsEnabled = false;
     EditUserWindow.fieldsEnabled = true;
+    EditUserWindow.infoMessage = data.__hadError__.errorMessage;
+    EditUserWindow.showInfoPopup = true;
+    EditUserWindow.showSpinner = true;
 
     if (app) app.doRender();
 
@@ -269,13 +278,14 @@ async function deleteUser(userData) {
 
   eventManager.send(Defs.ipcSubmitLogout, {
     userName: EditUserWindow.userName,
-    authToken: EditUserWindow.authToken
+    authToken: EditUserWindow.authToken,
   });
 
-  EditUserWindow.infoMessage = EditUserWindow.userName + " deleted";
-  EditUserWindow.showInfoPopup = true;
   EditUserWindow.buttonsEnabled = false;
   EditUserWindow.fieldsEnabled = true;
+  EditUserWindow.infoMessage = EditUserWindow.userName + " deleted";
+  EditUserWindow.showInfoPopup = true;
+  EditUserWindow.showSpinner = false;
 
   EditUserWindow.userId = 0;
   EditUserWindow.userName = "";
@@ -291,6 +301,9 @@ async function deleteUser(userData) {
 }
 
 async function updateUser(userData) {
+  EditUserWindow.showSpinner = true;
+  if (app) app.doRender();
+
   const { data, status } = await user.updateUser(userData);
   if (data.__hadError__) {
     console.log(
@@ -300,11 +313,11 @@ async function updateUser(userData) {
         data.__hadError__.statusCode
     );
 
-    EditUserWindow.infoMessage = data.__hadError__.errorMessage;
-
-    EditUserWindow.showInfoPopup = true;
     EditUserWindow.buttonsEnabled = false;
     EditUserWindow.fieldsEnabled = true;
+    EditUserWindow.infoMessage = data.__hadError__.errorMessage;
+    EditUserWindow.showInfoPopup = true;
+    EditUserWindow.showSpinner = false;
 
     if (app) app.doRender();
 
@@ -315,10 +328,11 @@ async function updateUser(userData) {
   EditUserWindow.emailAddress = userData.emailAddress;
   EditUserWindow.password = userData.password;
 
-  EditUserWindow.infoMessage = EditUserWindow.userName + " updated";
-  EditUserWindow.showInfoPopup = true;
   EditUserWindow.buttonsEnabled = false;
   EditUserWindow.fieldsEnabled = true;
+  EditUserWindow.infoMessage = EditUserWindow.userName + " updated";
+  EditUserWindow.showInfoPopup = true;
+  EditUserWindow.showSpinner = false;
 
   if (app) app.doRender();
 }
