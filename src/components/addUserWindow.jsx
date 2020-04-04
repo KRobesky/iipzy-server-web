@@ -1,12 +1,12 @@
 import React from "react";
-import Spinner from "react-bootstrap/Spinner";
+//import Spinner from "react-bootstrap/Spinner";
 
 import Defs from "iipzy-shared/src/defs";
 
 import eventManager from "../ipc/eventManager";
 import user from "../services/user";
 import InfoPopup from "./infoPopup";
-//import SpinnerPopup from "./spinnerPopup";
+import SpinnerPopup from "./spinnerPopup";
 import ValidationPopup from "./validationPopup";
 import UserForm from "./userForm";
 
@@ -48,7 +48,7 @@ class AddUserWindow extends UserForm {
       emailAddress: AddUserWindow.emailAddress,
       mobilePhoneNo: AddUserWindow.mobilePhoneNo,
       password: AddUserWindow.password,
-      password2: AddUserWindow.password2
+      password2: AddUserWindow.password2,
     };
     return userData;
   }
@@ -90,7 +90,7 @@ class AddUserWindow extends UserForm {
     AddUserWindow.buttonsEnabled = !AddUserWindow.showValidationPopup;
     if (AddUserWindow.isVerified) {
       eventManager.send(Defs.ipcUserAddVerified, {
-        userName: AddUserWindow.userName
+        userName: AddUserWindow.userName,
       });
       AddUserWindow.isVerified = false;
     }
@@ -102,7 +102,7 @@ class AddUserWindow extends UserForm {
     if (verificationCode !== "000000")
       verifyUser({
         userId: AddUserWindow.userId,
-        verificationCode: verificationCode
+        verificationCode: verificationCode,
       });
   }
 
@@ -162,7 +162,7 @@ class AddUserWindow extends UserForm {
       <div>
         {showValidationPopup && (
           <ValidationPopup
-            onSubmit={ev => this.handleVerifyClick(ev)}
+            onSubmit={(ev) => this.handleVerifyClick(ev)}
             closePopup={this.hideValidationCodePopup.bind(this)}
           />
         )}
@@ -170,10 +170,11 @@ class AddUserWindow extends UserForm {
           <InfoPopup
             title={"Register User"}
             getInfoMessage={() => this.getInfoMessage()}
-            onSubmit={ev => this.handleInfoPopupClick(ev)}
+            onSubmit={(ev) => this.handleInfoPopupClick(ev)}
             closePopup={this.hideInfoPopup.bind(this)}
           />
         )}
+        {showSpinner && <SpinnerPopup />}
         {/*         {showSpinner && (
           <div>
             <Spinner animation="border" role="status">
@@ -191,7 +192,7 @@ class AddUserWindow extends UserForm {
           setFieldsEnabled={this.setFieldsEnabled}
           userNameDisabled={false}
           button1Label={"Register"}
-          onSubmit={ev => this.handleAddClick(ev)}
+          onSubmit={(ev) => this.handleAddClick(ev)}
         />
       </div>
     );
