@@ -83,8 +83,9 @@ class PasswordPopup extends React.Component {
               name="password"
               value={this.getPassword()}
               label="Password"
-              onChange={ev => this.handleChange(ev)}
+              onChange={(ev) => this.handleChange(ev)}
               error=""
+              percentageWidth={true}
             />
             <h1>{this.props.text}</h1>
             <div style={{ textAlign: "center" }}>
@@ -94,15 +95,15 @@ class PasswordPopup extends React.Component {
                 disabled={!this.isValidInput()}
                 style={{
                   width: "130px",
-                  color: "#0000b0"
+                  color: "#0000b0",
                 }}
                 /*  autoFocus */
-                onClick={ev => this.handleSubmitClick(ev)}
+                onClick={(ev) => this.handleSubmitClick(ev)}
               >
                 Submit
               </Button>
             </div>
-            <CloseButton onClick={ev => this.handleCloseClick(ev)} />
+            <CloseButton onClick={(ev) => this.handleCloseClick(ev)} />
           </div>
         </div>
       </div>
