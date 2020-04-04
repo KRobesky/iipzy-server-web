@@ -9,6 +9,7 @@ import cookie from "../utils/cookie";
 import ClientPicker from "./clientPicker";
 import InfoPopup from "./infoPopup";
 import Navigator from "./navigator";
+import SpinnerPopup from "./spinnerPopup";
 import updater from "../services/updater";
 
 let app = null;
