@@ -24,7 +24,7 @@ class NavBar extends React.Component {
     this.setState({ count: count });
   }
 
-  handleClick = url => {
+  handleClick = (url) => {
     console.log("==================NavBar.handleClick: url = " + url);
     //eventManager.send(Defs.ipcLinkTo, url);
   };
@@ -116,7 +116,7 @@ class NavBar extends React.Component {
               >
                 Download
               </NavLink>
-              {isAdmin && (
+              {isAdmin ? (
                 <NavLink
                   className="nav-item nav-link"
                   onClick={() => this.handleClick(Defs.urlAdministration)}
@@ -124,7 +124,7 @@ class NavBar extends React.Component {
                 >
                   Administration
                 </NavLink>
-              )}
+              ) : null}
             </div>
           </div>
         )}

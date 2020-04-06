@@ -335,17 +335,6 @@ class UserForm extends React.Component {
                   </td>
                 )}
               </tr>
-              {/*             <tr>
-              {showSpinner ? (
-                <td>
-                  <div style={{ marginLeft: "-60px" }}>
-                    <Spinner animation="border" role="status">
-                      <span className="sr-only">Loading...</span>
-                    </Spinner>
-                  </div>
-                </td>
-              ) : null}
-            </tr> */}
             </tbody>
           </table>
         </div>
