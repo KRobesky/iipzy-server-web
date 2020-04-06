@@ -88,6 +88,18 @@ class LoginWindow extends React.Component {
     this.doRender();
   }
 
+  handleKeyPress = (ev, title) => {
+    console.log("---handleKeyPress: key = " + ev.key + ", title = " + title);
+    // if (ev.key === 'Enter') {
+    //   this.refs.but.click()
+    // }
+  };
+
+  // onKeyPress={(ev) => {
+  //   console.log("---Enter.2---");
+  //   ev.key === "Enter" && this.handleSubmitClick(ev, "Log out");
+  // }}
+
   handleSubmitClick(ev, title) {
     console.log("LoginWindow.handleSubmitClick");
 
@@ -175,10 +187,7 @@ class LoginWindow extends React.Component {
               }}
               autoFocus={this.getSubmitButtonEnabled()}
               onClick={(ev) => this.handleSubmitClick(ev, "Log in")}
-              onKeyPress={(ev) => {
-                console.log("---Enter---");
-                ev.key === "Enter" && this.handleSubmitClick(ev, "Log in");
-              }}
+              onKeyPress={(ev) => this.handleKeyPress(ev, "Log in")}
             >
               Login
             </Button>
@@ -196,10 +205,7 @@ class LoginWindow extends React.Component {
               }}
               autoFocus={this.getSubmitButtonEnabled()}
               onClick={(ev) => this.handleSubmitClick(ev, "Log out")}
-              onKeyPress={(ev) => {
-                console.log("---Enter.2---");
-                ev.key === "Enter" && this.handleSubmitClick(ev, "Log out");
-              }}
+              onKeyPress={(ev) => this.handleKeyPress(ev, "Log out")}
             >
               Logout
             </Button>
