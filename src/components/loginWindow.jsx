@@ -166,7 +166,7 @@ class LoginWindow extends React.Component {
         {!showInfoPopup && !isLoggedIn && (
           <div style={{ marginLeft: "45px" }}>
             <Button
-              type="button"
+              type="submit"
               variant="contained"
               disabled={!this.getSubmitButtonEnabled()}
               style={{
@@ -183,7 +183,7 @@ class LoginWindow extends React.Component {
         {!showInfoPopup && isLoggedIn && (
           <div style={{ marginLeft: "45px" }}>
             <Button
-              type="button"
+              type="submit"
               variant="contained"
               disabled={!this.getSubmitButtonEnabled()}
               style={{
