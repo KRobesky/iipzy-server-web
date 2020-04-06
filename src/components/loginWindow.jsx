@@ -176,6 +176,7 @@ class LoginWindow extends React.Component {
               autoFocus={this.getSubmitButtonEnabled()}
               onClick={(ev) => this.handleSubmitClick(ev, "Log in")}
               onKeyPress={(ev) => {
+                console.log("---Enter---");
                 ev.key === "Enter" && this.handleSubmitClick(ev, "Log in");
               }}
             >
