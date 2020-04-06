@@ -1,7 +1,6 @@
 import React from "react";
 //import Joi from "joi-browser";
 import Button from "@material-ui/core/Button";
-import KeyboardEventHandler from "react-keyboard-event-handler";
 
 import Defs from "iipzy-shared/src/defs";
 
@@ -131,14 +130,6 @@ class LoginWindow extends React.Component {
     return (
       <div>
         <Navigator />
-        <KeyboardEventHandler
-          handleKeys={[13]}
-          onKeyEvent={(key, e) =>
-            console.log(
-              `++++++++++++++++++++do something upon keydown event of ${key}`
-            )
-          }
-        />
         {showInfoPopup && (
           <InfoPopup
             title={title_}
