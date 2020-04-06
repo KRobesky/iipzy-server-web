@@ -192,8 +192,8 @@ class LoginWindow extends React.Component {
               }}
               /* autoFocus */
               onClick={(ev) => this.handleSubmitClick(ev, "Log out")}
-              onKeyPress={(e) => {
-                e.key === "Enter" ? this.handleSubmitClick(ev, "Log out") : "";
+              onKeyPress={(ev) => {
+                ev.key === "Enter" ? this.handleSubmitClick(ev, "Log out") : "";
               }}
             >
               Logout
