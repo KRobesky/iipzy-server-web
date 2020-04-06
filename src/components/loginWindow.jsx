@@ -166,7 +166,7 @@ class LoginWindow extends React.Component {
         {!showInfoPopup && !isLoggedIn && (
           <div style={{ marginLeft: "45px" }}>
             <Button
-              type="submit"
+              type="button"
               variant="contained"
               disabled={!this.getSubmitButtonEnabled()}
               style={{
@@ -183,7 +183,7 @@ class LoginWindow extends React.Component {
         {!showInfoPopup && isLoggedIn && (
           <div style={{ marginLeft: "45px" }}>
             <Button
-              type="submit"
+              type="button"
               variant="contained"
               disabled={!this.getSubmitButtonEnabled()}
               style={{
@@ -192,6 +192,9 @@ class LoginWindow extends React.Component {
               }}
               /* autoFocus */
               onClick={(ev) => this.handleSubmitClick(ev, "Log out")}
+              onKeyPress={(e) => {
+                e.key === "Enter" ? this.handleSubmitClick(ev, "Log out") : "";
+              }}
             >
               Logout
             </Button>
