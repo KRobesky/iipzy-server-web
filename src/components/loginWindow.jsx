@@ -173,8 +173,11 @@ class LoginWindow extends React.Component {
                 width: "130px",
                 color: "#0000b0",
               }}
-              /* autoFocus */
+              autoFocus
               onClick={(ev) => this.handleSubmitClick(ev, "Log in")}
+              onKeyPress={(ev) => {
+                ev.key === "Enter" && this.handleSubmitClick(ev, "Log in");
+              }}
             >
               Login
             </Button>
@@ -190,11 +193,11 @@ class LoginWindow extends React.Component {
                 width: "130px",
                 color: "#0000b0",
               }}
-              /* autoFocus */
+              autoFocus
               onClick={(ev) => this.handleSubmitClick(ev, "Log out")}
-              /*               onKeyPress={(ev) => {
+              onKeyPress={(ev) => {
                 ev.key === "Enter" && this.handleSubmitClick(ev, "Log out");
-              }} */
+              }}
             >
               Logout
             </Button>
