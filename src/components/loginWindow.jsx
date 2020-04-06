@@ -187,7 +187,7 @@ class LoginWindow extends React.Component {
               }}
               autoFocus={this.getSubmitButtonEnabled()}
               onClick={(ev) => this.handleSubmitClick(ev, "Log in")}
-              onKeyPress={(ev) => this.handleKeyPress(ev, "Log in")}
+              /*               onKeyPress={(ev) => this.handleKeyPress(ev, "Log in")} */
             >
               Login
             </Button>
@@ -205,7 +205,7 @@ class LoginWindow extends React.Component {
               }}
               autoFocus={this.getSubmitButtonEnabled()}
               onClick={(ev) => this.handleSubmitClick(ev, "Log out")}
-              onKeyPress={(ev) => this.handleKeyPress(ev, "Log out")}
+              /*               onKeyPress={(ev) => this.handleKeyPress(ev, "Log out")} */
             >
               Logout
             </Button>
