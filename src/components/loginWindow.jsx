@@ -101,7 +101,7 @@ class LoginWindow extends React.Component {
   // }}
 
   handleSubmitClick(ev, title) {
-    console.log("LoginWindow.handleSubmitClick");
+    console.log("LoginWindow.handleSubmitClick: title = " + title);
 
     LoginWindow.buttonsEnabled = false;
     LoginWindow.title = title;
@@ -176,22 +176,24 @@ class LoginWindow extends React.Component {
         )}
         <div>&nbsp;</div>
         {!showInfoPopup && !isLoggedIn && (
-          <div style={{ marginLeft: "45px" }}>
-            <Button
-              type="button"
-              variant="contained"
-              disabled={!this.getSubmitButtonEnabled()}
-              style={{
-                width: "130px",
-                color: "#0000b0",
-              }}
-              /*               autoFocus={this.getSubmitButtonEnabled()} */
-              onClick={(ev) => this.handleSubmitClick(ev, "Log in")}
-              /*               onKeyPress={(ev) => this.handleKeyPress(ev, "Log in")} */
-            >
-              Login
-            </Button>
-          </div>
+          <form onSubmit={(ev) => this.handleSubmitClick(ev, "Log in-submit")}>
+            <div style={{ marginLeft: "45px" }}>
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={!this.getSubmitButtonEnabled()}
+                style={{
+                  width: "130px",
+                  color: "#0000b0",
+                }}
+                /*               autoFocus={this.getSubmitButtonEnabled()} */
+                onClick={(ev) => this.handleSubmitClick(ev, "Log in")}
+                /*               onKeyPress={(ev) => this.handleKeyPress(ev, "Log in")} */
+              >
+                Login
+              </Button>
+            </div>
+          </form>
         )}
         {!showInfoPopup && isLoggedIn && (
           <div style={{ marginLeft: "45px" }}>
