@@ -149,8 +149,7 @@ class LoginWindow extends React.Component {
           </div>
         )}
         {showSpinner && <SpinnerPopup />}
-        {!showInfoPopup && !isLoggedIn ? (
-          /*           <form onSubmit={(ev) => this.handleSubmitClick(ev, "Log in submit")}> */
+        {!showInfoPopup && !isLoggedIn && (
           <form>
             <Input
               type="text"
@@ -189,9 +188,9 @@ class LoginWindow extends React.Component {
               </Button>
             </div>
           </form>
-        ) : null}
-        {!showInfoPopup && isLoggedIn ? (
-          <div>
+        )}
+        {!showInfoPopup && isLoggedIn && (
+          <form>
             <Input
               type="text"
               autofocus={true}
@@ -217,8 +216,8 @@ class LoginWindow extends React.Component {
                 Logout
               </Button>
             </div>
-          </div>
-        ) : null}
+          </form>
+        )}
       </div>
     );
   }
