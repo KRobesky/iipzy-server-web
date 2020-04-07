@@ -149,34 +149,30 @@ class LoginWindow extends React.Component {
           </div>
         )}
         {showSpinner && <SpinnerPopup />}
-        {!showInfoPopup && (
-          <Input
-            type="text"
-            autofocus={true}
-            disabled={isLoggedIn}
-            name="userName"
-            value={this.getUserName()}
-            label="User Name"
-            onChange={(ev) => this.handleChange(ev)}
-            error=""
-          />
-        )}
-        {!showInfoPopup && !isLoggedIn && (
-          <Input
-            type="password"
-            autofocus={false}
-            hidden={isLoggedIn}
-            disabled={isLoggedIn}
-            name="password"
-            value={this.getPassword()}
-            label="Password"
-            onChange={(ev) => this.handleChange(ev)}
-            error=""
-          />
-        )}
-        <div>&nbsp;</div>
-        {!showInfoPopup && !isLoggedIn && (
-          <form onSubmit={(ev) => this.handleSubmitClick(ev, "Log in-submit")}>
+        {!showInfoPopup && !isLoggedIn ? (
+          <div>
+            <Input
+              type="text"
+              autofocus={true}
+              disabled={isLoggedIn}
+              name="userName"
+              value={this.getUserName()}
+              label="User Name"
+              onChange={(ev) => this.handleChange(ev)}
+              error=""
+            />
+            <Input
+              type="password"
+              autofocus={false}
+              hidden={isLoggedIn}
+              disabled={isLoggedIn}
+              name="password"
+              value={this.getPassword()}
+              label="Password"
+              onChange={(ev) => this.handleChange(ev)}
+              error=""
+            />
+            <div>&nbsp;</div>
             <div style={{ marginLeft: "45px" }}>
               <Button
                 type="submit"
@@ -186,33 +182,42 @@ class LoginWindow extends React.Component {
                   width: "130px",
                   color: "#0000b0",
                 }}
-                /*               autoFocus={this.getSubmitButtonEnabled()} */
                 onClick={(ev) => this.handleSubmitClick(ev, "Log in")}
-                /*               onKeyPress={(ev) => this.handleKeyPress(ev, "Log in")} */
               >
                 Login
               </Button>
             </div>
-          </form>
-        )}
-        {!showInfoPopup && isLoggedIn && (
-          <div style={{ marginLeft: "45px" }}>
-            <Button
-              type="button"
-              variant="contained"
-              disabled={!this.getSubmitButtonEnabled()}
-              style={{
-                width: "130px",
-                color: "#0000b0",
-              }}
-              /*               autoFocus={this.getSubmitButtonEnabled()} */
-              onClick={(ev) => this.handleSubmitClick(ev, "Log out")}
-              /*               onKeyPress={(ev) => this.handleKeyPress(ev, "Log out")} */
-            >
-              Logout
-            </Button>
           </div>
-        )}
+        ) : null}
+        {!showInfoPopup && isLoggedIn ? (
+          <div>
+            <Input
+              type="text"
+              autofocus={true}
+              disabled={isLoggedIn}
+              name="userName"
+              value={this.getUserName()}
+              label="User Name"
+              onChange={(ev) => this.handleChange(ev)}
+              error=""
+            />
+            <div>&nbsp;</div>
+            <div style={{ marginLeft: "45px" }}>
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={!this.getSubmitButtonEnabled()}
+                style={{
+                  width: "130px",
+                  color: "#0000b0",
+                }}
+                onClick={(ev) => this.handleSubmitClick(ev, "Log out")}
+              >
+                Logout
+              </Button>
+            </div>
+          </div>
+        ) : null}
       </div>
     );
   }
