@@ -76,8 +76,9 @@ class ValidationPopup extends React.Component {
               name="code"
               value={this.getCode()}
               label="Code"
-              onChange={ev => this.handleChange(ev)}
+              onChange={(ev) => this.handleChange(ev)}
               error=""
+              porportionalWidth={true}
             />
             <h1>{this.props.text}</h1>
             <div style={{ textAlign: "center" }}>
@@ -87,15 +88,15 @@ class ValidationPopup extends React.Component {
                 disabled={!this.isValidInput()}
                 style={{
                   width: "130px",
-                  color: "#0000b0"
+                  color: "#0000b0",
                 }}
                 autoFocus
-                onClick={ev => this.handleSubmitClick(ev)}
+                onClick={(ev) => this.handleSubmitClick(ev)}
               >
                 Submit
               </Button>
             </div>
-            <CloseButton onClick={ev => this.handleCancelClick(ev)} />
+            <CloseButton onClick={(ev) => this.handleCancelClick(ev)} />
           </div>
         </div>
       </div>

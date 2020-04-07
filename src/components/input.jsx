@@ -10,9 +10,9 @@ const Input = ({
   autofocus,
   disabled,
   onChange,
-  porportiionalWidth,
+  porportionalWidth,
 }) => {
-  const width = porportiionalWidth ? "85%" : "480px";
+  const width = porportionalWidth ? "85%" : "480px";
   return (
     <div className="form-group" style={{ width, marginLeft: 45 }}>
       <label htmlFor={name}>{label}</label>
