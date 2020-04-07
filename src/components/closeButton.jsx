@@ -9,7 +9,7 @@ class CloseButton extends React.Component {
     console.log("CloseButton.constructor");
 
     this.state = {
-      linkCount: 0
+      linkCount: 0,
     };
   }
 
@@ -24,14 +24,15 @@ class CloseButton extends React.Component {
     return (
       <div>
         <IconButton
-          onClick={ev => this.handleClick(ev)}
+          onClick={(ev) => this.handleClick(ev)}
+          type="submit"
           style={{
             position: "absolute",
             top: "0px",
             right: "0px",
             border: "none",
             background: "none",
-            outline: "none"
+            outline: "none",
           }}
         >
           <FiX style={{ height: 30, width: 30 }} />
