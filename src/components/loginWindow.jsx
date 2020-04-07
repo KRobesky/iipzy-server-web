@@ -150,7 +150,8 @@ class LoginWindow extends React.Component {
         )}
         {showSpinner && <SpinnerPopup />}
         {!showInfoPopup && !isLoggedIn ? (
-          <form onSubmit={(ev) => this.handleSubmitClick(ev, "Log in submit")}>
+          /*           <form onSubmit={(ev) => this.handleSubmitClick(ev, "Log in submit")}> */
+          <form>
             <Input
               type="text"
               autofocus={true}
