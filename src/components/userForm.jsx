@@ -247,97 +247,98 @@ class UserForm extends React.Component {
         <div style={{ marginLeft: 20, textAlign: "left" }}>
           <p style={{ fontSize: "140%" }}>{this.props.title}</p>
         </div>
-        {/*        {showSpinner && <SpinnerPopup />} */}
-        {this.renderInput(
-          "userName",
-          "User Name",
-          "text",
-          true,
-          this.props.userNameDisabled || !fieldsEnabled,
-          (ev) => this.handleChange(ev)
-        )}
-        {this.renderInput(
-          "emailAddress",
-          "Email Address",
-          "text",
-          false,
-          !this.isValidUserName() || !fieldsEnabled,
-          (ev) => this.handleChange(ev)
-        )}
-        {this.renderInput(
-          "mobilePhoneNo",
-          "Mobile Phone Number",
-          "text",
-          false,
-          !this.isValidEmailAddress() || !fieldsEnabled,
-          (ev) => this.handleChange(ev)
-        )}
-        {this.renderInput(
-          "password",
-          "Password",
-          "password",
-          false,
-          !this.isValidMobilePhoneNo() || !fieldsEnabled,
-          (ev) => this.handleChange(ev)
-        )}
-        {this.renderInput(
-          "password2",
-          "Password Again",
-          "password",
-          false,
-          !this.isValidPassword() || !fieldsEnabled,
-          (ev) => this.handlePassword2Change(ev)
-        )}
-        <div>&nbsp;</div>
-        <div style={{ marginLeft: "45px" }}>
-          <table align="left">
-            <tbody>
-              <tr>
-                <td>
-                  <div
-                    style={{
-                      textAlign: "center",
-                      marginRight: button1MarginRight,
-                    }}
-                  >
-                    <Button
-                      type="button"
-                      variant="contained"
-                      disabled={!this.isValidInput()}
-                      style={{
-                        width: "130px",
-                        color: "#0000b0",
-                      }}
-                      /*                       autoFocus */
-                      onClick={(ev) => this.handleButtonClick(ev)}
-                    >
-                      {this.getButton1Label()}
-                    </Button>
-                  </div>
-                </td>
-                {this.props.onSubmit2 && (
+        <form>
+          {this.renderInput(
+            "userName",
+            "User Name",
+            "text",
+            true,
+            this.props.userNameDisabled || !fieldsEnabled,
+            (ev) => this.handleChange(ev)
+          )}
+          {this.renderInput(
+            "emailAddress",
+            "Email Address",
+            "text",
+            false,
+            !this.isValidUserName() || !fieldsEnabled,
+            (ev) => this.handleChange(ev)
+          )}
+          {this.renderInput(
+            "mobilePhoneNo",
+            "Mobile Phone Number",
+            "text",
+            false,
+            !this.isValidEmailAddress() || !fieldsEnabled,
+            (ev) => this.handleChange(ev)
+          )}
+          {this.renderInput(
+            "password",
+            "Password",
+            "password",
+            false,
+            !this.isValidMobilePhoneNo() || !fieldsEnabled,
+            (ev) => this.handleChange(ev)
+          )}
+          {this.renderInput(
+            "password2",
+            "Password Again",
+            "password",
+            false,
+            !this.isValidPassword() || !fieldsEnabled,
+            (ev) => this.handlePassword2Change(ev)
+          )}
+          <div>&nbsp;</div>
+          <div style={{ marginLeft: "45px" }}>
+            <table align="left">
+              <tbody>
+                <tr>
                   <td>
-                    <div style={{ textAlign: "center", marginLeft: 20 }}>
+                    <div
+                      style={{
+                        textAlign: "center",
+                        marginRight: button1MarginRight,
+                      }}
+                    >
                       <Button
-                        type="button"
+                        type="submit"
                         variant="contained"
-                        disabled={!buttonsEnabled}
+                        disabled={!this.isValidInput()}
                         style={{
                           width: "130px",
                           color: "#0000b0",
                         }}
-                        /*                         autoFocus */
-                        onClick={(ev) => this.handleButton2Click(ev)}
+                        /*                       autoFocus */
+                        onClick={(ev) => this.handleButtonClick(ev)}
                       >
-                        {this.getButton2Label()}
+                        {this.getButton1Label()}
                       </Button>
                     </div>
                   </td>
-                )}
-              </tr>
-            </tbody>
-          </table>
-        </div>
+                  {this.props.onSubmit2 && (
+                    <td>
+                      <div style={{ textAlign: "center", marginLeft: 20 }}>
+                        <Button
+                          type="button"
+                          variant="contained"
+                          disabled={!buttonsEnabled}
+                          style={{
+                            width: "130px",
+                            color: "#0000b0",
+                          }}
+                          /*                         autoFocus */
+                          onClick={(ev) => this.handleButton2Click(ev)}
+                        >
+                          {this.getButton2Label()}
+                        </Button>
+                      </div>
+                    </td>
+                  )}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </form>
       </div>
     );
     console.log("<<<UserForm.render");
