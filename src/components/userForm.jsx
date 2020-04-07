@@ -308,7 +308,7 @@ class UserForm extends React.Component {
                         width: "130px",
                         color: "#0000b0",
                       }}
-                      autoFocus
+                      /*                       autoFocus */
                       onClick={(ev) => this.handleButtonClick(ev)}
                     >
                       {this.getButton1Label()}
@@ -326,7 +326,7 @@ class UserForm extends React.Component {
                           width: "130px",
                           color: "#0000b0",
                         }}
-                        autoFocus
+                        /*                         autoFocus */
                         onClick={(ev) => this.handleButton2Click(ev)}
                       >
                         {this.getButton2Label()}
