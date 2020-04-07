@@ -76,34 +76,36 @@ class PasswordPopup extends React.Component {
             <div style={{ marginLeft: 20, textAlign: "left" }}>
               <p style={{ fontSize: "140%" }}>Enter Password</p>
             </div>
-            <Input
-              type="password"
-              autofocus={true}
-              disabled={false}
-              name="password"
-              value={this.getPassword()}
-              label="Password"
-              onChange={(ev) => this.handleChange(ev)}
-              error=""
-              porportionalWidth={true}
-            />
-            <h1>{this.props.text}</h1>
-            <div style={{ textAlign: "center" }}>
-              <Button
-                type="button"
-                variant="contained"
-                disabled={!this.isValidInput()}
-                style={{
-                  width: "130px",
-                  color: "#0000b0",
-                }}
-                /*  autoFocus */
-                onClick={(ev) => this.handleSubmitClick(ev)}
-              >
-                Submit
-              </Button>
-            </div>
-            <CloseButton onClick={(ev) => this.handleCloseClick(ev)} />
+            <form>
+              <Input
+                type="password"
+                autofocus={true}
+                disabled={false}
+                name="password"
+                value={this.getPassword()}
+                label="Password"
+                onChange={(ev) => this.handleChange(ev)}
+                error=""
+                porportionalWidth={true}
+              />
+              <h1>{this.props.text}</h1>
+              <div style={{ textAlign: "center" }}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disabled={!this.isValidInput()}
+                  style={{
+                    width: "130px",
+                    color: "#0000b0",
+                  }}
+                  /*  autoFocus */
+                  onClick={(ev) => this.handleSubmitClick(ev)}
+                >
+                  Submit
+                </Button>
+              </div>
+              <CloseButton onClick={(ev) => this.handleCloseClick(ev)} />
+            </form>
           </div>
         </div>
       </div>
