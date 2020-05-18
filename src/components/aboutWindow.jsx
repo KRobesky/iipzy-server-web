@@ -48,10 +48,10 @@ class AboutWindow extends React.Component {
             and speed.
           </p>
           <p>
-            An iipzy device on your local network talks to the iipzy service.
-            The iipzy device is a Raspberry Pi computer, running linux and iipzy
-            software. Click <b>Download</b> above for how to set up a Raspberry
-            Pi.
+            An iipzy device on your local network talks to the iipzy service in
+            the cloud. The iipzy device is a Raspberry Pi computer, running
+            linux and iipzy software. Click <b>Download</b> above for how to set
+            up a Raspberry Pi.
           </p>
           <p>
             The iipzy device sends a heartbeat to the iipzy service every 20
