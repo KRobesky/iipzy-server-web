@@ -64,7 +64,7 @@ class AboutWindow extends React.Component {
             To measure network latency, Sentinel sends a ping to an internet
             server every 5 seconds. You can view the ping latency on a graph so
             that you can see latency variations over time. The ping history is
-            kept for 30 days. Iipzy notifies you by email if one or more pings
+            kept for 30 days. iipzy notifies you by email if one or more pings
             are dropped.
           </p>
           <p>
