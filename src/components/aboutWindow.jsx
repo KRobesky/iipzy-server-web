@@ -78,8 +78,8 @@ class AboutWindow extends React.Component {
             can view info about the devices, such as ip address, name, and
             capabilities. iipzy notifies you via email if a new device appears
             on your network or if a device hasn't been seen for 30 days. You can
-            optionally monitor a device so that you are notified by email if it
-            goes offline or comes online.
+            optionally monitor a particular device so that you are notified by
+            email if it goes offline or comes online.
           </p>
         </div>
       </div>
