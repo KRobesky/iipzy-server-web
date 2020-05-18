@@ -53,29 +53,29 @@ class AboutWindow extends React.Component {
             Raspberry Pi. The iipzy device is known as <b>Sentinel</b>.
           </p>
           <p>
-            To watch your network connection, iipzy Sentinel sends a heartbeat
-            to the iipzy service every 20 seconds. If the service fails to
-            receive a heartbeat for one minute, the service assumes your
-            internet connection is down. You are notified by a text message and
-            email of this. When a heartbeat is again received, you are notified
-            that the connection is up.
+            To watch your network connection, Sentinel sends a heartbeat to the
+            iipzy service every 20 seconds. If the service fails to receive a
+            heartbeat for one minute, the service assumes your internet
+            connection is down. You are notified by a text message and email of
+            this. When a heartbeat is again received, you are notified that the
+            connection is up.
           </p>
           <p>
-            To measure network latency, iipzy Sentinel sends a ping to a known
+            To measure network latency, Sentinel sends a ping to a known
             internet server every 5 seconds. You can view the ping latency on a
             graph so that you can see latency variations over time. The ping
             history is kept for 30 days. Iipzy notifies you by email if one or
             more pings are dropped.
           </p>
           <p>
-            To measure network throughput, iipzy Sentinel runs a speed test once
-            a day, at about 1 am. You can also run the speed test on demand. You
+            To measure network throughput, Sentinel runs a speed test once a
+            day, at about 1 am. You can also run the speed test on demand. You
             can view the history of the speed tests to see if your throughput is
             changing.
           </p>
           <p>
-            Additionally, iipzy Sentinel keeps track of devices on your network.
-            You can view info about the devices, such as name, ip address, and
+            Additionally, Sentinel keeps track of devices on your network. You
+            can view info about the devices, such as name, ip address, and
             capabilities. iipzy notifies you via email if a new device appears
             on your network or if a device hasn't been seen for 30 days. You can
             optionally monitor a device so that you are notified by email if it
