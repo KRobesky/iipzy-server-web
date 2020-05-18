@@ -47,7 +47,7 @@ class AboutWindow extends React.Component {
             iipzy monitors your internet connection for reliability and speed.
           </p>
           <p>
-            An iipzy device - known as <b>Sentinel</b> - on your local network,
+            An iipzy device (known as <b>Sentinel</b>) on your local network,
             talks to the iipzy service in the cloud. The iipzy device is a
             Raspberry Pi computer, running linux and iipzy software. Click{" "}
             <b>Download</b> above for how to set up a Raspberry Pi.
