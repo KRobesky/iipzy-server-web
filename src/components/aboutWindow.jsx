@@ -58,12 +58,12 @@ class AboutWindow extends React.Component {
             dropped.
           </p>
           <p>
-            The iipzy device runs a speed test once a day, at about 1 am, or
-            when you ask it to. You can view the history of the speed tests to
-            see if your throughput is changing.
+            The iipzy device runs a speed test once a day, at about 1 am. You
+            can also run the speed test on demand. You can view the history of
+            the speed tests to see if your throughput is changing.
           </p>
           <p>
-            Iipzy also keeps track of devices on your network. You can view info
+            Iipzy keeps track of devices on your network. You can view info
             about the devices, such as name, ip address, and capabilities. Iipzy
             will notify you via email if a new device connects to your network
             or if a device hasn't connected for 30 days. You can optionally
