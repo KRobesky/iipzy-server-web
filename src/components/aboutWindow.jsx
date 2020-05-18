@@ -36,6 +36,8 @@ class AboutWindow extends React.Component {
   render() {
     console.log("AboutWindow.render");
 
+    const downloadPath = ".." + Defs.urlDownload;
+
     return (
       <div>
         <Navigator />
@@ -48,7 +50,7 @@ class AboutWindow extends React.Component {
           <p>
             An iipzy device on your local network talks to the iipzy server. The
             iipzy device is a Raspberry Pi computer, running linux and iipzy
-            software. See <a href={Defs.urlDownload}>here</a> for setting up a
+            software. See <a href={downloadPath}>Download</a> for setting up a
             Raspberry Pi.
           </p>
           <p>
