@@ -39,12 +39,10 @@ class AboutWindow extends React.Component {
         <Navigator />
         <div style={{ marginLeft: 20, textAlign: "left" }}>
           <p style={{ fontSize: "140%" }}>About iipzy</p>
-          <p>&nbsp;</p>
           <p>
             The iipzy service monitors your internet connection for reliability
             and speed.
           </p>
-          <p>&nbsp;</p>
           <p>
             The iipzy device continually (every 20 seconds) sends a heartbeat to
             the iipzy server. If the service fails to receive a heartbeat for
@@ -53,7 +51,6 @@ class AboutWindow extends React.Component {
             heartbeat is again received, you will be notified that the
             connection is up.
           </p>
-          <p>&nbsp;</p>
           <p>
             The iipzy device continually (every 5 seconds) pings a known
             internet server. You can view the ping latency on a graph so that
@@ -61,13 +58,11 @@ class AboutWindow extends React.Component {
             for 30 days. Iipzy will notify you via email if one or more pings
             are dropped.
           </p>
-          <p>&nbsp;</p>
           <p>
             The iipzy device runs a speed test once a day, or when you ask it
             to. You can view the history of the speed tests to see if your
             throughput is changing.
           </p>
-          <p>&nbsp;</p>
           <p>
             Iipzy also keeps track of devices on your network. You can view info
             about the devices, such as name, ip address, and capabilities. Iipzy
