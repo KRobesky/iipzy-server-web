@@ -44,31 +44,30 @@ class AboutWindow extends React.Component {
             and speed.
           </p>
           <p>
-            The iipzy device continually (every 20 seconds) sends a heartbeat to
-            the iipzy server. If the service fails to receive a heartbeat for
-            one minute, the service assumes your internet connection is down.
-            You will be notified by a text message and email of this. When the
-            heartbeat is again received, you will be notified that the
-            connection is up.
+            The iipzy device sends a heartbeat to the iipzy service every 20
+            seconds. If the service fails to receive a heartbeat for one minute,
+            the service assumes your internet connection is down. You will be
+            notified by a text message and email of this. When the heartbeat is
+            again received, you will be notified that the connection is up.
           </p>
           <p>
-            The iipzy device continually (every 5 seconds) pings a known
-            internet server. You can view the ping latency on a graph so that
-            you can see latency variations over time. The ping history is kept
-            for 30 days. Iipzy will notify you via email if one or more pings
-            are dropped.
+            The iipzy device sends a ping to a known internet server every 5
+            seconds. You can view the ping latency on a graph so that you can
+            see latency variations over time. The ping history is kept for 30
+            days. Iipzy will notify you by email if one or more pings are
+            dropped.
           </p>
           <p>
-            The iipzy device runs a speed test once a day, or when you ask it
-            to. You can view the history of the speed tests to see if your
-            throughput is changing.
+            The iipzy device runs a speed test once a day, at about 1 am, or
+            when you ask it to. You can view the history of the speed tests to
+            see if your throughput is changing.
           </p>
           <p>
             Iipzy also keeps track of devices on your network. You can view info
             about the devices, such as name, ip address, and capabilities. Iipzy
             will notify you via email if a new device connects to your network
             or if a device hasn't connected for 30 days. You can optionally
-            monitor a device so that you can be notified via email if it goes
+            monitor a device so that you will be notified by email if it goes
             offline or comes online.
           </p>
         </div>
