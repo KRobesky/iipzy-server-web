@@ -44,8 +44,7 @@ class AboutWindow extends React.Component {
         <div style={{ marginLeft: 20, textAlign: "left" }}>
           <p style={{ fontSize: "140%" }}>About iipzy</p>
           <p>
-            The iipzy service monitors your internet connection for reliability
-            and speed.
+            iipzy monitors your internet connection for reliability and speed.
           </p>
           <p>
             An iipzy device on your local network talks to the iipzy service in
