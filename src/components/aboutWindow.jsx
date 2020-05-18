@@ -1,5 +1,7 @@
 import React from "react";
 
+import Defs from "iipzy-shared/src/defs";
+
 import Navigator from "./navigator";
 
 let app = null;
@@ -46,7 +48,8 @@ class AboutWindow extends React.Component {
           <p>
             An iipzy device on your local network talks to the iipzy server. The
             iipzy device is a Raspberry Pi computer, running linux and iipzy
-            software.
+            software. See <a href={Defs.urlDownload}>here</a> for setting up a
+            Raspberry Pi.
           </p>
           <p>
             The iipzy device sends a heartbeat to the iipzy service every 20
