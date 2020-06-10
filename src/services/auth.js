@@ -67,9 +67,6 @@ async function logoutRequest(params) {
 async function loginAsync(userName, passwordDecrypted) {
   log(">>>loginAsync", "auth", "info");
 
-  cookie.set("clientToken", null);
-  http.setClientTokenHeader(null);
-
   const { data, status } = await sendLogin({
     userName: userName,
     password: passwordDecrypted,
