@@ -90,7 +90,7 @@ async function createClient() {
         localIPAddress,
         clientType: "web",
         clientToken: newClientToken,
-        clientName: "web client"
+        clientName: "web client",
       }
     );
     if (status2 === Defs.httpStatusOk) {
@@ -151,7 +151,7 @@ async function heartbeat() {
 
   if (status !== Defs.httpStatusOk) {
     if (status === Defs.httpStatusUnauthorized) {
-      await cookie.set("clientToken", null);
+      cookie.set("clientToken", null);
       clientToken = null;
     }
   }

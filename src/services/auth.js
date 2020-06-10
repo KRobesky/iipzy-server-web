@@ -40,6 +40,9 @@ async function sendLogout() {
 async function login() {
   log("auth.login", "auth", "info");
 
+  cookie.set("clientToken", null);
+  http.setClientTokenHeader(null);
+
   const userName = cookie.get("userName");
   log("userName=" + userName, "auth", "info");
   if (userName != null) {
@@ -69,7 +72,7 @@ async function loginAsync(userName, passwordDecrypted) {
 
   const { data, status } = await sendLogin({
     userName: userName,
-    password: passwordDecrypted
+    password: passwordDecrypted,
   });
 
   log("loginAsync: status = " + status, "auth", "info");
@@ -149,7 +152,7 @@ async function handleCompletion(
     authToken: authToken,
     loginStatus: loginStatus,
     isAdmin: isAdmin,
-    onUserCommand
+    onUserCommand,
   });
 
   log("handleCompletion after sending credentials", "auth", "verbose");
@@ -204,5 +207,5 @@ export default {
   login,
   loginRequest,
   logoutRequest,
-  reLoginAsync
+  reLoginAsync,
 };
