@@ -40,9 +40,6 @@ async function sendLogout() {
 async function login() {
   log("auth.login", "auth", "info");
 
-  cookie.set("clientToken", null);
-  http.setClientTokenHeader(null);
-
   const userName = cookie.get("userName");
   log("userName=" + userName, "auth", "info");
   if (userName != null) {
@@ -69,6 +66,9 @@ async function logoutRequest(params) {
 
 async function loginAsync(userName, passwordDecrypted) {
   log(">>>loginAsync", "auth", "info");
+
+  cookie.set("clientToken", null);
+  http.setClientTokenHeader(null);
 
   const { data, status } = await sendLogin({
     userName: userName,
