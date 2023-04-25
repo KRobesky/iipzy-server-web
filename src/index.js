@@ -20,7 +20,7 @@ import updater from "./services/updater";
 import user from "./services/user";
 //import cookie from "./utils/cookie";
 
-const serverIPAddress = "iipzy.net:8002";
+const serverIPAddress = "iipzy.net:8001";
 
 async function main() {
   ReactDOM.render(
