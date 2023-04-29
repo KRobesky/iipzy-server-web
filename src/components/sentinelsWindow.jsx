@@ -104,22 +104,22 @@ class SentinelsWindow extends React.Component {
     };
 
     const paramsEncrypted = cipher.encrypt(JSON.stringify(params));
-    ///* 
+    /* 
     window.location.replace(
       "http://" +
         item.localIPAddress +
         ":8008?params=" +
         encodeURI(paramsEncrypted)
     );
-    //*/
-    /*
+    */
+    ///*
     window.location.replace(
       "https://" +
         "iipzy.net" +
         ":8443?params=" +
         encodeURI(paramsEncrypted)
     );
-    */
+    //*/
   }
 
   handleLoginClick(ev) {
