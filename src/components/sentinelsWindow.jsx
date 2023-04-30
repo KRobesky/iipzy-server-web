@@ -93,8 +93,10 @@ class SentinelsWindow extends React.Component {
         item.localIPAddress +
         ", isOnLine = " +
         item.isOnLine + 
-        ". isLocalClient = " +
-        item.isLocalClient
+        ", isLocalClient = " +
+        item.isLocalClient + 
+        ", clientToken = " +
+        item.clientToken,
     );
 
     if (!item.isOnLine) return;
@@ -111,15 +113,15 @@ class SentinelsWindow extends React.Component {
       window.location.replace(
         "http://" +
           item.localIPAddress +
-          ":8008?params=" +
-          encodeURI(paramsEncrypted)
+          ":8008?params=" + encodeURI(paramsEncrypted) + 
+          "&clientToken=" + item.clientToken
       ); 
     } else {
        window.location.replace(
         "https://" +
           "iipzy.net" +
-          ":8443?params=" +
-          encodeURI(paramsEncrypted)
+          ":8443?params=" + encodeURI(paramsEncrypted) +
+          "&clientToken=" + item.clientToken
       );
     }
   }
