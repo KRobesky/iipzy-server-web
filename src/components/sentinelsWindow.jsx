@@ -92,7 +92,9 @@ class SentinelsWindow extends React.Component {
       "SentinelsWindow.clientTokenClick = " +
         item.localIPAddress +
         ", isOnLine = " +
-        item.isOnLine
+        item.isOnLine + 
+        ". isLocalClient = " +
+        item.isLocalClient
     );
 
     if (!item.isOnLine) return;
@@ -104,22 +106,22 @@ class SentinelsWindow extends React.Component {
     };
 
     const paramsEncrypted = cipher.encrypt(JSON.stringify(params));
-    /* 
-    window.location.replace(
-      "http://" +
-        item.localIPAddress +
-        ":8008?params=" +
-        encodeURI(paramsEncrypted)
-    );
-    */
-    ///*
-    window.location.replace(
-      "https://" +
-        "iipzy.net" +
-        ":8443?params=" +
-        encodeURI(paramsEncrypted)
-    );
-    //*/
+    
+    if (item.isLocalClient) {
+      window.location.replace(
+        "http://" +
+          item.localIPAddress +
+          ":8008?params=" +
+          encodeURI(paramsEncrypted)
+      ); 
+    } else {
+       window.location.replace(
+        "https://" +
+          "iipzy.net" +
+          ":8443?params=" +
+          encodeURI(paramsEncrypted)
+      );
+    }
   }
 
   handleLoginClick(ev) {
@@ -230,7 +232,8 @@ async function getClientsFromDB(queryString) {
     if (app != null) {
       const item = {
         localIPAddress: SentinelsWindow.clients[0].localIPAddress,
-        isOnLine: SentinelsWindow.clients[0].isOnLine
+        isOnLine: SentinelsWindow.clients[0].isOnLine,
+        isLocalClient: SentinelsWindow.clients[0].isLocalClient
       };
       app.handleLocalIPAddressClick(item);
     }
