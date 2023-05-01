@@ -235,7 +235,8 @@ async function getClientsFromDB(queryString) {
       const item = {
         localIPAddress: SentinelsWindow.clients[0].localIPAddress,
         isOnLine: SentinelsWindow.clients[0].isOnLine,
-        isLocalClient: SentinelsWindow.clients[0].isLocalClient
+        isLocalClient: SentinelsWindow.clients[0].isLocalClient,
+        clientToken: SentinelsWindow.clients[0].clientToken
       };
       app.handleLocalIPAddressClick(item);
     }
