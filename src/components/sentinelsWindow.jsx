@@ -49,6 +49,13 @@ class SentinelTable extends React.Component {
               </td>
               <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
               <td
+                style={{ cursor: item.userId ? "pointer" : "default" }}
+                onClick={() => this.props.onClick(item)}
+              >
+                {!item.userId ? "not registered" : ""}
+              </td>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td
                 style={{ cursor: item.isOnLine ? "pointer" : "default" }}
                 onClick={() => this.props.onClick(item)}
               >

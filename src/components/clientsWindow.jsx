@@ -79,6 +79,13 @@ class ClientTable extends React.Component {
               >
                 {!item.isOnLine ? "off line" : ""}
               </td>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td
+                style={{ cursor: item.userId ? "pointer" : "default" }}
+                onClick={() => this.props.onClick(item.clientToken)}
+              >
+                {!item.userId ? "not registered" : ""}
+              </td>
             </tr>
           ))}
       </table>
