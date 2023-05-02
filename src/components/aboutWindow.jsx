@@ -48,9 +48,9 @@ class AboutWindow extends React.Component {
           </p>
           <p>
             An iipzy device on your local network talks to the iipzy service in
-            the cloud. The iipzy device is a Raspberry Pi computer running linux
+            the cloud. The iipzy device is a Nano Pi R4S computer running linux
             and iipzy software. Click <b>Download</b> above for how to set up a
-            Raspberry Pi. The iipzy device is known as <b>Sentinel</b>.
+            NanoPi R4S. The iipzy device is known as <b>Sentinel</b>.
           </p>
           <p>
             To watch your network connection, Sentinel sends a heartbeat to the
