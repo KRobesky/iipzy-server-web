@@ -42,7 +42,7 @@ class NavBar extends React.Component {
     const loggedIn = NavBar.loggedIn;
     const navbarName = NavBar.navbarName;
 
-    const user = NavBar.user;
+    const userName = NavBar.userName;
 
     console.log("NavBar.render: = " + navbarName);
 
@@ -167,7 +167,7 @@ class NavBar extends React.Component {
           )}
         </nav>
         <div style={{ marginLeft: 24, textAlign: "left" }}>
-            <p style={{ fontSize: "100%" }}>User: {user}</p>
+            <p style={{ fontSize: "100%" }}>User: {userName}</p>
         </div>
       </div>
     );
@@ -176,7 +176,7 @@ class NavBar extends React.Component {
 
 NavBar.isAdmin = false;
 NavBar.navbarName = "home";
-NavBar.user = "not logged in"
+NavBar.userName = "not logged in"
 
 const handleShowNavBar = (event, data) => {
   console.log("NavBar.handleShowNavBar: " + data);
