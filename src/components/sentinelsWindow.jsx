@@ -239,10 +239,11 @@ async function getClientsFromDB(queryString) {
     // go directly to sentinel.
     if (app != null) {
       const item = {
-        localIPAddress: SentinelsWindow.clients[0].localIPAddress,
+        clientName: SentinelsWindow.clients[0].clientName,
+        clientToken: SentinelsWindow.clients[0].clientToken,
         isOnLine: SentinelsWindow.clients[0].isOnLine,
         isLocalClient: SentinelsWindow.clients[0].isLocalClient,
-        clientToken: SentinelsWindow.clients[0].clientToken
+        localIPAddress: SentinelsWindow.clients[0].localIPAddress
       };
       app.handleLocalIPAddressClick(item);
     }
