@@ -109,7 +109,7 @@ class SentinelsWindow extends React.Component {
     const params = {
       userName: cookie.get("userName"),
       password: cookie.get("password"),
-      item.clientName,
+      clientName: item.clientName,
       from: window.location.origin
     };
 
