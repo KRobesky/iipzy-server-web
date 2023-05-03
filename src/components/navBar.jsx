@@ -41,135 +41,144 @@ class NavBar extends React.Component {
     const isAdmin = NavBar.isAdmin;
     const loggedIn = NavBar.loggedIn;
     const navbarName = NavBar.navbarName;
+    
+    const user = NavBar.user;
+    const device = NavBar.device;
 
     console.log("NavBar.render: = " + navbarName);
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        {navbarName === "home" && (
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <NavLink
-                className="nav-item nav-link"
-                onClick={() => this.handleClick(Defs.urlIipzy)}
-                to={Defs.urlIipzy}
-              >
-                iipzy
-              </NavLink>
-              <NavLink
-                className="nav-item nav-link"
-                onClick={() => this.handleClick(Defs.urlSentinels)}
-                to={Defs.urlSentinels}
-              >
-                Sentinel
-              </NavLink>
-              {!loggedIn && (
+      <div>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          {navbarName === "home" && (
+            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div className="navbar-nav">
                 <NavLink
                   className="nav-item nav-link"
-                  onClick={() => this.handleClick(Defs.urlLogin)}
-                  to={Defs.urlLogin}
+                  onClick={() => this.handleClick(Defs.urlIipzy)}
+                  to={Defs.urlIipzy}
                 >
-                  Log In
+                  iipzy
                 </NavLink>
-              )}
-              {loggedIn && (
                 <NavLink
                   className="nav-item nav-link"
-                  onClick={() => this.handleClick(Defs.urlLogin)}
-                  to={Defs.urlLogin}
+                  onClick={() => this.handleClick(Defs.urlSentinels)}
+                  to={Defs.urlSentinels}
                 >
-                  Log Out
+                  Sentinel
                 </NavLink>
-              )}
-              <NavLink
-                className="nav-item nav-link"
-                onClick={() => this.handleClick(Defs.urlEditUser)}
-                to={Defs.urlEditUser}
-              >
-                Edit User
-              </NavLink>
-              <NavLink
-                className="nav-item nav-link"
-                onClick={() => this.handleClick(Defs.urlForgotPassword)}
-                to={Defs.urlForgotPassword}
-              >
-                Forgot Password
-              </NavLink>
-              <NavLink
-                className="nav-item nav-link"
-                onClick={() => this.handleClick(Defs.urlAddUser)}
-                to={Defs.urlAddUser}
-              >
-                Register
-              </NavLink>
-              <NavLink
-                className="nav-item nav-link"
-                onClick={() => this.handleClick(Defs.urlAbout)}
-                to={Defs.urlAbout}
-              >
-                About
-              </NavLink>
-              <NavLink
-                className="nav-item nav-link"
-                onClick={() => this.handleClick(Defs.urlDownload)}
-                to={Defs.urlDownload}
-              >
-                Download
-              </NavLink>
-              {isAdmin ? (
+                {!loggedIn && (
+                  <NavLink
+                    className="nav-item nav-link"
+                    onClick={() => this.handleClick(Defs.urlLogin)}
+                    to={Defs.urlLogin}
+                  >
+                    Log In
+                  </NavLink>
+                )}
+                {loggedIn && (
+                  <NavLink
+                    className="nav-item nav-link"
+                    onClick={() => this.handleClick(Defs.urlLogin)}
+                    to={Defs.urlLogin}
+                  >
+                    Log Out
+                  </NavLink>
+                )}
                 <NavLink
                   className="nav-item nav-link"
-                  onClick={() => this.handleClick(Defs.urlAdministration)}
-                  to={Defs.urlAdministration}
+                  onClick={() => this.handleClick(Defs.urlEditUser)}
+                  to={Defs.urlEditUser}
                 >
-                  Administration
+                  Edit User
                 </NavLink>
-              ) : null}
+                <NavLink
+                  className="nav-item nav-link"
+                  onClick={() => this.handleClick(Defs.urlForgotPassword)}
+                  to={Defs.urlForgotPassword}
+                >
+                  Forgot Password
+                </NavLink>
+                <NavLink
+                  className="nav-item nav-link"
+                  onClick={() => this.handleClick(Defs.urlAddUser)}
+                  to={Defs.urlAddUser}
+                >
+                  Register
+                </NavLink>
+                <NavLink
+                  className="nav-item nav-link"
+                  onClick={() => this.handleClick(Defs.urlAbout)}
+                  to={Defs.urlAbout}
+                >
+                  About
+                </NavLink>
+                <NavLink
+                  className="nav-item nav-link"
+                  onClick={() => this.handleClick(Defs.urlDownload)}
+                  to={Defs.urlDownload}
+                >
+                  Download
+                </NavLink>
+                {isAdmin ? (
+                  <NavLink
+                    className="nav-item nav-link"
+                    onClick={() => this.handleClick(Defs.urlAdministration)}
+                    to={Defs.urlAdministration}
+                  >
+                    Administration
+                  </NavLink>
+                ) : null}
+              </div>
             </div>
-          </div>
-        )}
-        {navbarName === "admin" && (
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <NavLink
-                className="nav-item nav-link"
-                onClick={() => this.handleClick(Defs.urlClients)}
-                to={Defs.urlClients}
-              >
-                Clients
-              </NavLink>
-              <NavLink
-                className="nav-item nav-link"
-                onClick={() => this.handleClick(Defs.urlSentinelAdmin)}
-                to={Defs.urlSentinelAdmin}
-              >
-                Admin
-              </NavLink>
-              <NavLink
-                className="nav-item nav-link"
-                onClick={() => this.handleClick(Defs.urlUpdater)}
-                to={Defs.urlUpdater}
-              >
-                Update
-              </NavLink>
-              <NavLink
-                className="nav-item nav-link"
-                onClick={() => this.handleClick(Defs.urlHome)}
-                to={Defs.urlHome}
-              >
-                Home
-              </NavLink>
+          )}
+          {navbarName === "admin" && (
+            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div className="navbar-nav">
+                <NavLink
+                  className="nav-item nav-link"
+                  onClick={() => this.handleClick(Defs.urlClients)}
+                  to={Defs.urlClients}
+                >
+                  Clients
+                </NavLink>
+                <NavLink
+                  className="nav-item nav-link"
+                  onClick={() => this.handleClick(Defs.urlSentinelAdmin)}
+                  to={Defs.urlSentinelAdmin}
+                >
+                  Admin
+                </NavLink>
+                <NavLink
+                  className="nav-item nav-link"
+                  onClick={() => this.handleClick(Defs.urlUpdater)}
+                  to={Defs.urlUpdater}
+                >
+                  Update
+                </NavLink>
+                <NavLink
+                  className="nav-item nav-link"
+                  onClick={() => this.handleClick(Defs.urlHome)}
+                  to={Defs.urlHome}
+                >
+                  Home
+                </NavLink>
+              </div>
             </div>
-          </div>
-        )}
-      </nav>
+          )}
+        </nav>
+        <div style={{ marginLeft: 24, textAlign: "left" }}>
+            <p style={{ fontSize: "100%" }}>User: {user}.      Device: {device}</p>
+        </div>
+      </div>
     );
   }
 }
 
 NavBar.isAdmin = false;
-NavBar.loggedIn = false;
+NavBar.device = "no device";
 NavBar.navbarName = "home";
+NavBar.user = "not logged in"
 
 const handleShowNavBar = (event, data) => {
   console.log("NavBar.handleShowNavBar: " + data);
