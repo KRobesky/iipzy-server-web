@@ -185,9 +185,10 @@ const handleShowNavBar = (event, data) => {
 };
 
 const handleLoginStatus = (event, data) => {
-  const { isAdmin, loginStatus } = data;
+  const { isAdmin, loginStatus, userName } = data;
   NavBar.isAdmin = isAdmin;
   NavBar.loggedIn = loginStatus === Defs.loginStatusLoggedIn;
+  NavBar.userName = NavBar.loggedIn ? userName : "not logged in";
   if (app != null) app.doRender();
 };
 
