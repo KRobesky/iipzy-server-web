@@ -97,13 +97,11 @@ class SentinelsWindow extends React.Component {
   handleLocalIPAddressClick(item) {
     console.log(
       "SentinelsWindow.clientTokenClick = " +
-        item.localIPAddress +
-        ", isOnLine = " +
-        item.isOnLine + 
-        ", isLocalClient = " +
-        item.isLocalClient + 
-        ", clientToken = " +
-        item.clientToken,
+        item.localIPAddress + 
+        ", isOnLine = "       + item.isOnLine + 
+        ", isLocalClient = "  + item.isLocalClient + 
+        ", clientToken = "    + item.clientToken + 
+        ", clientName = "     + item.clientName
     );
 
     if (!item.isOnLine) return;
@@ -111,6 +109,7 @@ class SentinelsWindow extends React.Component {
     const params = {
       userName: cookie.get("userName"),
       password: cookie.get("password"),
+      item.clientName,
       from: window.location.origin
     };
 
