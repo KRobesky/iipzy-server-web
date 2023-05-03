@@ -41,9 +41,8 @@ class NavBar extends React.Component {
     const isAdmin = NavBar.isAdmin;
     const loggedIn = NavBar.loggedIn;
     const navbarName = NavBar.navbarName;
-    
+
     const user = NavBar.user;
-    const device = NavBar.device;
 
     console.log("NavBar.render: = " + navbarName);
 
@@ -168,7 +167,7 @@ class NavBar extends React.Component {
           )}
         </nav>
         <div style={{ marginLeft: 24, textAlign: "left" }}>
-            <p style={{ fontSize: "100%" }}>User: {user}.      Device: {device}</p>
+            <p style={{ fontSize: "100%" }}>User: {user}</p>
         </div>
       </div>
     );
@@ -176,7 +175,6 @@ class NavBar extends React.Component {
 }
 
 NavBar.isAdmin = false;
-NavBar.device = "no device";
 NavBar.navbarName = "home";
 NavBar.user = "not logged in"
 
