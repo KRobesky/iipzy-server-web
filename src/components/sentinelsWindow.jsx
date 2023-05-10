@@ -120,14 +120,16 @@ class SentinelsWindow extends React.Component {
         "http://" +
           item.localIPAddress +
           ":" + Defs.port_sentinel_web + "?params=" + encodeURI(paramsEncrypted) +
-           "&clientToken=" + item.clientToken
+           "&clientToken=" + item.clientToken +
+           "&isLocalClient=true"
       ); 
     } else {
        window.location.replace(
         "https://" +
           "iipzy.net" +
           ":" + Defs.port_sentinel_web + "?params=" + encodeURI(paramsEncrypted) +
-          "&clientToken=" + item.clientToken
+          "&clientToken=" + item.clientToken +
+          "&isLocalClient=false"
       );
     }
   }
