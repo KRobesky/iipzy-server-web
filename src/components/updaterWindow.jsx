@@ -205,8 +205,8 @@ class UpdaterWindow extends React.Component {
                           <input
                             type="radio"
                             name="update-type"
-                            value="iipzy-pi"
-                            checked={updateType === "iipzy-pi"}
+                            value="iipzy-core"
+                            checked={updateType === "iipzy-core"}
                             disabled={disabledWhileUpdating}
                             onChange={(ev) => this.handleUpdateTypeChange(ev)}
                           />
@@ -324,7 +324,7 @@ UpdaterWindow.submitTimeout = null;
 UpdaterWindow.status = "done";
 UpdaterWindow.statusInterval = null;
 UpdaterWindow.tgtClientToken = "";
-UpdaterWindow.updateType = "iipzy-pi";
+UpdaterWindow.updateType = "iipzy-core";
 UpdaterWindow.waitForInProgress = false;
 
 async function getUpdaterStatus() {
