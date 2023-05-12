@@ -307,20 +307,6 @@ class UpdaterWindow extends React.Component {
                       <Button
                         type="button"
                         variant="contained"
-                        disabled={!this.getEnableSave()}
-                        style={{
-                          marginLeft: "100px",
-                          width: "130px",
-                          color: "#0000b0",
-                        }}
-                        autoFocus
-                        onClick={(ev) => this.handleSaveClick(ev)}
-                      >
-                        Save
-                      </Button>
-                      <Button
-                        type="button"
-                        variant="contained"
                         disabled={!this.getEnableSubmit()}
                         style={{
                           marginLeft: "50px",
