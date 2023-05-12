@@ -238,7 +238,7 @@ class UpdaterWindow extends React.Component {
                             disabled={disabledWhileUpdating}
                             onChange={(ev) => this.handleUpdateTypeChange(ev)}
                           />
-                          &nbsp;Sentinel Core&nbsp;
+                          &nbsp;Core&nbsp;
                         </tr>
                         <tr>
                           <input
@@ -249,7 +249,7 @@ class UpdaterWindow extends React.Component {
                             disabled={disabledWhileUpdating}
                             onChange={(ev) => this.handleUpdateTypeChange(ev)}
                           />
-                          &nbsp;Sentinel Admin&nbsp;
+                          &nbsp;Admin&nbsp;
                         </tr>
                         <tr>
                           <input
@@ -260,7 +260,7 @@ class UpdaterWindow extends React.Component {
                             disabled={disabledWhileUpdating}
                             onChange={(ev) => this.handleUpdateTypeChange(ev)}
                           />
-                          &nbsp;Sentinel Web&nbsp;
+                          &nbsp;Web&nbsp;
                         </tr>
                         <tr>
                           <input
@@ -271,14 +271,14 @@ class UpdaterWindow extends React.Component {
                             disabled={disabledWhileUpdating}
                             onChange={(ev) => this.handleUpdateTypeChange(ev)}
                           />
-                          &nbsp;Sentinel Web Proxy&nbsp;
+                          &nbsp;Web Proxy&nbsp;
                         </tr>
                         <tr>
                           <input
                             type="radio"
                             name="update-type"
-                            value="iipzy-traffic-control"
-                            checked={updateType === "iipzy-traffic-control"}
+                            value="iipzy-sentinel-traffic-control"
+                            checked={updateType === "iipzy-sentinel-traffic-control"}
                             disabled={disabledWhileUpdating}
                             onChange={(ev) => this.handleUpdateTypeChange(ev)}
                           />
