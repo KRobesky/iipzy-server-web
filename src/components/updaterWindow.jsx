@@ -140,7 +140,27 @@ class UpdaterWindow extends React.Component {
   }
 
   getRemoteTCPassword() {
-    return '12345';
+    return UpdaterWindow.password;
+  }
+
+  
+  handleChange(ev) {
+    const name = ev.target.name;
+    const value = ev.target.value;
+
+    console.log("updateWindow.name=" + name + ", value=" + this.state[name]);
+
+    switch (name) {
+      case "password": {
+        UpdaterWindow.password = value;
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+
+    this.setState({ [name]: value });
   }
 
   handleClientPick(ev) {
@@ -368,6 +388,7 @@ class UpdaterWindow extends React.Component {
 
 UpdaterWindow.infoMessage = "";
 UpdaterWindow.inProgress = false;
+UpdaterWindow.password = "";
 UpdaterWindow.showInfoPopup = false;
 UpdaterWindow.submitTimeout = null;
 UpdaterWindow.status = "done";
