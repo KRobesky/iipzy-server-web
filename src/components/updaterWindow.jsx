@@ -177,21 +177,6 @@ class UpdaterWindow extends React.Component {
     this.doRender();
   }
 
-  /*
-                            <td>
-                            <input
-                              autoFocus={false}
-                              disabled={this.getDisableRemoteTCPassword()}
-                              value={this.getRemoteTCPassword()}
-                              onChange={(ev) => this.handleChange(ev)}
-                              id="password"
-                              name="password"
-                              type="text"
-                              size="40"
-                            />
-                          </td>
-  */
-
   render() {
     console.log("UpdaterWindow render");
 
@@ -289,23 +274,15 @@ class UpdaterWindow extends React.Component {
                           &nbsp;Sentinel Web Proxy&nbsp;
                         </tr>
                         <tr>
-                          <td>
-                            <input
-                              type="radio"
-                              name="update-type"
-                              value="iipzy-traffic-control"
-                              checked={updateType === "iipzy-traffic-control"}
-                              disabled={disabledWhileUpdating}
-                              onChange={(ev) => this.handleUpdateTypeChange(ev)}
-                            />
-                            &nbsp;Traffic Control&nbsp;
-                          </td>
-                          <td>
-                            <label htmlFor="password">
-                              &nbsp;&nbsp;Password:&nbsp;&nbsp;
-                            </label>
-                          </td>
-
+                          <input
+                            type="radio"
+                            name="update-type"
+                            value="iipzy-traffic-control"
+                            checked={updateType === "iipzy-traffic-control"}
+                            disabled={disabledWhileUpdating}
+                            onChange={(ev) => this.handleUpdateTypeChange(ev)}
+                          />
+                          &nbsp;Traffic Control&nbsp;
                         </tr>
                         <tr>
                           <input
