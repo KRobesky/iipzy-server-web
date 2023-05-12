@@ -135,6 +135,14 @@ class UpdaterWindow extends React.Component {
     return UpdaterWindow.infoMessage;
   }
 
+  getDisableRemoteTCPassword() {
+    return false;
+  }
+
+  getRemoteTCPassword() {
+    return '12345';
+  }
+
   handleClientPick(ev) {
     console.log("UpdaterWindow.handleClientPick: " + ev);
     UpdaterWindow.tgtClientToken = ev;
@@ -210,7 +218,7 @@ class UpdaterWindow extends React.Component {
                             disabled={disabledWhileUpdating}
                             onChange={(ev) => this.handleUpdateTypeChange(ev)}
                           />
-                          &nbsp;Sentinel&nbsp;
+                          &nbsp;Sentinel Core&nbsp;
                         </tr>
                         <tr>
                           <input
@@ -233,6 +241,47 @@ class UpdaterWindow extends React.Component {
                             onChange={(ev) => this.handleUpdateTypeChange(ev)}
                           />
                           &nbsp;Sentinel Web&nbsp;
+                        </tr>
+                        <tr>
+                          <input
+                            type="radio"
+                            name="update-type"
+                            value="iipzy-sentinel-web-proxy"
+                            checked={updateType === "iipzy-sentinel-web-proxy"}
+                            disabled={disabledWhileUpdating}
+                            onChange={(ev) => this.handleUpdateTypeChange(ev)}
+                          />
+                          &nbsp;Sentinel Web Proxy&nbsp;
+                        </tr>
+                        <tr>
+                          <td>
+                            <input
+                              type="radio"
+                              name="update-type"
+                              value="iipzy-traffic-control"
+                              checked={updateType === "iipzy-traffic-control"}
+                              disabled={disabledWhileUpdating}
+                              onChange={(ev) => this.handleUpdateTypeChange(ev)}
+                            />
+                            &nbsp;Traffic Control&nbsp;
+                          </td>
+                          <td>
+                            <label htmlFor="password">
+                            &nbsp;&nbsp;Password:&nbsp;&nbsp;
+                            </label>
+                          </td>
+                          <td>
+                            <input
+                              autoFocus={false}
+                              disabled={this.getDisableRemoteTCPassword()}
+                              value={this.getRemoteTCPassword()}
+                              onChange={(ev) => this.handleChange(ev)}
+                              id="password"
+                              name="password"
+                              type="text"
+                              size="36"
+                            />
+                          </td>
                         </tr>
                         <tr>
                           <input
