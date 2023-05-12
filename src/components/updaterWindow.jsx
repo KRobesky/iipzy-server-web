@@ -300,6 +300,7 @@ class UpdaterWindow extends React.Component {
                               name="password"
                               type="text"
                               size="40"
+                              height="10"
                             />
                           </td>
                         </tr>
