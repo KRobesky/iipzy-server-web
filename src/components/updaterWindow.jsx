@@ -177,6 +177,21 @@ class UpdaterWindow extends React.Component {
     this.doRender();
   }
 
+  /*
+                            <td>
+                            <input
+                              autoFocus={false}
+                              disabled={this.getDisableRemoteTCPassword()}
+                              value={this.getRemoteTCPassword()}
+                              onChange={(ev) => this.handleChange(ev)}
+                              id="password"
+                              name="password"
+                              type="text"
+                              size="40"
+                            />
+                          </td>
+  */
+
   render() {
     console.log("UpdaterWindow render");
 
@@ -287,22 +302,10 @@ class UpdaterWindow extends React.Component {
                           </td>
                           <td>
                             <label htmlFor="password">
-                            &nbsp;&nbsp;Password:&nbsp;&nbsp;
+                              &nbsp;&nbsp;Password:&nbsp;&nbsp;
                             </label>
                           </td>
-                          <td>
-                            <input
-                              autoFocus={false}
-                              disabled={this.getDisableRemoteTCPassword()}
-                              value={this.getRemoteTCPassword()}
-                              onChange={(ev) => this.handleChange(ev)}
-                              id="password"
-                              name="password"
-                              type="text"
-                              size="40"
-                              height="5px"
-                            />
-                          </td>
+
                         </tr>
                         <tr>
                           <input
