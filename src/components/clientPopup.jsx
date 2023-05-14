@@ -11,10 +11,12 @@ let app = null;
 class VersionTable extends React.Component {
   constructor(props) {
     super(props);
+    console.log("VersionTable.constructor");
   }
 
   render() {
     const versionInfo = this.props.versionInfo;
+    console.log("VersionTable.render: versionInfo = " + JSON.stringify(versionInfo, null, 2));
     let versionInfoByModuleName = new Map();
     for (let i = 0; i < versionInfo.length; i++) {
       versionInfoByModuleName.set(versionInfo[i].moduleName, versionInfo[i]);
