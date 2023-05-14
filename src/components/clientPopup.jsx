@@ -14,40 +14,50 @@ class VersionTable extends React.Component {
     console.log("VersionTable.constructor");
   }
 
-  render() {
+  /*
+    render() {
     const versionInfo = this.props.versionInfo;
     console.log("VersionTable.render: versionInfo = " + JSON.stringify(versionInfo, null, 2));
-    let versionInfoByModuleName = new Map();
-    for (let i = 0; i < versionInfo.length; i++) {
-      console.log("map.set: moduleName = " + versionInfo[i].moduleName);
-      versionInfoByModuleName.set(versionInfo[i].moduleName, versionInfo[i]);
-    }
-
-    console.log("VersionTable render: versionInfoByModuleName=" + JSON.stringify(versionInfoByModuleName, null, 2));
 
     return (
       <table id="version-table">
-        {versionInfoByModuleName.map(item => (
+        {versionInfo.map(item => (
           <tr key={item.moduleName}>
             <td>
-              <div style={{ textAlign: "left", marginLeft: 20 }}>
-                {item.moduleName}
-              </div>
+              {item.moduleName}
             </td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td>
-              {item.updateTime}
-            </td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td>
-              {item.version}
-            </td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td>
-              {item.sharedVersion}
+              {item.moduleUpdateTime}
             </td>
           </tr>
         ))}
+      </table>
+    );
+  }
+}
+  */
+
+  render() {
+    const versionInfo = this.props.versionInfo;
+    console.log("VersionTable.render: versionInfo = " + JSON.stringify(versionInfo, null, 2));
+    if (!versionInfo) return (<div></div>);
+
+    return (
+      <table align="center">
+        <tbody>
+        {versionInfo.map(item => (
+          <tr key={item.moduleName}>
+            <td>
+              {item.moduleName}
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>
+              {item.moduleUpdateTime}
+            </td>
+          </tr>
+        ))}
+        </tbody>
       </table>
     );
   }
@@ -119,7 +129,7 @@ class ClientPopup extends React.Component {
       <div>
         <Navigator />
         <div className="popup">
-          <div className="popup_inner_600x500">
+          <div className="popup_inner_700x540">
             <div>
               <div style={{ marginLeft: 20, textAlign: "left" }}>
                 <p style={{ fontSize: "140%" }}>{client.clientName}</p>
@@ -199,26 +209,17 @@ class ClientPopup extends React.Component {
                     <td>Iperf3 Count:</td>
                     <td>{client.iperf3UseCountDaily}</td>
                   </tr>
-                  
-                  {clientIsSentinel && (<div
-                    style={{
-                      marginLeft: 20,
-                      /*             width: "1100px",
-                      height: "450px", */
-                      border: "1px solid #ccc",
-                      font: "14px Courier New",
-                      fontWeight: "bold",
-                      /*     overflowX: "scroll", */
-                      overflowY: "scroll"
-                    }}
-                  >
-                    <VersionTable
-                      versionInfo={client.versionInfo}
-                      onClick={ev => this.handleClientTokenClick(ev)}
-                    />
-                  </div>)}
+                  <tr>
+                    <td>VersionInfo:</td>
+                  </tr>
+
                 </tbody>
               </table>
+              {clientIsSentinel && (<div style={{marginLeft: 10}}>
+                <VersionTable
+                  versionInfo={client.versionInfo}
+                />
+              </div>)}
             </div>
             <CloseButton onClick={ev => this.handleCloseClick(ev)} />
           </div>

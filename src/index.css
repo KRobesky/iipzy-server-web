@@ -92,6 +92,15 @@ code {
   background: white;
 }
 
+.popup_inner_700x540 {
+  position: relative;
+  top: 20%;
+  width: 700px;
+  height: 540px;
+  margin: auto;
+  background: white;
+}
+
 .popup_inner_large {
   position: absolute;
   left: 5%;
