@@ -8,6 +8,48 @@ import Navigator from "./navigator";
 
 let app = null;
 
+class VersionTable extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const versionInfo = this.props.versionInfo;
+    let versionInfoByModuleName = new Map();
+    for (let i = 0; i < versionInfo.length; i++) {
+      versionInfoByModuleName.set(versionInfo[i].moduleName, versionInfo[i]);
+    }
+
+    console.log("VersionTable render: versionInfoByModuleName=" + JSON.stringify(versionInfoByModuleName, null, 2));
+
+    return (
+      <table id="version-table">
+        {versionInfoByModuleName.map(item => (
+          <tr key={item.moduleName}>
+            <td>
+              <div style={{ textAlign: "left", marginLeft: 20 }}>
+                {item.moduleName}
+              </div>
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>
+              {item.updateTime}
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>
+              {item.version}
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>
+              {item.sharedVersion}
+            </td>
+          </tr>
+        ))}
+      </table>
+    );
+  }
+}
+
 class ClientPopup extends React.Component {
   constructor(props) {
     super(props);
@@ -154,30 +196,24 @@ class ClientPopup extends React.Component {
                     <td>Iperf3 Count:</td>
                     <td>{client.iperf3UseCountDaily}</td>
                   </tr>
-                  {clientIsSentinel && (
-                    <tr>
-                      <td>Sentinel Update Time:</td>
-                      <td>{client.sentinelUpdateTime}</td>
-                    </tr>
-                  )}
-                  {clientIsSentinel && (
-                    <tr>
-                      <td>Sentinel Admin Update Time:</td>
-                      <td>{client.sentinelAdminUpdateTime}</td>
-                    </tr>
-                  )}
-                  {clientIsSentinel && (
-                    <tr>
-                      <td>Sentinel Web Update Time:</td>
-                      <td>{client.sentinelWebUpdateTime}</td>
-                    </tr>
-                  )}
-                  {clientIsSentinel && (
-                    <tr>
-                      <td>Updater Update Time:</td>
-                      <td>{client.updaterUpdateTime}</td>
-                    </tr>
-                  )}
+                  
+                  {clientIsSentinel && (<div
+                    style={{
+                      marginLeft: 20,
+                      /*             width: "1100px",
+                      height: "450px", */
+                      border: "1px solid #ccc",
+                      font: "14px Courier New",
+                      fontWeight: "bold",
+                      /*     overflowX: "scroll", */
+                      overflowY: "scroll"
+                    }}
+                  >
+                    <VersionTable
+                      versionInfo={client.versionInfo}
+                      onClick={ev => this.handleClientTokenClick(ev)}
+                    />
+                  </div>)}
                 </tbody>
               </table>
             </div>
