@@ -19,6 +19,7 @@ class VersionTable extends React.Component {
     console.log("VersionTable.render: versionInfo = " + JSON.stringify(versionInfo, null, 2));
     let versionInfoByModuleName = new Map();
     for (let i = 0; i < versionInfo.length; i++) {
+      console.log("map.set: moduleName = " + versionInfo[i].moduleName);
       versionInfoByModuleName.set(versionInfo[i].moduleName, versionInfo[i]);
     }
 
