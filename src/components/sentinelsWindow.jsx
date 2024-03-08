@@ -76,6 +76,11 @@ class SentinelsWindow extends React.Component {
     console.log("SentinelsWindow.constructor");
     this.state = { count: 0 };
 
+    this.originHref = clients.getOriginHref();
+    this.useRemoteWeb = clients.getUseRemoteWeb();
+
+    console.log("SentinelsWindow.constructor: useRemoteWeb = " + this.useRemoteWeb);
+
     app = this;
   }
 
@@ -110,12 +115,13 @@ class SentinelsWindow extends React.Component {
       userName: cookie.get("userName"),
       password: cookie.get("password"),
       clientName: item.clientName,
-      from: window.location.origin
+      //from: window.location.href
+      from: this.originHref
     };
 
     const paramsEncrypted = cipher.encrypt(JSON.stringify(params));
     
-    if (item.isLocalClient) {
+    if (!this.useRemoteWeb && item.isLocalClient) {
       window.location.replace(
         "http://" +
           item.localIPAddress +
@@ -145,7 +151,7 @@ class SentinelsWindow extends React.Component {
     const clients = SentinelsWindow.clients;
     const isLoggedIn = SentinelsWindow.isLoggedIn;
     const numSentinels = clients ? clients.length : 0;
-
+    
     if (!clients && isLoggedIn) return <div></div>;
 
     if (numSentinels === 1) return <div></div>;
