@@ -34,7 +34,7 @@ function getQueryVariable(variable) {
   for (let i = 0; i < vars.length; i++) {
     var pair = vars[i].split("=");
     console.log(pair);
-    if (pair[0] === variable) {
+    if (pair[0].toLowerCase() === variable.toLowerCase()) {
       return pair[1];
     }
   }
